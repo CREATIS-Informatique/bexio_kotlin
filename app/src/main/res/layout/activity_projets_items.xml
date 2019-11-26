@@ -57,9 +57,10 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
+            android:background="@drawable/projets_items_background"
             android:gravity="center"
             android:text="Actif"
-            android:textColor="#131D2C"
+            android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
