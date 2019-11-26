@@ -9,7 +9,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".TacheActivity"></activity>
+        <activity android:name=".ProjetsActivity"></activity>
+        <activity android:name=".TacheActivity" />
         <activity android:name=".TachesActivity" />
         <activity android:name=".TempsActivity" />
         <activity android:name=".ReglagesActivity" />
