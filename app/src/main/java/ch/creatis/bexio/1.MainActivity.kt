@@ -35,6 +35,30 @@ class MainActivity : AppCompatActivity() {
 
 
 
+        // Temps
+
+        TempsFrame.setOnClickListener {
+
+            val intent = Intent(this, TempsActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
+        }
+
+
+
+        // Tâches
+
+        TachesFrame.setOnClickListener {
+
+            val intent = Intent(this, TacheActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
+        }
+
+
+
         // Réglages
 
         ReglagesFrame.setOnClickListener {
