@@ -10,13 +10,21 @@ import android.os.Build
 import kotlinx.android.synthetic.main.activity_a_main.*
 
 
-class MainActivity : AppCompatActivity() {
 
+class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_a_main)
+
+
+
+        textView.setOnClickListener {
+
+
+
+        }
 
 
 
@@ -104,3 +112,5 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
+
