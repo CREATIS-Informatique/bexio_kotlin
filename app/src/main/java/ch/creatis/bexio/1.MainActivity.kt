@@ -20,14 +20,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        textView.setOnClickListener {
-
-
-
-        }
-
-
-
         TransparentTopBar()
 
 
@@ -112,5 +104,3 @@ class MainActivity : AppCompatActivity() {
 
 
 }
-
-
