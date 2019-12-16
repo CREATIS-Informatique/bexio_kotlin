@@ -19,6 +19,7 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 
+
 class ContactsActivity : AppCompatActivity() {
 
 
