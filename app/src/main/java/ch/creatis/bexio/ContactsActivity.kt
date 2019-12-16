@@ -10,18 +10,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.activity_contacts.*
 import kotlinx.android.synthetic.main.activity_contacts_items.view.*
-
+import org.json.JSONArray
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 class ContactsActivity : AppCompatActivity() {
 
 
 
-    var adapter: FoodAdapter? = null
-    var foodsList = ArrayList<Food>()
+    var adapter: ContactAdapter? = null
+    var contactList = ArrayList<Contact>()
 
 
 
@@ -31,39 +34,29 @@ class ContactsActivity : AppCompatActivity() {
 
 
 
-//        // load foods
-//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-//        foodsList.add(Food("Theodros Mulugeta",R.drawable.contacts_photo_profil))
-//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-//        adapter = FoodAdapter(this, foodsList)
-//        gvFoods.adapter = adapter
-
-
-
         val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
         var org = sharedPreferences.getString("ORG", "")
         var accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
         val queue = Volley.newRequestQueue(this)
-        val url = "https://office.bexio.com/api2.php/$org/task"
-        val stringRequest = object : StringRequest(Method.GET, url, Response.Listener<String> { response ->
+        val url = "https://office.bexio.com/api2.php/$org/contact"
+        val stringRequest = object : JsonArrayRequest(Method.GET, url,JSONArray(), Response.Listener<JSONArray> { response ->
 
 
 
-            // -------------------------------------------------------------------------------------
+            for (i in 0 until response.length()) {
+                var id= response.getJSONObject(i)["id"].toString()
+                var name= response.getJSONObject(i)["name_1"].toString()
+                var address= response.getJSONObject(i)["address"].toString()
+                var postcode= response.getJSONObject(i)["postcode"].toString()
+                var city= response.getJSONObject(i)["city"].toString()
+                var mail= response.getJSONObject(i)["mail"].toString()
+                var phone_fixed= response.getJSONObject(i)["phone_fixed"].toString()
+                val contact = Contact(id,name,address,postcode,city,mail,phone_fixed)
+                contactList.add(contact)
+            }
 
-            println(response)
-
-            // -------------------------------------------------------------------------------------
+            adapter = ContactAdapter(this@ContactsActivity, contactList)
+            GridContacts.adapter = adapter
 
 
 
@@ -90,66 +83,81 @@ class ContactsActivity : AppCompatActivity() {
 
 
 
-// -------------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------
 
 
 
-// Contact Adapter
+    class ContactAdapter : BaseAdapter {
 
-class FoodAdapter : BaseAdapter {
-    var foodsList = ArrayList<Food>()
-    var context: Context? = null
 
-    constructor(context: Context, foodsList: ArrayList<Food>) : super() {
-        this.context = context
-        this.foodsList = foodsList
+
+        var contactsList = ArrayList<Contact>()
+        var context: Context? = null
+
+
+
+        constructor(context: Context, contactsList: ArrayList<Contact>) : super() {
+            this.context = context
+            this.contactsList = contactsList
+        }
+
+
+
+        override fun getCount(): Int { return contactsList.size }
+
+
+        override fun getItem(position: Int): Any { return contactsList[position] }
+
+
+        override fun getItemId(position: Int): Long { return position.toLong() }
+
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+
+            val contact = this.contactsList[position]
+            var inflator = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            var contactView = inflator.inflate(R.layout.activity_contacts_items, null)
+//            foodView.photoContacts.setImageResource(contact.id!!)
+            contactView.tvName.text = contact.name!!
+            return contactView
+
+
+
+        }
+
+
+
     }
 
-    override fun getCount(): Int {
-        return foodsList.size
-    }
 
-    override fun getItem(position: Int): Any {
-        return foodsList[position]
-    }
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val food = this.foodsList[position]
-
-        var inflator = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        var foodView = inflator.inflate(R.layout.activity_contacts_items, null)
-        foodView.photoContacts.setImageResource(food.image!!)
-        foodView.tvName.text = food.name!!
-
-        return foodView
-    }
-}
+    // ---------------------------------------------------------------------------------------------
 
 
 
-// -------------------------------------------------------------------------------------------------
+    class Contact {
 
 
 
-// Contacts class
-
-class Food {
-
-
-
-    var name: String? = null
-    var image: Int? = null
-
+        var id: String? = null
+        var name: String? = null
+        var address: String? = null
+        var postcode: String? = null
+        var city: String? = null
+        var mail: String? = null
+        var phone_fixed: String? = null
 
 
-    constructor(name: String, image: Int) {
-        this.name = name
-        this.image = image
-    }
+
+        constructor(id: String, name: String, address: String, postcode: String, city: String, mail: String, phone_fixed: String) {
+            this.id = id
+            this.name = name
+            this.address = address
+            this.postcode = postcode
+            this.city = city
+            this.mail = mail
+            this.phone_fixed = phone_fixed
+        }
 
 
 
