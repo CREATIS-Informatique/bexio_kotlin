@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-        webView.settings.javaScriptEnabled = true // enable javascript
+        webView.settings.javaScriptEnabled = true
         webView.webViewClient = object : WebViewClient() {
 
 
@@ -55,6 +55,7 @@ class LoginActivity : AppCompatActivity() {
 
 
                 if (url!!.contains("code")) {
+
 
 
                     val chars = url
@@ -108,6 +109,7 @@ class LoginActivity : AppCompatActivity() {
 
             editor.putString("ACCESSTOKEN", responseJsonObj.getString("access_token"))
             editor.putString("REFRESHTOKEN", responseJsonObj.getString("refresh_token"))
+            editor.putString("ORG", responseJsonObj.getString("org"))
             editor.commit()
 
 
@@ -150,6 +152,7 @@ class LoginActivity : AppCompatActivity() {
             var responseJsonObj = JSONObject(response)
             editor.putString("ACCESSTOKEN", responseJsonObj.getString("access_token"))
             editor.putString("REFRESHTOKEN", responseJsonObj.getString("refresh_token"))
+            editor.putString("ORG", responseJsonObj.getString("org"))
             editor.commit()
 
 
