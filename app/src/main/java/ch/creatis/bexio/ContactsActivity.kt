@@ -9,8 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import kotlinx.android.synthetic.main.activity_contacts.*
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_contacts_items.view.*
+
 
 
 class ContactsActivity : AppCompatActivity() {
@@ -26,23 +29,59 @@ class ContactsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contacts)
 
-        // load foods
-        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-        foodsList.add(Food("Theodros Mulugeta",R.drawable.contacts_photo_profil))
-        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
-        adapter = FoodAdapter(this, foodsList)
 
-        gvFoods.adapter = adapter
+
+//        // load foods
+//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
+//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
+//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
+//        foodsList.add(Food("Theodros Mulugeta",R.drawable.contacts_photo_profil))
+//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
+//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
+//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
+//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
+//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
+//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
+//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
+//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
+//        foodsList.add(Food("Theodros Mulugeta", R.drawable.contacts_photo_profil))
+//        adapter = FoodAdapter(this, foodsList)
+//        gvFoods.adapter = adapter
+
+
+
+        val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
+        var org = sharedPreferences.getString("ORG", "")
+        var accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
+        val queue = Volley.newRequestQueue(this)
+        val url = "https://office.bexio.com/api2.php/$org/task"
+        val stringRequest = object : StringRequest(Method.GET, url, Response.Listener<String> { response ->
+
+
+
+            // -------------------------------------------------------------------------------------
+
+            println(response)
+
+            // -------------------------------------------------------------------------------------
+
+
+
+        }, Response.ErrorListener {})
+
+        {
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Accept"] = "application/json"
+                headers["Authorization"] = "Bearer $accessToken"
+                return headers
+            }
+        }
+
+        queue.add(stringRequest)
+
+
+
     }
 
 
@@ -99,11 +138,19 @@ class FoodAdapter : BaseAdapter {
 // Contacts class
 
 class Food {
+
+
+
     var name: String? = null
     var image: Int? = null
+
+
 
     constructor(name: String, image: Int) {
         this.name = name
         this.image = image
     }
+
+
+
 }

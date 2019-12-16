@@ -80,7 +80,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-        webView.loadUrl("https://office.bexio.com/oauth/authorize?client_id=4707003559.apps.bexio.com&redirect_uri=bxpocket://auth&state=creatis2019&scope=task_show%20project_show%20monitoring_edit")
+        webView.loadUrl("https://office.bexio.com/oauth/authorize?client_id=4707003559.apps.bexio.com&redirect_uri=bxpocket://auth&state=creatis2019&scope=contact_show project_show task_show monitoring_edit")
 
 
 
