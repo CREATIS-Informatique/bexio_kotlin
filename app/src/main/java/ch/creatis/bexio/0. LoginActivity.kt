@@ -26,7 +26,7 @@ import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
 
-    
+
 
     private var numberOfRequestsToMake = 0
     private var hasRequestFailed = false
