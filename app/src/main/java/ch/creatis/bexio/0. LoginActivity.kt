@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.room.Room
@@ -74,8 +75,6 @@ class LoginActivity : AppCompatActivity() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
 
-
-
                 if (url!!.contains("code")) {
 
 
@@ -87,10 +86,9 @@ class LoginActivity : AppCompatActivity() {
 
                     // -------------------------------------------------------------------------------------
 
-                    editor.putString("CODETOKEN", codeun.drop(16))
-                    editor.commit()
-                    getAccessTokenFirstTime()
-                    // webView.visibility = View.INVISIBLE
+                        editor.putString("CODETOKEN", codeun.drop(16))
+                        editor.commit()
+                        getAccessTokenFirstTime()
 
                     // -------------------------------------------------------------------------------------
 
@@ -138,6 +136,7 @@ class LoginActivity : AppCompatActivity() {
             editor.putString("ORG", responseJsonObj.getString("org"))
             editor.commit()
             makeAllDataRequest()
+            webView.visibility = View.INVISIBLE
 
             // -------------------------------------------------------------------------------------
 
@@ -299,7 +298,6 @@ class LoginActivity : AppCompatActivity() {
 
         val intentAct = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intentAct)
-        println("OKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOK")
 
 
 

@@ -11,6 +11,10 @@ import kotlinx.android.synthetic.main.activity_a_main.*
 
 
 
+
+
+
+
 class MainActivity : AppCompatActivity() {
 
 
@@ -99,6 +103,12 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
+    }
+
+
+
+    override fun onBackPressed() {
+        return
     }
 
 
