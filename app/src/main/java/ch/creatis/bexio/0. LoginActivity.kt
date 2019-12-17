@@ -26,8 +26,7 @@ import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
 
-
-
+    
 
     private var numberOfRequestsToMake = 0
     private var hasRequestFailed = false
@@ -131,12 +130,12 @@ class LoginActivity : AppCompatActivity() {
 
             // -------------------------------------------------------------------------------------
 
+            webView.visibility = View.INVISIBLE
             editor.putString("ACCESSTOKEN", responseJsonObj.getString("access_token"))
             editor.putString("REFRESHTOKEN", responseJsonObj.getString("refresh_token"))
             editor.putString("ORG", responseJsonObj.getString("org"))
             editor.commit()
             makeAllDataRequest()
-            webView.visibility = View.INVISIBLE
 
             // -------------------------------------------------------------------------------------
 
