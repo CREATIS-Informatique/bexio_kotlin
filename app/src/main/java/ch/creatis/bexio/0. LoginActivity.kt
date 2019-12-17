@@ -8,16 +8,34 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.room.Room
+import ch.creatis.bexio.Room.AppDatabase
+import ch.creatis.bexio.Room.Contact
 import com.android.volley.Request
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.activity_contacts.*
 import kotlinx.android.synthetic.main.activity_login.*
+import org.json.JSONArray
 import org.json.JSONObject
 
 
 
 class LoginActivity : AppCompatActivity() {
+
+
+
+
+    private var numberOfRequestsToMake = 0
+    private var hasRequestFailed = false
+
+    var contactListDatabase = mutableListOf<Contact>()
+
+
+
+    // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -34,6 +52,10 @@ class LoginActivity : AppCompatActivity() {
 
 
     }
+
+
+
+    // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -68,7 +90,7 @@ class LoginActivity : AppCompatActivity() {
                     editor.putString("CODETOKEN", codeun.drop(16))
                     editor.commit()
                     getAccessTokenFirstTime()
-//                    webView.visibility = View.INVISIBLE
+                    // webView.visibility = View.INVISIBLE
 
                     // -------------------------------------------------------------------------------------
 
@@ -85,6 +107,10 @@ class LoginActivity : AppCompatActivity() {
 
 
     }
+
+
+
+    // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -111,11 +137,7 @@ class LoginActivity : AppCompatActivity() {
             editor.putString("REFRESHTOKEN", responseJsonObj.getString("refresh_token"))
             editor.putString("ORG", responseJsonObj.getString("org"))
             editor.commit()
-
-
-
-            val intentAct = Intent(this@LoginActivity, MainActivity::class.java)
-            startActivity(intentAct)
+            makeAllDataRequest()
 
             // -------------------------------------------------------------------------------------
 
@@ -157,8 +179,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-            val intentAct = Intent(this@LoginActivity, MainActivity::class.java)
-            startActivity(intentAct)
+            makeAllDataRequest()
 
             // -------------------------------------------------------------------------------------
 
@@ -167,6 +188,118 @@ class LoginActivity : AppCompatActivity() {
         }, Response.ErrorListener {})
 
         queue.add(stringRequest)
+
+
+
+    }
+
+
+
+    // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+    fun makeAllDataRequest(){
+
+
+
+        // -----------------------------------------------------------------------------------------
+
+        val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
+        val org = sharedPreferences.getString("ORG", "")
+        val url = "https://office.bexio.com/api2.php/$org/contact"
+        val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
+
+        // -----------------------------------------------------------------------------------------
+
+
+
+        val queue = Volley.newRequestQueue(this)
+        val stringRequest = object : JsonArrayRequest(Method.GET, url, JSONArray(), Response.Listener<JSONArray> { response ->
+
+                for (i in 0 until response.length()) {
+                    val idBexio= response.getJSONObject(i)["id"].toString()
+                    val name= response.getJSONObject(i)["name_1"].toString()
+                    val address= response.getJSONObject(i)["address"].toString()
+                    val postcode= response.getJSONObject(i)["postcode"].toString()
+                    val city= response.getJSONObject(i)["city"].toString()
+                    val mail= response.getJSONObject(i)["mail"].toString()
+                    val phone_fixed= response.getJSONObject(i)["phone_fixed"].toString()
+                    val contact = Contact(null, idBexio,name,address,postcode,city,mail,phone_fixed)
+                    contactListDatabase.add(contact)
+                }
+
+
+            numberOfRequestsToMake--
+            if (numberOfRequestsToMake == 0) { requestEndInternet() }
+
+
+
+            }, Response.ErrorListener {
+
+
+            numberOfRequestsToMake--
+            hasRequestFailed = true
+            if (numberOfRequestsToMake == 0) { requestEndInternet() }
+
+
+        })
+
+        {
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Accept"] = "application/json"
+                headers["Authorization"] = "Bearer $accessToken"
+                return headers
+            }
+        }
+
+
+
+        queue.add(stringRequest)
+        numberOfRequestsToMake++
+
+
+
+    }
+
+
+
+    fun requestEndInternet() {
+
+        if (hasRequestFailed) {
+            hasRequestFailed = false
+
+
+        } else {
+
+            updateDatabase()
+
+        }
+
+
+
+    }
+
+
+
+    fun updateDatabase(){
+
+
+
+        val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
+
+
+
+        val contactDAO = database.contactDAO
+        contactDAO.delete()
+        for (contact in contactListDatabase){ contactDAO.insert(contact)}
+
+
+
+        val intentAct = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(intentAct)
+        println("OKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOK")
 
 
 

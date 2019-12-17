@@ -23,20 +23,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    <GridView
-            android:id="@+id/GridContacts"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refreshView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/all_background"
-            android:horizontalSpacing="15dp"
-            android:numColumns="2"
-            android:padding="15dp"
-            android:verticalSpacing="20dp"
+            android:elevation="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+            app:layout_constraintTop_toBottomOf="@+id/textView7">
+
+
+        <GridView
+                android:id="@+id/GridContacts"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/all_background"
+                android:horizontalSpacing="15dp"
+                android:numColumns="2"
+                android:padding="15dp"
+                android:verticalSpacing="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
