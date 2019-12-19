@@ -2,12 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="ch.creatis.bexio">
 
-
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-
 
     <application
             android:allowBackup="true"
@@ -16,15 +12,13 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".Next.ContactsActivityNext"></activity>
         <activity android:name=".LoginActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
         </activity>
         <activity android:name=".ProjetsActivity" />
         <activity android:name=".TacheActivity" />
@@ -32,7 +26,6 @@
         <activity android:name=".ReglagesActivity" />
         <activity android:name=".ContactsActivity" />
         <activity android:name=".MainActivity">
-
             <intent-filter>
                 <data
                         android:host="redirecturi"

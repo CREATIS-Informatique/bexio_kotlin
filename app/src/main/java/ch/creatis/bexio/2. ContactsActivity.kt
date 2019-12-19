@@ -4,8 +4,10 @@ package ch.creatis.bexio
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.net.ConnectivityManager
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +15,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.room.*
+import ch.creatis.bexio.Next.ContactsActivityNext
 import ch.creatis.bexio.Room.AppDatabase
 import ch.creatis.bexio.Room.Contact
 import com.android.volley.Response
@@ -106,16 +110,16 @@ class ContactsActivity : AppCompatActivity() {
 
             val queue = Volley.newRequestQueue(this)
             val stringRequest = object : JsonArrayRequest(Method.GET, url,JSONArray(), Response.Listener<JSONArray> { response ->
-
                 for (i in 0 until response.length()) {
                     val idBexio= response.getJSONObject(i)["id"].toString()
-                    val name= response.getJSONObject(i)["name_1"].toString()
+                    val name_un= response.getJSONObject(i)["name_1"].toString()
+                    val name_deux= response.getJSONObject(i)["name_2"].toString()
                     val address= response.getJSONObject(i)["address"].toString()
                     val postcode= response.getJSONObject(i)["postcode"].toString()
                     val city= response.getJSONObject(i)["city"].toString()
                     val mail= response.getJSONObject(i)["mail"].toString()
                     val phone_fixed= response.getJSONObject(i)["phone_fixed"].toString()
-                    val contact = Contact(null, idBexio,name,address,postcode,city,mail,phone_fixed)
+                    val contact = Contact(null, idBexio,name_un, name_deux,address,postcode,city,mail,phone_fixed)
                     contactDAO.insert(contact)
                 }
 
@@ -229,7 +233,6 @@ class ContactsActivity : AppCompatActivity() {
         }
 
 
-
         override fun getCount(): Int { return contactsList.size }
 
 
@@ -241,11 +244,49 @@ class ContactsActivity : AppCompatActivity() {
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
-            val contact = this.contactsList[position]
+
             var inflator = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             var contactView = inflator.inflate(R.layout.activity_contacts_items, null)
-            //            foodView.photoContacts.setImageResource(contact.id!!)
-            contactView.tvName.text = contact.name!!
+
+
+            // foodView.photoContacts.setImageResource(contact.id!!)
+
+            val contact = this.contactsList[position]
+
+            contactView.tvName.text = contact.name_un + contact.name_deux!!
+
+            contactView.mailButton.setOnClickListener {
+
+                val emailIntent = Intent(Intent.ACTION_SEND)
+                emailIntent.type = "plain/text"
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(contact.mail))
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "")
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "")
+                context!!.startActivity(Intent.createChooser(emailIntent, "Choisissez une application Mail"))
+
+            }
+
+            contactView.telButton.setOnClickListener {
+
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.data = Uri.parse("tel:${contact.phone_fixed}")
+                context!!.startActivity(intent)
+
+            }
+
+            contactView.setOnClickListener {
+
+                val intent = Intent(context, ContactsActivityNext::class.java)
+                intent.putExtra("value1", contact.address)
+                intent.putExtra("value2", contact.city)
+                intent.putExtra("value3", contact.idBexio)
+                intent.putExtra("valu4", contact.idRoom)
+                context!!.startActivity(intent)
+
+            }
+
+
+
             return contactView
 
 

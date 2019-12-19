@@ -217,13 +217,14 @@ class LoginActivity : AppCompatActivity() {
 
                 for (i in 0 until response.length()) {
                     val idBexio= response.getJSONObject(i)["id"].toString()
-                    val name= response.getJSONObject(i)["name_1"].toString()
+                    val name_un= response.getJSONObject(i)["name_1"].toString()
+                    val name_deux= response.getJSONObject(i)["name_2"].toString()
                     val address= response.getJSONObject(i)["address"].toString()
                     val postcode= response.getJSONObject(i)["postcode"].toString()
                     val city= response.getJSONObject(i)["city"].toString()
                     val mail= response.getJSONObject(i)["mail"].toString()
                     val phone_fixed= response.getJSONObject(i)["phone_fixed"].toString()
-                    val contact = Contact(null, idBexio,name,address,postcode,city,mail,phone_fixed)
+                    val contact = Contact(null, idBexio,name_un,name_deux,address,postcode,city,mail,phone_fixed)
                     contactListDatabase.add(contact)
                 }
 
@@ -285,7 +286,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-        val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
+        val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").fallbackToDestructiveMigration().allowMainThreadQueries().build()
 
 
 
