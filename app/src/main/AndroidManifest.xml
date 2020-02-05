@@ -28,8 +28,8 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <data
-                        android:host="redirecturi"
-                        android:scheme="demo" />
+                        android:host="my"
+                        android:scheme="demo"/>
 
                 <action android:name="android.intent.action.VIEW" />
 

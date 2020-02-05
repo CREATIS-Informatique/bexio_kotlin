@@ -21,7 +21,15 @@ import kotlinx.android.synthetic.main.activity_contacts.*
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONArray
 import org.json.JSONObject
-
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.net.Uri
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.util.Log
 
 
 class LoginActivity : AppCompatActivity() {
@@ -30,7 +38,6 @@ class LoginActivity : AppCompatActivity() {
 
     private var numberOfRequestsToMake = 0
     private var hasRequestFailed = false
-
     var contactListDatabase = mutableListOf<Contact>()
 
 
@@ -42,12 +49,15 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-
-
         val sharedPreferences = getSharedPreferences("Bexio", Context.MODE_PRIVATE)
         var refreshToken = sharedPreferences.getString("REFRESHTOKEN", "")
-        if (refreshToken == ""){ webViewIsVisible() } else {getAccessTokenAllTime()}
+
+
+
+        // Première installation de l'application si le Refresh Token n'est pas vide alors il requête avec le Refresh Token
+        if (refreshToken == ""){ webViewIsVisible() } else {
+//            getAccessTokenAllTime()
+        }
 
 
 
@@ -59,6 +69,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+    // 1
     fun webViewIsVisible(){
 
         val sharedPreferences = getSharedPreferences("Bexio", Context.MODE_PRIVATE)
@@ -81,11 +92,9 @@ class LoginActivity : AppCompatActivity() {
                     val chars = url
                     val codeun = chars!!.dropLast(18)
 
-
-
                     // -------------------------------------------------------------------------------------
 
-                        editor.putString("CODETOKEN", codeun.drop(16))
+                        editor.putString("CODETOKEN", codeun.drop(15))
                         editor.commit()
                         getAccessTokenFirstTime()
 
@@ -99,7 +108,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-        webView.loadUrl("https://office.bexio.com/oauth/authorize?client_id=4707003559.apps.bexio.com&redirect_uri=bxpocket://auth&state=creatis2019&scope=contact_show project_show task_show monitoring_edit")
+        webView.loadUrl("https://idp.bexio.com/authorize?response_type=code&client_id=7baa8853-0f2d-48f5-aa7e-1baf94879d53&redirect_uri=my://demo&state=creatis2019&scope=openid profile offline_access contact_show project_show task_show monitoring_edit")
 
 
 
@@ -111,37 +120,36 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+    // 2
     fun getAccessTokenFirstTime(){
 
         val sharedPreferences = getSharedPreferences("Bexio", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         var codeToken = sharedPreferences.getString("CODETOKEN", "")
+        val url = "https://idp.bexio.com/token?grant_type=authorization_code&code=$codeToken&client_id=7baa8853-0f2d-48f5-aa7e-1baf94879d53&redirect_uri=my://demo&client_secret=H_qo-zE3jEsxGGhkwu9Cfv4UnUtXPXadKGqvQ47d-i94nojffdpVcQKqOErTVZc4Zbuyw_lVWjKAZpj6uor-7w"
 
 
 
         val queue = Volley.newRequestQueue(this)
-
-        val url = "https://office.bexio.com/oauth/access_token?client_id=4707003559.apps.bexio.com&redirect_uri=bxpocket://auth&client_secret=nRA79oKLwIIRh7NOH5TNavWabEE=&$codeToken"
-
         val stringRequest = StringRequest(Request.Method.POST, url, Response.Listener<String> { response ->
 
             var responseJsonObj = JSONObject(response)
-
+            println(response)
 
             // -------------------------------------------------------------------------------------
 
             webView.visibility = View.INVISIBLE
             editor.putString("ACCESSTOKEN", responseJsonObj.getString("access_token"))
             editor.putString("REFRESHTOKEN", responseJsonObj.getString("refresh_token"))
-            editor.putString("ORG", responseJsonObj.getString("org"))
+            editor.putString("IDTOKEN", responseJsonObj.getString("id_token"))
             editor.commit()
             makeAllDataRequest()
 
             // -------------------------------------------------------------------------------------
 
-
-
         }, Response.ErrorListener {})
+
+
 
         queue.add(stringRequest)
 
@@ -151,52 +159,65 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-    fun getAccessTokenAllTime(){
-
-        val sharedPreferences = getSharedPreferences("Bexio", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        var refreshToken = sharedPreferences.getString("REFRESHTOKEN", "")
 
 
 
-        val queue = Volley.newRequestQueue(this)
-
-        val url = "https://office.bexio.com/oauth/refresh_token?client_id=4707003559.apps.bexio.com&client_secret=nRA79oKLwIIRh7NOH5TNavWabEE=&refresh_token=$refreshToken"
-
-        val stringRequest = StringRequest(Request.Method.POST, url, Response.Listener<String> { response ->
 
 
 
-            // -------------------------------------------------------------------------------------
-
-            var responseJsonObj = JSONObject(response)
-            editor.putString("ACCESSTOKEN", responseJsonObj.getString("access_token"))
-            editor.putString("REFRESHTOKEN", responseJsonObj.getString("refresh_token"))
-            editor.putString("ORG", responseJsonObj.getString("org"))
-            editor.commit()
 
 
 
-            makeAllDataRequest()
-
-            // -------------------------------------------------------------------------------------
 
 
 
-        }, Response.ErrorListener {})
-
-        queue.add(stringRequest)
-
-
-
-    }
+    // Last
+//    fun getAccessTokenAllTime(){
+//
+//        val sharedPreferences = getSharedPreferences("Bexio", Context.MODE_PRIVATE)
+//        val editor = sharedPreferences.edit()
+//        var refreshToken = sharedPreferences.getString("REFRESHTOKEN", "")
+//
+//
+//
+//        val queue = Volley.newRequestQueue(this)
+//
+//        val url = "https://idp.bexio.com/auth/o2/token?grant_type=refresh_token&refresh_token=$refreshToken&client_id=7baa8853-0f2d-48f5-aa7e-1baf94879d53"
+//
+//        val stringRequest = StringRequest(Request.Method.POST, url, Response.Listener<String> { response ->
+//
+//
+//
+//            // -------------------------------------------------------------------------------------
+//
+////            var responseJsonObj = JSONObject(response)
+////            editor.putString("ACCESSTOKEN", responseJsonObj.getString("access_token"))
+////            editor.putString("REFRESHTOKEN", responseJsonObj.getString("refresh_token"))
+////            editor.putString("ORG", responseJsonObj.getString("org"))
+////            editor.commit()
+//
+//
+//
+//            makeAllDataRequest()
+//
+//            // -------------------------------------------------------------------------------------
+//
+//
+//
+//        }, Response.ErrorListener {})
+//
+//        queue.add(stringRequest)
+//
+//
+//
+//    }
 
 
 
     // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-
+    // 3
     fun makeAllDataRequest(){
 
 
@@ -204,8 +225,7 @@ class LoginActivity : AppCompatActivity() {
         // -----------------------------------------------------------------------------------------
 
         val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
-        val org = sharedPreferences.getString("ORG", "")
-        val url = "https://office.bexio.com/api2.php/$org/contact"
+        val url = "https://api.bexio.com/2.0/contact"
         val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
 
         // -----------------------------------------------------------------------------------------
@@ -263,7 +283,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-
+    // 4
     fun requestEndInternet() {
 
         if (hasRequestFailed) {
@@ -282,6 +302,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+    // 5
     fun updateDatabase(){
 
 
