@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Première installation de l'application si le Refresh Token n'est pas vide alors il requête avec le Refresh Token
         if (refreshToken == ""){ webViewIsVisible() } else {
-//            getAccessTokenAllTime()
+            getAccessTokenAllTime()
         }
 
 
@@ -159,58 +159,46 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+//     Last
+    fun getAccessTokenAllTime(){
+
+        val sharedPreferences = getSharedPreferences("Bexio", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        var refreshToken = sharedPreferences.getString("REFRESHTOKEN", "")
 
 
 
+        val queue = Volley.newRequestQueue(this)
+
+        val url = "https://idp.bexio.com/token?grant_type=refresh_token&refresh_token=$refreshToken&client_id=7baa8853-0f2d-48f5-aa7e-1baf94879d53&client_secret=H_qo-zE3jEsxGGhkwu9Cfv4UnUtXPXadKGqvQ47d-i94nojffdpVcQKqOErTVZc4Zbuyw_lVWjKAZpj6uor-7w"
+
+        val stringRequest = StringRequest(Request.Method.POST, url, Response.Listener<String> { response ->
 
 
 
+            // -------------------------------------------------------------------------------------
+
+            var responseJsonObj = JSONObject(response)
+            editor.putString("ACCESSTOKEN", responseJsonObj.getString("access_token"))
+            editor.putString("REFRESHTOKEN", responseJsonObj.getString("refresh_token"))
+            editor.putString("IDTOKEN", responseJsonObj.getString("id_token"))
+            editor.commit()
 
 
 
+            makeAllDataRequest()
+
+            // -------------------------------------------------------------------------------------
 
 
 
-    // Last
-//    fun getAccessTokenAllTime(){
-//
-//        val sharedPreferences = getSharedPreferences("Bexio", Context.MODE_PRIVATE)
-//        val editor = sharedPreferences.edit()
-//        var refreshToken = sharedPreferences.getString("REFRESHTOKEN", "")
-//
-//
-//
-//        val queue = Volley.newRequestQueue(this)
-//
-//        val url = "https://idp.bexio.com/auth/o2/token?grant_type=refresh_token&refresh_token=$refreshToken&client_id=7baa8853-0f2d-48f5-aa7e-1baf94879d53"
-//
-//        val stringRequest = StringRequest(Request.Method.POST, url, Response.Listener<String> { response ->
-//
-//
-//
-//            // -------------------------------------------------------------------------------------
-//
-////            var responseJsonObj = JSONObject(response)
-////            editor.putString("ACCESSTOKEN", responseJsonObj.getString("access_token"))
-////            editor.putString("REFRESHTOKEN", responseJsonObj.getString("refresh_token"))
-////            editor.putString("ORG", responseJsonObj.getString("org"))
-////            editor.commit()
-//
-//
-//
-//            makeAllDataRequest()
-//
-//            // -------------------------------------------------------------------------------------
-//
-//
-//
-//        }, Response.ErrorListener {})
-//
-//        queue.add(stringRequest)
-//
-//
-//
-//    }
+        }, Response.ErrorListener {})
+
+        queue.add(stringRequest)
+
+
+
+    }
 
 
 
