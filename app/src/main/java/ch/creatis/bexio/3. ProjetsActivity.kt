@@ -45,8 +45,6 @@ class ProjetsActivity : AppCompatActivity() {
 
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_projets)
@@ -75,8 +73,6 @@ class ProjetsActivity : AppCompatActivity() {
 
 
     }
-
-
 
 
 
@@ -171,7 +167,7 @@ class ProjetsActivity : AppCompatActivity() {
             val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
             val projectDAO = database.projetDAO
             projectList = projectDAO.getItems() as ArrayList<Projet>
-            refreshView.isRefreshing = false
+            refreshViewProjets.isRefreshing = false
         }
 
     }
@@ -218,7 +214,10 @@ class ProjetsAdapter(val items : ArrayList<Projet>, val context: Context) : Recy
 
 
     override fun onBindViewHolder(holder: ProjetsHolder, position: Int) {
-//        holder.viewTemps?.text = items.get(position)
+        holder.projectLabel?.text = items[position].name
+        holder.nr?.text = items[position].nr
+        holder.startDate?.text = items[position].start_date
+        holder.endDate?.text = items[position].end_date
     }
 
 
@@ -239,6 +238,9 @@ class ProjetsAdapter(val items : ArrayList<Projet>, val context: Context) : Recy
 
 class ProjetsHolder (view: View) : RecyclerView.ViewHolder(view) {
 
-    val viewTemps = view.projetLabel
+    val projectLabel = view.projetLabel
+    val nr = view.nrLabel
+    val startDate = view.startDateLabel
+    val endDate = view.endDateLabel
 
 }
