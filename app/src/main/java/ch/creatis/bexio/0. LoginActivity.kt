@@ -49,13 +49,27 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+
+
         val sharedPreferences = getSharedPreferences("Bexio", Context.MODE_PRIVATE)
+        var clientidsettings = sharedPreferences.getString("CLIENTID", "")
         var refreshToken = sharedPreferences.getString("REFRESHTOKEN", "")
 
 
 
         // Première installation de l'application si le Refresh Token n'est pas vide alors il requête avec le Refresh Token
-        if (refreshToken == ""){ webViewIsVisible() } else {
+
+        if(clientidsettings == ""){
+
+            val intentAct = Intent(this@LoginActivity, ReglagesActivity::class.java)
+            startActivity(intentAct)
+
+        }else if(refreshToken == ""){
+
+            webViewIsVisible() }
+
+        else {
             getAccessTokenAllTime()
         }
 
