@@ -20,12 +20,14 @@ import org.json.JSONArray
 class ProjetsActivity : AppCompatActivity() {
 
 
+
     // -----------------------------------
 
     private var numberOfRequestsToMake = 0
     private var hasRequestFailed = false
 
     // -----------------------------------
+
 
 
     val tableau: ArrayList<String> = ArrayList()
@@ -50,11 +52,11 @@ class ProjetsActivity : AppCompatActivity() {
 
         recyclerViewProjets.layoutManager = LinearLayoutManager(this)
         recyclerViewProjets.adapter = ProjetsAdapter(tableau, this)
-
         RefreshRequest()
 
-    }
 
+
+    }
 
 
 
@@ -68,7 +70,7 @@ class ProjetsActivity : AppCompatActivity() {
 //
             val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
             val org = sharedPreferences.getString("ORG", "")
-            val url = "https://office.bexio.com/api2.php/$org/pr_project"
+            val url = "https://api.bexio.com/2.0/pr_project"
             val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
 
 //            // -----------------------------------------------------------------------------------------
