@@ -1,21 +1,31 @@
 package ch.creatis.bexio
 
+
+
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.Color
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
+import ch.creatis.bexio.Room.AppDatabase
+import ch.creatis.bexio.Room.Projet
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.activity_contacts.*
 import kotlinx.android.synthetic.main.activity_projets.*
 import kotlinx.android.synthetic.main.activity_projets_items.view.*
 import org.json.JSONArray
+
+
 
 class ProjetsActivity : AppCompatActivity() {
 
@@ -28,9 +38,12 @@ class ProjetsActivity : AppCompatActivity() {
 
     // -----------------------------------
 
+    var adapter: ProjetsAdapter? = null
+    var projectList = ArrayList<Projet>()
+
+    // -----------------------------------
 
 
-    val tableau: ArrayList<String> = ArrayList()
 
 
 
@@ -40,19 +53,24 @@ class ProjetsActivity : AppCompatActivity() {
 
 
 
-        tableau.add("Application")
-        tableau.add("Application")
-        tableau.add("Application")
-        tableau.add("Application")
-        tableau.add("Application")
-        tableau.add("Application")
-        tableau.add("Application")
+        // Database
+        val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
+        val projetDAO = database.projetDAO
+        projectList = projetDAO.getItems() as ArrayList<Projet>
 
 
 
+        // Adapter
         recyclerViewProjets.layoutManager = LinearLayoutManager(this)
-        recyclerViewProjets.adapter = ProjetsAdapter(tableau, this)
+        recyclerViewProjets.adapter = ProjetsAdapter(projectList, this)
         RefreshRequest()
+
+
+
+        // RefreshView
+        refreshViewProjets.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this, R.color.colorPrimary))
+        refreshViewProjets.setColorSchemeColors(Color.WHITE)
+        refreshViewProjets.setOnRefreshListener { if(numberOfRequestsToMake == 0){ if (isConnected()) {RefreshRequest()} else { Alerte() } } }
 
 
 
@@ -60,36 +78,42 @@ class ProjetsActivity : AppCompatActivity() {
 
 
 
-            fun RefreshRequest(){
-//
-//            val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
-//            val contactDAO = database.contactDAO
-//            contactDAO.delete()
-//
-//            // -----------------------------------------------------------------------------------------
-//
+
+
+    fun RefreshRequest(){
+
+
+
+            val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
+            val projetDAO = database.projetDAO
+            projetDAO.delete()
+
+            // -----------------------------------------------------------------------------------------
+
             val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
-            val org = sharedPreferences.getString("ORG", "")
             val url = "https://api.bexio.com/2.0/pr_project"
             val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
 
-//            // -----------------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------------
 
 
 
             val queue = Volley.newRequestQueue(this)
             val stringRequest = object : JsonArrayRequest(Method.GET, url,JSONArray(), Response.Listener<JSONArray> { response ->
 
-                println(response)
-
 
                 for (i in 0 until response.length()) {
 
+                    val idBexio= response.getJSONObject(i)["id"].toString()
+                    val name_un= response.getJSONObject(i)["nr"].toString()
+                    val name_deux= response.getJSONObject(i)["name"].toString()
+                    val address= response.getJSONObject(i)["start_date"].toString()
+                    val postcode= response.getJSONObject(i)["end_date"].toString()
+                    val city= response.getJSONObject(i)["comment"].toString()
+                    val projet = Projet(null, idBexio,name_un, name_deux,address,postcode,city)
+                    projetDAO.insert(projet)
+
                 }
-
-
-
-
 
 
 
@@ -122,7 +146,11 @@ class ProjetsActivity : AppCompatActivity() {
 
 
 
-        }
+    }
+
+
+
+
 
 
     // -------------------------------------------------------------------------------------- Internet ---------------------------------------------------------------------------------------
@@ -140,12 +168,10 @@ class ProjetsActivity : AppCompatActivity() {
             hasRequestFailed = false
 
         } else {
-//            val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
-//            val contactDAO = database.contactDAO
-//            contactList = contactDAO.getItems() as ArrayList<Contact>
-//            adapter = ContactAdapter(this@ContactsActivity, contactList)
-//            GridContacts.adapter = adapter
-//            refreshView.isRefreshing = false
+            val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
+            val projectDAO = database.projetDAO
+            projectList = projectDAO.getItems() as ArrayList<Projet>
+            refreshView.isRefreshing = false
         }
 
     }
@@ -154,7 +180,7 @@ class ProjetsActivity : AppCompatActivity() {
 
     fun Alerte(){
 
-//        refreshView.isRefreshing = false
+        refreshViewProjets.isRefreshing = false
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Aucune connexion à internet")
         builder.setMessage("Vérifiez vos réglages avant de pouvoir utiliser l'application.")
@@ -172,7 +198,10 @@ class ProjetsActivity : AppCompatActivity() {
 
 
 
-class ProjetsAdapter(val items : ArrayList<String>, val context: Context) : RecyclerView.Adapter<ProjetsHolder>() {
+
+
+
+class ProjetsAdapter(val items : ArrayList<Projet>, val context: Context) : RecyclerView.Adapter<ProjetsHolder>() {
 
 
 
@@ -189,7 +218,7 @@ class ProjetsAdapter(val items : ArrayList<String>, val context: Context) : Recy
 
 
     override fun onBindViewHolder(holder: ProjetsHolder, position: Int) {
-        holder.viewTemps?.text = items.get(position)
+//        holder.viewTemps?.text = items.get(position)
     }
 
 
@@ -201,6 +230,10 @@ class ProjetsAdapter(val items : ArrayList<String>, val context: Context) : Recy
 
 
 }
+
+
+
+
 
 
 

@@ -34,11 +34,6 @@ import kotlin.collections.HashMap
 class ContactsActivity : AppCompatActivity() {
 
 
-
-
-
-
-
         // -----------------------------------
 
         private var numberOfRequestsToMake = 0
@@ -46,46 +41,42 @@ class ContactsActivity : AppCompatActivity() {
 
         // -----------------------------------
 
-
-
         var adapter: ContactAdapter? = null
         var contactList = ArrayList<Contact>()
 
-
+        // -----------------------------------
 
 
 
 
 
         override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_contacts)
+                super.onCreate(savedInstanceState)
+                setContentView(R.layout.activity_contacts)
 
 
 
-            // Database
-            val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
-            val contactDAO = database.contactDAO
-            contactList = contactDAO.getItems() as ArrayList<Contact>
+                // Database
+                val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
+                val contactDAO = database.contactDAO
+                contactList = contactDAO.getItems() as ArrayList<Contact>
 
 
 
-            // Adapter
-            adapter = ContactAdapter(this@ContactsActivity, contactList)
-            GridContacts.adapter = adapter
+                // Adapter
+                adapter = ContactAdapter(this@ContactsActivity, contactList)
+                GridContacts.adapter = adapter
 
 
 
-            // RefreshView
-            refreshView.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this, R.color.colorPrimary))
-            refreshView.setColorSchemeColors(Color.WHITE)
-            refreshView.setOnRefreshListener { if(numberOfRequestsToMake == 0){ if (isConnected()) {RefreshRequest()} else { Alerte() } } }
+                // RefreshView
+                refreshView.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this, R.color.colorPrimary))
+                refreshView.setColorSchemeColors(Color.WHITE)
+                refreshView.setOnRefreshListener { if(numberOfRequestsToMake == 0){ if (isConnected()) {RefreshRequest()} else { Alerte() } } }
 
 
 
-        }
-
-
+            }
 
 
 
@@ -97,11 +88,12 @@ class ContactsActivity : AppCompatActivity() {
             val contactDAO = database.contactDAO
             contactDAO.delete()
 
+
+
             // -----------------------------------------------------------------------------------------
 
             val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
-            val org = sharedPreferences.getString("ORG", "")
-            val url = "https://office.bexio.com/api2.php/$org/contact"
+            val url = "https://api.bexio.com/2.0/contact"
             val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
 
             // -----------------------------------------------------------------------------------------
@@ -208,11 +200,15 @@ class ContactsActivity : AppCompatActivity() {
 
 
 
+}
 
 
 
 
-    }
+
+
+
+
 
 
 
@@ -286,14 +282,10 @@ class ContactsActivity : AppCompatActivity() {
             }
 
 
-
             return contactView
-
 
 
         }
 
 
-
 }
-

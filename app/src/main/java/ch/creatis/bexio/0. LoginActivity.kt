@@ -59,18 +59,14 @@ class LoginActivity : AppCompatActivity() {
 
 
         // Première installation de l'application si le Refresh Token n'est pas vide alors il requête avec le Refresh Token
-
-        if(clientidsettings == ""){
-
-            val intentAct = Intent(this@LoginActivity, ReglagesActivity::class.java)
-            startActivity(intentAct)
-
-        }else if(refreshToken == ""){
+        if(refreshToken == ""){
 
             webViewIsVisible() }
 
         else {
+
             getAccessTokenAllTime()
+
         }
 
 

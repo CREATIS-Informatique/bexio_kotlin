@@ -23,15 +23,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewProjets"
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refreshViewProjets"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/all_background"
+            android:elevation="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/projetLabel" />
+            app:layout_constraintTop_toBottomOf="@+id/projetLabel">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewProjets"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/all_background" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
