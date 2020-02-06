@@ -38,7 +38,6 @@ class ProjetsActivity : AppCompatActivity() {
 
     // -----------------------------------
 
-    var adapter: ProjetsAdapter? = null
     var projectList = ArrayList<Projet>()
 
     // -----------------------------------
@@ -83,6 +82,8 @@ class ProjetsActivity : AppCompatActivity() {
             val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
             val projetDAO = database.projetDAO
             projetDAO.delete()
+
+
 
             // -----------------------------------------------------------------------------------------
 
@@ -149,7 +150,7 @@ class ProjetsActivity : AppCompatActivity() {
 
 
 
-    // -------------------------------------------------------------------------------------- Internet ---------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------- Internet --------------------------------------------------------------------------------------
 
     fun isConnected(): Boolean {
         val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

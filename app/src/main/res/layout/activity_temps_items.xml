@@ -15,14 +15,14 @@
             android:layout_height="0dp"
             android:background="#E53935"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/semaineLabel"
+            app:layout_constraintEnd_toStartOf="@+id/tempsLabel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
     </FrameLayout>
 
     <TextView
-            android:id="@+id/semaineLabel"
+            android:id="@+id/tempsLabel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -59,7 +59,7 @@
             android:text="Du"
             android:textColor="#131D2C"
             app:layout_constraintEnd_toStartOf="@+id/textView10"
-            app:layout_constraintStart_toEndOf="@+id/semaineLabel"
+            app:layout_constraintStart_toEndOf="@+id/tempsLabel"
             app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
