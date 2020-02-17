@@ -9,7 +9,7 @@
         android:orientation="vertical">
 
     <TextView
-            android:id="@+id/dateLimiteLabel"
+            android:id="@+id/objetLabel"
             android:layout_width="110dp"
             android:layout_height="23dp"
             android:layout_marginStart="20dp"
@@ -26,7 +26,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:text="Avant le :"
+            android:text="Objet :"
             android:textColor="#131D2C"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -61,7 +61,7 @@
             android:text="En suspens"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/dateLimiteLabel" />
+            app:layout_constraintStart_toEndOf="@+id/objetLabel" />
 
     <Button
             android:id="@+id/button"

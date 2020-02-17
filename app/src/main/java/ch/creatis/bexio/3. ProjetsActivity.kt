@@ -98,6 +98,7 @@ class ProjetsActivity : AppCompatActivity() {
             val queue = Volley.newRequestQueue(this)
             val stringRequest = object : JsonArrayRequest(Method.GET, url,JSONArray(), Response.Listener<JSONArray> { response ->
 
+                println(response)
 
                 for (i in 0 until response.length()) {
 

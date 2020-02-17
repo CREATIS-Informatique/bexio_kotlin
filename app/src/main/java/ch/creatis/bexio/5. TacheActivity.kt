@@ -110,14 +110,15 @@ class TacheActivity : AppCompatActivity() {
         val stringRequest = object : JsonArrayRequest(Method.GET, url,
             JSONArray(), Response.Listener<JSONArray> { response ->
 
-
+                println(response)
 
 
                 for (i in 0 until response.length()) {
 
-                    val idBexio= response.getJSONObject(i)["id"].toString()
-                    val name_un= response.getJSONObject(i)["subject"].toString()
-                    val taches = Tache(null, idBexio,name_un)
+                    val idBexio = response.getJSONObject(i)["id"].toString()
+                    val subject= response.getJSONObject(i)["subject"].toString()
+                    val statuts= response.getJSONObject(i)["todo_status_id"].toString()
+                    val taches = Tache(null,idBexio,subject,statuts)
                     tachesDAO.insert(taches)
 
                 }
@@ -210,8 +211,10 @@ class TachesAdapter(val items : ArrayList<Tache>, val context: Context) : Recycl
 
 
     override fun onBindViewHolder(holder: TachesHolder, position: Int) {
-        holder.viewDateLimite.text = items[position].dateLimit
-        holder.viewStatus.text = items[position].status
+
+        holder.viewObjet.text = items[position].subject
+        if(items[position].status == "1"){ holder.viewStatus.text = "Suspens" }
+
     }
 
 
@@ -228,7 +231,8 @@ class TachesAdapter(val items : ArrayList<Tache>, val context: Context) : Recycl
 
 class TachesHolder (view: View) : RecyclerView.ViewHolder(view) {
 
+    val viewObjet = view.objetLabel
     val viewStatus = view.statutLabel
-    val viewDateLimite = view.dateLimiteLabel
+
 
 }

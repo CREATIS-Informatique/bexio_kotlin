@@ -16,15 +16,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import ch.creatis.bexio.Room.AppDatabase
-import ch.creatis.bexio.Room.Projet
 import ch.creatis.bexio.Room.Temps
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.activity_projets.*
 import kotlinx.android.synthetic.main.activity_temps.*
 import kotlinx.android.synthetic.main.activity_temps_items.view.*
 import org.json.JSONArray
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 class TempsActivity : AppCompatActivity() {
@@ -110,9 +112,14 @@ class TempsActivity : AppCompatActivity() {
                 for (i in 0 until response.length()) {
 
                     val idBexio= response.getJSONObject(i)["id"].toString()
-                    val name_un= response.getJSONObject(i)["duration"].toString()
-                    val temps = Temps(null, idBexio,name_un)
-                    tempsDAO.insert(temps)
+                    val date= response.getJSONObject(i)["date"].toString()
+                    val duration = response.getJSONObject(i)["duration"].toString()
+                    val temps = Temps(null, idBexio,date, duration)
+
+                    if(response.getJSONObject(i)["user_id"] == 1){
+                        tempsDAO.insert(temps)
+
+                    }
 
                 }
 
@@ -206,6 +213,8 @@ class TempsAdapter(val items : ArrayList<Temps>, val context: Context) : Recycle
 
 
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TempsHolder {
         return TempsHolder(LayoutInflater.from(context).inflate(R.layout.activity_temps_items, parent, false))
     }
@@ -213,7 +222,26 @@ class TempsAdapter(val items : ArrayList<Temps>, val context: Context) : Recycle
 
 
     override fun onBindViewHolder(holder: TempsHolder, position: Int) {
-//        holder.viewTemps?.text = items.get(position)
+
+
+
+        val dateConverter = SimpleDateFormat("yyyy-MM-dd").parse(items[position].date)
+        val calendar = Calendar.getInstance()
+        calendar.time = dateConverter
+
+
+
+        val weekOfYear = calendar.get(Calendar.WEEK_OF_YEAR)
+        var firstDay = calendar.get(calendar.firstDayOfWeek)
+
+
+
+        holder.viewDate?.text = weekOfYear.toString()
+        holder.viewFirstDay.text = firstDay.toString()
+        holder.viewDuration?.text = items[position].duration
+
+
+
     }
 
 
@@ -230,6 +258,9 @@ class TempsAdapter(val items : ArrayList<Temps>, val context: Context) : Recycle
 
 class TempsHolder (view: View) : RecyclerView.ViewHolder(view) {
 
-    val viewTemps = view.tempsLabel
+    val viewDate = view.semaineNbrLabel
+    val viewFirstDay = view.firstDayLabel
+    val viewLastDay = view.lastDayLabel
+    val viewDuration = view.durationLabel
 
 }
