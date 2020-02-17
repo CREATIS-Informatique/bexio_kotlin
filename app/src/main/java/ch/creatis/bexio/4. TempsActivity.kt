@@ -60,9 +60,9 @@ class TempsActivity : AppCompatActivity() {
 
 
             // Adapter
+            RefreshRequest()
             recyclerViewTemps.layoutManager = LinearLayoutManager(this)
             recyclerViewTemps.adapter = TempsAdapter(tempsList, this)
-            RefreshRequest()
 
 
 
@@ -210,8 +210,6 @@ class TempsActivity : AppCompatActivity() {
 
 
 class TempsAdapter(val items : ArrayList<Temps>, val context: Context) : RecyclerView.Adapter<TempsHolder>() {
-
-
 
 
 

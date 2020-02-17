@@ -39,7 +39,7 @@ data class Contact(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var idBexi
 
 
 @Entity(tableName = "projets")
-data class Projet(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var idBexio: String?, var nr: String?, var name: String?, var start_date: String?, var end_date: String?, var comment: String?) {
+data class Projet(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var idBexio: String?, var nr: String?, var name: String?, var start_date: String?, var pr_state_id: String?, var comment: String?) {
 
 
 

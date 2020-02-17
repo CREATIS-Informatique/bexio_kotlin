@@ -24,7 +24,11 @@ import kotlinx.android.synthetic.main.activity_contacts.*
 import kotlinx.android.synthetic.main.activity_projets.*
 import kotlinx.android.synthetic.main.activity_projets_items.view.*
 import org.json.JSONArray
-
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 class ProjetsActivity : AppCompatActivity() {
@@ -58,9 +62,9 @@ class ProjetsActivity : AppCompatActivity() {
 
 
         // Adapter
+        RefreshRequest()
         recyclerViewProjets.layoutManager = LinearLayoutManager(this)
         recyclerViewProjets.adapter = ProjetsAdapter(projectList, this)
-        RefreshRequest()
 
 
 
@@ -106,7 +110,7 @@ class ProjetsActivity : AppCompatActivity() {
                     val name_un= response.getJSONObject(i)["nr"].toString()
                     val name_deux= response.getJSONObject(i)["name"].toString()
                     val address= response.getJSONObject(i)["start_date"].toString()
-                    val postcode= response.getJSONObject(i)["end_date"].toString()
+                    val postcode= response.getJSONObject(i)["pr_state_id"].toString()
                     val city= response.getJSONObject(i)["comment"].toString()
                     val projet = Projet(null, idBexio,name_un, name_deux,address,postcode,city)
                     projetDAO.insert(projet)
@@ -216,10 +220,18 @@ class ProjetsAdapter(val items : ArrayList<Projet>, val context: Context) : Recy
 
 
     override fun onBindViewHolder(holder: ProjetsHolder, position: Int) {
+
         holder.projectLabel?.text = items[position].name
-        holder.nr?.text = items[position].nr
+        holder.nr?.text = "Nº " + items[position].nr
         holder.startDate?.text = items[position].start_date
-        holder.endDate?.text = items[position].end_date
+
+        if (items[position].pr_state_id == "1"){
+            holder.endDate?.text = "Actif"
+        } else if(items[position].pr_state_id == "2"){
+            holder.endDate?.text = "Ouvert"
+//            holder.endDate.setBackgroundColor(R.color)
+        }
+
     }
 
 

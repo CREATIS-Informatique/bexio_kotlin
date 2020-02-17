@@ -62,9 +62,9 @@ class TacheActivity : AppCompatActivity() {
 
 
         // Adapter
+        RefreshRequest()
         recyclerViewTaches.layoutManager = LinearLayoutManager(this)
         recyclerViewTaches.adapter = TachesAdapter(tachesList, this)
-        RefreshRequest()
 
 
 
