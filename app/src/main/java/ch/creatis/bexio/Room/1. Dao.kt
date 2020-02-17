@@ -24,7 +24,7 @@ interface ContactDAO {
 
 
 
-    @Query("SELECT * FROM contacts ORDER BY name_un DESC")
+    @Query("SELECT * FROM contacts ORDER BY name_un ASC")
     fun getItems(): List<Contact>
 
 

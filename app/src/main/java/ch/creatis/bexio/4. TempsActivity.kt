@@ -6,6 +6,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Color
 import android.net.ConnectivityManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -24,6 +25,10 @@ import kotlinx.android.synthetic.main.activity_temps.*
 import kotlinx.android.synthetic.main.activity_temps_items.view.*
 import org.json.JSONArray
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDate.parse
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -238,7 +243,14 @@ class TempsAdapter(val items : ArrayList<Temps>, val context: Context) : Recycle
         holder.viewFirstDay.text = firstDay.toString()
         holder.viewDuration?.text = items[position].duration
 
+        //-------------------------------
 
+        val time = items[position].duration
+        val sdf = SimpleDateFormat("HH:mm")
+        val date = sdf.parse(time)
+        println(date)
+
+        //-------------------------------
 
     }
 

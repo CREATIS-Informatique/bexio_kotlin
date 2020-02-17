@@ -102,6 +102,9 @@ class ContactsActivity : AppCompatActivity() {
 
             val queue = Volley.newRequestQueue(this)
             val stringRequest = object : JsonArrayRequest(Method.GET, url,JSONArray(), Response.Listener<JSONArray> { response ->
+
+                println(response)
+
                 for (i in 0 until response.length()) {
                     val idBexio= response.getJSONObject(i)["id"].toString()
                     val name_un= response.getJSONObject(i)["name_1"].toString()
@@ -249,26 +252,53 @@ class ContactsActivity : AppCompatActivity() {
 
             val contact = this.contactsList[position]
 
-            contactView.tvName.text = contact.name_un + contact.name_deux!!
+            contactView.tvName.text = contact.name_un + " " +contact.name_deux!!
 
-            contactView.mailButton.setOnClickListener {
 
-                val emailIntent = Intent(Intent.ACTION_SEND)
-                emailIntent.type = "plain/text"
-                emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(contact.mail))
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "")
-                emailIntent.putExtra(Intent.EXTRA_TEXT, "")
-                context!!.startActivity(Intent.createChooser(emailIntent, "Choisissez une application Mail"))
+
+            if (contact.mail == "") {
+
+                contactView.mailButton.visibility = View.GONE
+
+            } else {
+
+                contactView.mailButton.setOnClickListener {
+
+
+                    val emailIntent = Intent(Intent.ACTION_SEND)
+                    emailIntent.type = "plain/text"
+                    emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(contact.mail))
+                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "")
+                    emailIntent.putExtra(Intent.EXTRA_TEXT, "")
+                    context!!.startActivity(Intent.createChooser(emailIntent, "Choisissez une application Mail"))
+
+
+
+                }
 
             }
 
-            contactView.telButton.setOnClickListener {
 
-                val intent = Intent(Intent.ACTION_DIAL)
-                intent.data = Uri.parse("tel:${contact.phone_fixed}")
-                context!!.startActivity(intent)
+
+            if (contact.phone_fixed == "") {
+
+                contactView.telButton.visibility = View.GONE
+
+            } else {
+
+                contactView.telButton.setOnClickListener {
+
+
+                    val intent = Intent(Intent.ACTION_DIAL)
+                    intent.data = Uri.parse("tel:${contact.phone_fixed}")
+                    context!!.startActivity(intent)
+
+
+                }
 
             }
+
+
 
             contactView.setOnClickListener {
 
