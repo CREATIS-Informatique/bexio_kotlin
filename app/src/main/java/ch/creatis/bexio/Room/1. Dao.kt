@@ -111,7 +111,7 @@ interface TachesDAO {
 
 
 
-    @Query("SELECT * FROM taches ORDER BY idBexio DESC")
+    @Query("SELECT * FROM taches ORDER BY dateLimit DESC")
     fun getItems(): List<Tache>
 
 

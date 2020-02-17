@@ -17,14 +17,13 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import ch.creatis.bexio.Room.AppDatabase
 import ch.creatis.bexio.Room.Tache
-import ch.creatis.bexio.Room.Temps
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_taches.*
 import kotlinx.android.synthetic.main.activity_taches_items.view.*
-import kotlinx.android.synthetic.main.activity_temps.*
 import org.json.JSONArray
+
 
 
 class TacheActivity : AppCompatActivity() {
@@ -57,7 +56,7 @@ class TacheActivity : AppCompatActivity() {
 
         // Database
         val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
-        val tachesDAO = database.tempsDAO
+        val tachesDAO = database.tacheDAO
         tachesList = tachesDAO.getItems() as ArrayList<Tache>
 
 
@@ -100,7 +99,7 @@ class TacheActivity : AppCompatActivity() {
         // -----------------------------------------------------------------------------------------
 
         val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
-        val url = "https://api.bexio.com/2.0/timesheet"
+        val url = "https://api.bexio.com/2.0/task"
         val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
 
         // -----------------------------------------------------------------------------------------
@@ -113,19 +112,15 @@ class TacheActivity : AppCompatActivity() {
 
 
 
-                println(response)
-
-
 
                 for (i in 0 until response.length()) {
 
                     val idBexio= response.getJSONObject(i)["id"].toString()
-                    val name_un= response.getJSONObject(i)["duration"].toString()
+                    val name_un= response.getJSONObject(i)["subject"].toString()
                     val taches = Tache(null, idBexio,name_un)
                     tachesDAO.insert(taches)
 
                 }
-
 
 
                 numberOfRequestsToMake--
@@ -161,17 +156,6 @@ class TacheActivity : AppCompatActivity() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     // -------------------------------------------------------------------------------------- Internet --------------------------------------------------------------------------------------
 
     fun isConnected(): Boolean {
@@ -188,9 +172,9 @@ class TacheActivity : AppCompatActivity() {
 
         } else {
             val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
-            val tachesDAO = database.tempsDAO
+            val tachesDAO = database.tacheDAO
             tachesList = tachesDAO.getItems() as ArrayList<Tache>
-            refreshViewTemps.isRefreshing = false
+            refreshViewTaches.isRefreshing = false
         }
 
     }
@@ -198,7 +182,7 @@ class TacheActivity : AppCompatActivity() {
 
 
     fun Alerte(){
-        refreshViewTemps.isRefreshing = false
+        refreshViewTaches.isRefreshing = false
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Aucune connexion à internet")
         builder.setMessage("Vérifiez vos réglages avant de pouvoir utiliser l'application.")
@@ -211,15 +195,7 @@ class TacheActivity : AppCompatActivity() {
 
 
 
-
-
-
-
 }
-
-
-
-
 
 
 
@@ -234,7 +210,8 @@ class TachesAdapter(val items : ArrayList<Tache>, val context: Context) : Recycl
 
 
     override fun onBindViewHolder(holder: TachesHolder, position: Int) {
-//        holder.viewTaches.text = items.get(position)
+        holder.viewDateLimite.text = items[position].dateLimit
+        holder.viewStatus.text = items[position].status
     }
 
 
@@ -249,16 +226,9 @@ class TachesAdapter(val items : ArrayList<Tache>, val context: Context) : Recycl
 
 
 
-
-
-
-
-
-
-
-
 class TachesHolder (view: View) : RecyclerView.ViewHolder(view) {
 
-    val viewTaches = view.dateLimiteLabel
+    val viewStatus = view.statutLabel
+    val viewDateLimite = view.dateLimiteLabel
 
 }
