@@ -15,8 +15,8 @@
             android:id="@+id/photoContacts"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:srcCompat="@drawable/contacts_photo_profil"
-            android:contentDescription="TODO" />
+            android:contentDescription="TODO"
+            app:srcCompat="@drawable/contacts_photo_profil" />
 
     <TextView
             android:id="@+id/tvName"

@@ -258,7 +258,7 @@ class ContactsActivity : AppCompatActivity() {
 
             if (contact.mail == "") {
 
-                contactView.mailButton.visibility = View.GONE
+                contactView.mailButton.visibility = View.INVISIBLE
 
             } else {
 
@@ -282,7 +282,7 @@ class ContactsActivity : AppCompatActivity() {
 
             if (contact.phone_fixed == "") {
 
-                contactView.telButton.visibility = View.GONE
+                contactView.telButton.visibility = View.INVISIBLE
 
             } else {
 
