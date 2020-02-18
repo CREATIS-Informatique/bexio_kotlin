@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import ch.creatis.bexio.R
+import kotlinx.android.synthetic.main.activity_contacts_next.*
 
 class ContactsActivityNext : AppCompatActivity() {
 
@@ -14,11 +15,7 @@ class ContactsActivityNext : AppCompatActivity() {
         setContentView(R.layout.activity_contacts_next)
 
 
-
-        var bundle :Bundle ?=intent.extras
-
-
-
+            nomLabel.text = intent.getStringExtra("name_un")
     }
 
 

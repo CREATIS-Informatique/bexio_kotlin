@@ -112,9 +112,16 @@ class ContactsActivity : AppCompatActivity() {
                     val address= response.getJSONObject(i)["address"].toString()
                     val postcode= response.getJSONObject(i)["postcode"].toString()
                     val city= response.getJSONObject(i)["city"].toString()
+                    val country_id = response.getJSONObject(i)["country_id"].toString()
                     val mail= response.getJSONObject(i)["mail"].toString()
+                    val mail_second= response.getJSONObject(i)["mail_second"].toString()
                     val phone_fixed= response.getJSONObject(i)["phone_fixed"].toString()
-                    val contact = Contact(null, idBexio,name_un, name_deux,address,postcode,city,mail,phone_fixed)
+                    val phone_fixed_second= response.getJSONObject(i)["phone_fixed_second"].toString()
+                    val phone_mobile= response.getJSONObject(i)["phone_mobile"].toString()
+                    val fax= response.getJSONObject(i)["fax"].toString()
+                    val url= response.getJSONObject(i)["url"].toString()
+                    val skype_name= response.getJSONObject(i)["skype_name"].toString()
+                    val contact = Contact(null, idBexio,name_un, name_deux,address,postcode,city,country_id,mail,mail_second,phone_fixed,phone_fixed_second,phone_mobile,fax,url,skype_name)
                     contactDAO.insert(contact)
                 }
 
@@ -303,10 +310,20 @@ class ContactsActivity : AppCompatActivity() {
             contactView.setOnClickListener {
 
                 val intent = Intent(context, ContactsActivityNext::class.java)
-                intent.putExtra("value1", contact.address)
-                intent.putExtra("value2", contact.city)
-                intent.putExtra("value3", contact.idBexio)
-                intent.putExtra("valu4", contact.idRoom)
+                intent.putExtra("name_un", contact.name_un)
+                intent.putExtra("name_deux", contact.name_deux)
+                intent.putExtra("adresse", contact.address)
+                intent.putExtra("postcode", contact.postcode)
+                intent.putExtra("city", contact.city)
+                intent.putExtra("country_id", contact.country_id)
+                intent.putExtra("mail", contact.mail)
+                intent.putExtra("mail_second", contact.mail_second)
+                intent.putExtra("phone_fixed", contact.phone_fixed)
+                intent.putExtra("phone_fixed_second", contact.phone_fixed_second)
+                intent.putExtra("phone_mobile", contact.phone_mobile)
+                intent.putExtra("fax", contact.fax)
+                intent.putExtra("url", contact.url)
+                intent.putExtra("skype_name", contact.skype_name)
                 context!!.startActivity(intent)
 
             }

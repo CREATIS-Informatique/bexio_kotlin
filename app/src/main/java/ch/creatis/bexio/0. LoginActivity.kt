@@ -241,9 +241,16 @@ class LoginActivity : AppCompatActivity() {
                     val address= response.getJSONObject(i)["address"].toString()
                     val postcode= response.getJSONObject(i)["postcode"].toString()
                     val city= response.getJSONObject(i)["city"].toString()
+                    val country_id = response.getJSONObject(i)["country_id"].toString()
                     val mail= response.getJSONObject(i)["mail"].toString()
+                    val mail_second= response.getJSONObject(i)["mail_second"].toString()
                     val phone_fixed= response.getJSONObject(i)["phone_fixed"].toString()
-                    val contact = Contact(null, idBexio,name_un,name_deux,address,postcode,city,mail,phone_fixed)
+                    val phone_fixed_second= response.getJSONObject(i)["phone_fixed_second"].toString()
+                    val phone_mobile= response.getJSONObject(i)["phone_mobile"].toString()
+                    val fax= response.getJSONObject(i)["fax"].toString()
+                    val url= response.getJSONObject(i)["url"].toString()
+                    val skype_name= response.getJSONObject(i)["skype_name"].toString()
+                    val contact = Contact(null, idBexio,name_un, name_deux,address,postcode,city,country_id,mail,mail_second,phone_fixed,phone_fixed_second,phone_mobile,fax,url,skype_name)
                     contactListDatabase.add(contact)
                 }
 

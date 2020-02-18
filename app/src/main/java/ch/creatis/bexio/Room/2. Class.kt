@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 
 
 @Entity(tableName = "contacts")
-data class Contact(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var idBexio: String?, var name_un: String?, var name_deux: String?, var address: String?, var postcode: String?, var city: String?, var mail: String?, var phone_fixed: String?) {
+data class Contact(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var idBexio: String?, var name_un: String?, var name_deux: String?, var address: String?, var postcode: String?, var city: String?,var country_id: String?, var mail: String?,var mail_second: String?, var phone_fixed: String?, var phone_fixed_second: String?, var phone_mobile: String?, var fax: String?, var url: String?, var skype_name: String?) {
 
 
 
