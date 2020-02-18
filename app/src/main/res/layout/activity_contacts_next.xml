@@ -4,6 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/all_background_home"
         tools:context=".Next.ContactsActivityNext">
 
     <ScrollView
@@ -26,7 +27,7 @@
                     android:layout_margin="30dp"
                     android:gravity="center"
                     android:text="Nom de l'entreprise"
-                    android:textColor="#131D2C"
+                    android:textColor="#FFFFFF"
                     android:textSize="20sp" />
 
             <ImageView
@@ -50,14 +51,14 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginRight="20dp"
-                        android:background="@drawable/contacts_mail" />
+                        android:background="@drawable/contacts_mail_white" />
 
                 <Button
                         android:id="@+id/phoneButton"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="20dp"
-                        android:background="@drawable/contacts_phone" />
+                        android:background="@drawable/contacts_phone_white" />
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -319,16 +320,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_margin="20dp"
-                    android:gravity="center"
-                    android:text="Contact supplémentaire"
-                    android:textColor="#131D2C"
-                    android:textSize="20sp" />
         </LinearLayout>
     </ScrollView>
 

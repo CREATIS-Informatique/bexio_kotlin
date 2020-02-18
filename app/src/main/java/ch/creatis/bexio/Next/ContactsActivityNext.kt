@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import ch.creatis.bexio.R
 import kotlinx.android.synthetic.main.activity_contacts_next.*
 
@@ -41,30 +42,35 @@ class ContactsActivityNext : AppCompatActivity() {
 
             // ------------------------------------------------------------------------------------------------------------------------------------
 
-            if (mail == "") {
-                mailButton.visibility = View.INVISIBLE
-            } else {
+
                 mailButton.setOnClickListener {
-                    val emailIntent = Intent(Intent.ACTION_SEND)
-                    emailIntent.type = "plain/text"
-                    emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(mail))
-                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "")
-                    emailIntent.putExtra(Intent.EXTRA_TEXT, "")
-                    startActivity(Intent.createChooser(emailIntent, "Choisissez une application Mail"))
-                }
+                    if (mail == "") {
+                        Toast.makeText(this, "Il n'y pas de mail !", Toast.LENGTH_LONG).show()
+                    } else {
+                        val emailIntent = Intent(Intent.ACTION_SEND)
+                        emailIntent.type = "plain/text"
+                        emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(mail))
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "")
+                        emailIntent.putExtra(Intent.EXTRA_TEXT, "")
+                        startActivity(Intent.createChooser(emailIntent, "Choisissez une application Mail"))
+                    }
+
             }
 
             // ------------------------------------------------------------------------------------------------------------------------------------
 
-            if (phone_fixed == "") {
-                phoneButton.visibility = View.INVISIBLE
-            } else{
+
                 phoneButton.setOnClickListener {
-                    val intent = Intent(Intent.ACTION_DIAL)
-                    intent.data = Uri.parse("tel:${phone_fixed}")
-                    startActivity(intent)
+                    if (phone_fixed == "") {
+                        Toast.makeText(this, "Il n'y pas de téléphone !", Toast.LENGTH_LONG).show()
+                    } else{
+                        val intent = Intent(Intent.ACTION_DIAL)
+                        intent.data = Uri.parse("tel:${phone_fixed}")
+                        startActivity(intent)
+                    }
+
                 }
-            }
+
 
             // ------------------------------------------------------------------------------------------------------------------------------------
 
