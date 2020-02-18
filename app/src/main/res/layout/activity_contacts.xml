@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/refreshView"
+            android:id="@+id/refreshViewContacts"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:elevation="2dp"
@@ -33,23 +33,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7">
 
-
-        <GridView
-                android:id="@+id/GridContacts"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/all_background"
-                android:horizontalSpacing="15dp"
-                android:numColumns="1"
-                android:padding="15dp"
-                android:verticalSpacing="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewContacts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 

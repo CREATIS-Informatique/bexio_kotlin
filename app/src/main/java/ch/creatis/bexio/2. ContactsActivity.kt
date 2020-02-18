@@ -10,18 +10,17 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.room.*
 import ch.creatis.bexio.Next.ContactsActivityNext
 import ch.creatis.bexio.Room.AppDatabase
 import ch.creatis.bexio.Room.Contact
-import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.StringRequest
@@ -38,55 +37,52 @@ import kotlin.collections.HashMap
 class ContactsActivity : AppCompatActivity() {
 
 
-        // -----------------------------------
+    // -----------------------------------
 
-        private var numberOfRequestsToMake = 0
-        private var hasRequestFailed = false
+    private var numberOfRequestsToMake = 0
+    private var hasRequestFailed = false
 
-        // -----------------------------------
+    // -----------------------------------
 
-        var adapter: ContactAdapter? = null
-        var contactList = ArrayList<Contact>()
+    var contactList = ArrayList<Contact>()
 
-        // -----------------------------------
-
-
+    // -----------------------------------
 
 
 
         override fun onCreate(savedInstanceState: Bundle?) {
-                super.onCreate(savedInstanceState)
-                setContentView(R.layout.activity_contacts)
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_contacts)
 
 
 
-                // Database
-                val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
-                val contactDAO = database.contactDAO
-                contactList = contactDAO.getItems() as ArrayList<Contact>
+        // Database
+        val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
+        val contactDAO = database.contactDAO
+        contactList = contactDAO.getItems() as ArrayList<Contact>
 
 
 
-                // Adapter
-                adapter = ContactAdapter(this@ContactsActivity, contactList)
-                GridContacts.adapter = adapter
+        // Adapter
+        RefreshRequest()
+        recyclerViewContacts.layoutManager = LinearLayoutManager(this)
+        recyclerViewContacts.adapter = ContactsAdapter(contactList, this)
 
 
 
-                // RefreshView
-                refreshView.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this, R.color.colorPrimary))
-                refreshView.setColorSchemeColors(Color.WHITE)
-                refreshView.setOnRefreshListener { if(numberOfRequestsToMake == 0){ if (isConnected()) {RefreshRequest()} else { Alerte() } } }
+        // RefreshView
+        refreshViewContacts.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this, R.color.colorPrimary))
+        refreshViewContacts.setColorSchemeColors(Color.WHITE)
+        refreshViewContacts.setOnRefreshListener { if(numberOfRequestsToMake == 0){ if (isConnected()) {RefreshRequest()} else { Alerte() } } }
 
 
 
-            }
+    }
 
 
 
 
-
-        fun RefreshRequest(){
+            fun RefreshRequest(){
 
             val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
             val contactDAO = database.contactDAO
@@ -178,12 +174,6 @@ class ContactsActivity : AppCompatActivity() {
                 }
 
 
-
-                adapter = ContactAdapter(this@ContactsActivity, contactList)
-                GridContacts.adapter = adapter
-
-
-
                 numberOfRequestsToMake--
                 if (numberOfRequestsToMake == 0) { requestEndInternet() }
 
@@ -237,9 +227,7 @@ class ContactsActivity : AppCompatActivity() {
                 val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
                 val contactDAO = database.contactDAO
                 contactList = contactDAO.getItems() as ArrayList<Contact>
-                adapter = ContactAdapter(this@ContactsActivity, contactList)
-                GridContacts.adapter = adapter
-                refreshView.isRefreshing = false
+                refreshViewContacts.isRefreshing = false
             }
 
         }
@@ -248,7 +236,7 @@ class ContactsActivity : AppCompatActivity() {
 
         fun Alerte(){
 
-            refreshView.isRefreshing = false
+            refreshViewContacts.isRefreshing = false
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Aucune connexion à internet")
             builder.setMessage("Vérifiez vos réglages avant de pouvoir utiliser l'application.")
@@ -268,82 +256,29 @@ class ContactsActivity : AppCompatActivity() {
 
 
 
+class ContactsAdapter(val items : ArrayList<Contact>, val context: Context) : RecyclerView.Adapter<ContactsHolder>() {
 
 
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactsHolder {
+        return ContactsHolder(
+            LayoutInflater.from(context).inflate(
+                R.layout.activity_contacts_items,
+                parent,
+                false
+            )
+        )
+    }
 
 
 
+    override fun onBindViewHolder(holder: ContactsHolder, position: Int) {
 
+        val contact= items[position]
 
+        holder.contactName.text = contact.name_un + " " +contact.name_deux!!
 
-
-    class ContactAdapter : BaseAdapter {
-
-        var contactsList = ArrayList<Contact>()
-        var context: Context? = null
-
-
-
-        constructor(context: Context, contactsList: ArrayList<Contact>) : super() {
-            this.context = context
-            this.contactsList = contactsList
-        }
-
-
-        override fun getCount(): Int { return contactsList.size }
-
-
-        override fun getItem(position: Int): Any { return contactsList[position] }
-
-
-        override fun getItemId(position: Int): Long { return position.toLong() }
-
-
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-
-
-
-            var inflator = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            var contactView = inflator.inflate(R.layout.activity_contacts_items, null)
-
-
-
-            val contact = this.contactsList[position]
-            contactView.contactName.text = contact.name_un + " " +contact.name_deux!!
-
-
-
-                contactView.mailButton.setOnClickListener {
-                    if (contact.mail == "" || contact.mail == "null") {
-                        Toast.makeText(context, "Il n'y pas de mail !", Toast.LENGTH_LONG).show()
-                    }else {
-                        val emailIntent = Intent(Intent.ACTION_SEND)
-                        emailIntent.type = "plain/text"
-                        emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(contact.mail))
-                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "")
-                        emailIntent.putExtra(Intent.EXTRA_TEXT, "")
-                        context!!.startActivity(Intent.createChooser(emailIntent, "Choisissez une application Mail"))
-                    }
-                }
-
-
-
-                contactView.telButton.setOnClickListener {
-                    if (contact.phone_fixed == "" || contact.phone_fixed == "null") {
-                        Toast.makeText(context, "Il n'y pas de téléphone !", Toast.LENGTH_LONG).show()
-                    } else {
-                        val intent = Intent(Intent.ACTION_DIAL)
-                        intent.data = Uri.parse("tel:${contact.phone_fixed}")
-                        context!!.startActivity(intent)
-                    }
-                }
-
-
-
-
-
-            contactView.setOnClickListener {
+        holder.contactView.setOnClickListener {
 
                 val intent = Intent(context, ContactsActivityNext::class.java)
                 intent.putExtra("name_un", contact.name_un)
@@ -362,13 +297,57 @@ class ContactsActivity : AppCompatActivity() {
                 intent.putExtra("skype_name", contact.skype_name)
                 context!!.startActivity(intent)
 
-            }
+        }
+
+        holder.mailButton.setOnClickListener {
+
+            if (contact.mail == "" || contact.mail == "null") { Toast.makeText(context, "Il n'y pas de mail !", Toast.LENGTH_LONG).show() }else {
+                        val emailIntent = Intent(Intent.ACTION_SEND)
+                        emailIntent.type = "plain/text"
+                        emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(contact.mail))
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "")
+                        emailIntent.putExtra(Intent.EXTRA_TEXT, "")
+                        context!!.startActivity(Intent.createChooser(emailIntent, "Choisissez une application Mail"))
+                    }
+        }
 
 
-            return contactView
 
+        holder.telButton.setOnClickListener {
+            if (contact.phone_fixed == "" || contact.phone_fixed == "null") { Toast.makeText(context, "Il n'y pas de téléphone !", Toast.LENGTH_LONG).show()} else {
+                        val intent = Intent(Intent.ACTION_DIAL)
+                        intent.data = Uri.parse("tel:${contact.phone_fixed}")
+                        context!!.startActivity(intent)
+                    }
 
         }
 
+
+
+    }
+
+
+
+    override fun getItemCount(): Int {
+        return items.size
+    }
+
+
+
+
+}
+
+
+
+
+
+
+
+class ContactsHolder (view: View) : RecyclerView.ViewHolder(view) {
+
+        val contactView = view.contactView
+        val contactName = view.contactName
+        val mailButton = view.mailButton
+        val telButton = view.telButton
 
 }
