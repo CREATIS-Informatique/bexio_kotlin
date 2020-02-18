@@ -15,7 +15,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.room.*
 import ch.creatis.bexio.Next.ContactsActivityNext
 import ch.creatis.bexio.Room.AppDatabase
@@ -259,7 +258,7 @@ class ContactsActivity : AppCompatActivity() {
 
             val contact = this.contactsList[position]
 
-            contactView.tvName.text = contact.name_un + " " +contact.name_deux!!
+            contactView.contactName.text = contact.name_un + " " +contact.name_deux!!
 
 
 
