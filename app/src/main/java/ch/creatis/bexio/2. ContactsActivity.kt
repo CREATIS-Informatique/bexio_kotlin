@@ -278,7 +278,7 @@ class ContactsActivity : AppCompatActivity() {
 
 
                 contactView.telButton.setOnClickListener {
-                    if (contact.phone_fixed == "") {
+                    if (contact.phone_fixed == "" || contact.phone_fixed == "null") {
                         Toast.makeText(context, "Il n'y pas de téléphone !", Toast.LENGTH_LONG).show()
                     } else {
                         val intent = Intent(Intent.ACTION_DIAL)

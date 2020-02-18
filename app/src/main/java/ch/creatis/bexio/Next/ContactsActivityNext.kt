@@ -38,7 +38,9 @@ class ContactsActivityNext : AppCompatActivity() {
 
             // ------------------------------------------------------------------------------------------------------------------------------------
 
-                if (name_un == "" || name_un == "null"){ nomLabel.visibility = View.GONE }else {nomLabel.text = intent.getStringExtra("name_un")}
+                if (name_un == "" || name_un == "null"){ name_un = "" }
+                if (name_deux == "" || name_deux == "null"){ name_deux = "" }
+                nomLabel.text = name_un + " " + name_deux
 
             // ------------------------------------------------------------------------------------------------------------------------------------
 
