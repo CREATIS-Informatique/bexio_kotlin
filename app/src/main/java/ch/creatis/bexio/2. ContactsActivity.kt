@@ -251,11 +251,11 @@ class ContactsActivity : AppCompatActivity() {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
 
+
             var inflator = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             var contactView = inflator.inflate(R.layout.activity_contacts_items, null)
 
 
-            // foodView.photoContacts.setImageResource(contact.id!!)
 
             val contact = this.contactsList[position]
 

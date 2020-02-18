@@ -1,9 +1,10 @@
 package ch.creatis.bexio.Next
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import ch.creatis.bexio.R
 import kotlinx.android.synthetic.main.activity_contacts_next.*
 
@@ -34,7 +35,36 @@ class ContactsActivityNext : AppCompatActivity() {
 
 
 
-            if (name_un == "" || name_un == "null"){ nomLabel.visibility = View.GONE }else {nomLabel.text = intent.getStringExtra("name_un")}
+            // ------------------------------------------------------------------------------------------------------------------------------------
+
+                if (name_un == "" || name_un == "null"){ nomLabel.visibility = View.GONE }else {nomLabel.text = intent.getStringExtra("name_un")}
+
+            // ------------------------------------------------------------------------------------------------------------------------------------
+
+            if (mail == "") {
+                mailButton.visibility = View.INVISIBLE
+            } else {
+                mailButton.setOnClickListener {
+                    val emailIntent = Intent(Intent.ACTION_SEND)
+                    emailIntent.type = "plain/text"
+                    emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(mail))
+                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "")
+                    emailIntent.putExtra(Intent.EXTRA_TEXT, "")
+                    startActivity(Intent.createChooser(emailIntent, "Choisissez une application Mail"))
+                }
+            }
+
+            // ------------------------------------------------------------------------------------------------------------------------------------
+
+            if (phone_fixed == "") {
+                phoneButton.visibility = View.INVISIBLE
+            } else{
+                phoneButton.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_DIAL)
+                    intent.data = Uri.parse("tel:${phone_fixed}")
+                    startActivity(intent)
+                }
+            }
 
             // ------------------------------------------------------------------------------------------------------------------------------------
 
@@ -43,6 +73,23 @@ class ContactsActivityNext : AppCompatActivity() {
                 siteWebLabel.visibility = View.GONE
             } else{
                 siteWebLabel.text = url
+                siteWebLabel.setOnClickListener {
+
+
+
+                    if (url.startsWith("http://") || url.startsWith("https://")){
+                        var browser = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                        startActivity(browser)
+                    }else{
+                        var urlWith = "http://" + url
+                        var browser = Intent(Intent.ACTION_VIEW, Uri.parse(urlWith))
+                        startActivity(browser)
+
+                    }
+
+
+
+                }
             }
 
             // ------------------------------------------------------------------------------------------------------------------------------------
@@ -64,7 +111,6 @@ class ContactsActivityNext : AppCompatActivity() {
             var villeVariable = postcode + "" + city + "" + country_id.toString()
 
 
-
             if (villeVariable == ""){
                 ville.visibility = View.GONE
                 villeLabel.visibility = View.GONE
@@ -79,6 +125,11 @@ class ContactsActivityNext : AppCompatActivity() {
                 mobileLabel.visibility = View.GONE
             } else{
                 mobileLabel.text = phone_mobile
+                mobileLabel.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_DIAL)
+                    intent.data = Uri.parse("tel:${phone_mobile}")
+                    startActivity(intent)
+                }
             }
 
             // ------------------------------------------------------------------------------------------------------------------------------------
@@ -88,6 +139,11 @@ class ContactsActivityNext : AppCompatActivity() {
                 telDeuxLabel.visibility = View.GONE
             } else{
                 telDeuxLabel.text = phone_fixed_second
+                telDeuxLabel.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_DIAL)
+                    intent.data = Uri.parse("tel:${phone_fixed_second}")
+                    startActivity(intent)
+                }
             }
 
             // ------------------------------------------------------------------------------------------------------------------------------------
@@ -97,6 +153,14 @@ class ContactsActivityNext : AppCompatActivity() {
                 mailDeuxLabel.visibility = View.GONE
             } else{
                 mailDeuxLabel.text = mail_second
+                mailDeuxLabel.setOnClickListener {
+                    val emailIntent = Intent(Intent.ACTION_SEND)
+                    emailIntent.type = "plain/text"
+                    emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(mail_second))
+                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "")
+                    emailIntent.putExtra(Intent.EXTRA_TEXT, "")
+                    startActivity(Intent.createChooser(emailIntent, "Choisissez une application Mail"))
+                }
             }
 
             // ------------------------------------------------------------------------------------------------------------------------------------
