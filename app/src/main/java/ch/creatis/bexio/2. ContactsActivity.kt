@@ -10,9 +10,12 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,6 +46,7 @@ class ContactsActivity : AppCompatActivity() {
     private var hasRequestFailed = false
 
     // -----------------------------------
+    lateinit var mAdapter: ContactsAdapter
 
     var contactList = ArrayList<Contact>()
 
@@ -66,7 +70,8 @@ class ContactsActivity : AppCompatActivity() {
         // Adapter
         RefreshRequest()
         recyclerViewContacts.layoutManager = LinearLayoutManager(this)
-        recyclerViewContacts.adapter = ContactsAdapter(contactList, this)
+            mAdapter = ContactsAdapter(contactList, this)
+            recyclerViewContacts.adapter = mAdapter
 
 
 
@@ -76,12 +81,50 @@ class ContactsActivity : AppCompatActivity() {
         refreshViewContacts.setOnRefreshListener { if(numberOfRequestsToMake == 0){ if (isConnected()) {RefreshRequest()} else { Alerte() } } }
 
 
-
             // EditText
+            SearchView()
 
 
     }
 
+
+    fun SearchView(){
+
+
+
+        editTextContacts.addTextChangedListener(object: TextWatcher {
+
+            override fun beforeTextChanged(s:CharSequence, start:Int, count:Int, after:Int) {
+            }
+            override fun onTextChanged(s:CharSequence, start:Int, before:Int, count:Int) {
+            }
+            override fun afterTextChanged(s: Editable) {
+                SearchViewfilter(s.toString())
+
+            }
+        })
+
+
+
+    }
+
+
+
+    private fun SearchViewfilter(text:String) {
+
+        var filteredList:ArrayList<Contact> = ArrayList()
+
+        for (item in contactList)
+        {
+            if (item.getNomFiltered()!!.toLowerCase().contains(text.toLowerCase()))
+            {
+                filteredList.add(item)
+            }
+        }
+
+        mAdapter.filterList(filteredList)
+
+    }
 
 
 
@@ -259,7 +302,7 @@ class ContactsActivity : AppCompatActivity() {
 
 
 
-class ContactsAdapter(val items : ArrayList<Contact>, val context: Context) : RecyclerView.Adapter<ContactsHolder>() {
+class ContactsAdapter(var items : ArrayList<Contact>, val context: Context) : RecyclerView.Adapter<ContactsHolder>() {
 
 
 
@@ -335,7 +378,14 @@ class ContactsAdapter(val items : ArrayList<Contact>, val context: Context) : Re
         return items.size
     }
 
+    // ----------- Search View ------------
 
+    fun filterList(filteredList:ArrayList<Contact>) {
+        items = filteredList
+        notifyDataSetChanged()
+    }
+
+    // ----------------------------------
 
 
 }

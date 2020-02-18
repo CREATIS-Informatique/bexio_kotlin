@@ -14,9 +14,10 @@ data class Contact(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var idBexi
 
     // ----------- Search View ------------
 
-    //    fun getNomFiltered(): String? {
-    //        return nom
-    //    }
+        fun getNomFiltered(): String? {
+            return name_un
+        }
+
     //
     //    fun getPrenomFiltered(): String? {
     //        return prenom
