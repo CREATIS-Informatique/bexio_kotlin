@@ -10,6 +10,7 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,12 +21,15 @@ import androidx.room.*
 import ch.creatis.bexio.Next.ContactsActivityNext
 import ch.creatis.bexio.Room.AppDatabase
 import ch.creatis.bexio.Room.Contact
+import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_contacts.*
 import kotlinx.android.synthetic.main.activity_contacts_items.view.*
 import org.json.JSONArray
+import org.json.JSONObject
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -103,7 +107,6 @@ class ContactsActivity : AppCompatActivity() {
             val queue = Volley.newRequestQueue(this)
             val stringRequest = object : JsonArrayRequest(Method.GET, url,JSONArray(), Response.Listener<JSONArray> { response ->
 
-                println(response)
 
                 for (i in 0 until response.length()) {
                     val idBexio= response.getJSONObject(i)["id"].toString()
@@ -112,7 +115,6 @@ class ContactsActivity : AppCompatActivity() {
                     val address= response.getJSONObject(i)["address"].toString()
                     val postcode= response.getJSONObject(i)["postcode"].toString()
                     val city= response.getJSONObject(i)["city"].toString()
-                    val country_id = response.getJSONObject(i)["country_id"].toString()
                     val mail= response.getJSONObject(i)["mail"].toString()
                     val mail_second= response.getJSONObject(i)["mail_second"].toString()
                     val phone_fixed= response.getJSONObject(i)["phone_fixed"].toString()
@@ -121,8 +123,58 @@ class ContactsActivity : AppCompatActivity() {
                     val fax= response.getJSONObject(i)["fax"].toString()
                     val url= response.getJSONObject(i)["url"].toString()
                     val skype_name= response.getJSONObject(i)["skype_name"].toString()
-                    val contact = Contact(null, idBexio,name_un, name_deux,address,postcode,city,country_id,mail,mail_second,phone_fixed,phone_fixed_second,phone_mobile,fax,url,skype_name)
-                    contactDAO.insert(contact)
+                    var country_id = response.getJSONObject(i)["country_id"].toString()
+
+
+
+
+
+
+                    // -----------------------------------------------------   Country    -------------------------------------------------------
+
+                    if(country_id != "" && country_id != "null"){
+                        val urlCountry = "https://api.bexio.com/2.0/country/$country_id"
+                        val queueCountry = Volley.newRequestQueue(this)
+                        val stringRequestCountry = object: StringRequest(Method.GET, urlCountry, Response.Listener<String> { response ->
+
+                            var jsonObject = JSONObject(response)
+                            country_id= jsonObject.optString("name", "")
+
+                            val contact = Contact(null, idBexio,name_un, name_deux,address,postcode,city,country_id,mail,mail_second,phone_fixed,phone_fixed_second,phone_mobile,fax,url,skype_name)
+                            contactDAO.insert(contact)
+
+                            numberOfRequestsToMake--
+                            if (numberOfRequestsToMake == 0) { requestEndInternet() }
+
+                        },
+                            Response.ErrorListener {
+
+                                numberOfRequestsToMake--
+                                hasRequestFailed = true
+                                if (numberOfRequestsToMake == 0) { requestEndInternet() }
+                            })
+                        {
+                            override fun getHeaders(): MutableMap<String, String> {
+                                val headers = HashMap<String, String>()
+                                headers["Accept"] = "application/json"
+                                headers["Authorization"] = "Bearer $accessToken"
+                                return headers
+                            }
+                        }
+
+                        queueCountry.add(stringRequestCountry)
+                        numberOfRequestsToMake++
+
+                    }
+
+                    // -----------------------------------------------------   Country    -------------------------------------------------------
+
+
+
+
+
+
+
                 }
 
 
