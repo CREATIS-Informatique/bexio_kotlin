@@ -108,7 +108,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/adresse" />
 
                 <TextView
-                        android:id="@+id/textView30"
+                        android:id="@+id/mobile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -121,7 +121,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/ville" />
 
                 <TextView
-                        android:id="@+id/textView32"
+                        android:id="@+id/telDeux"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -131,10 +131,10 @@
                         android:textColor="#131D2C"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+                        app:layout_constraintTop_toBottomOf="@+id/mobile" />
 
                 <TextView
-                        android:id="@+id/textView33"
+                        android:id="@+id/mailDeux"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -144,10 +144,10 @@
                         android:textColor="#131D2C"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView32" />
+                        app:layout_constraintTop_toBottomOf="@+id/telDeux" />
 
                 <TextView
-                        android:id="@+id/textView34"
+                        android:id="@+id/faxTitre"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -159,7 +159,7 @@
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView33"
+                        app:layout_constraintTop_toBottomOf="@+id/mailDeux"
                         app:layout_constraintVertical_bias="1.0" />
 
                 <TextView
@@ -171,7 +171,6 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginRight="20dp"
-                        android:text="TextView"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/siteWeb"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -185,13 +184,12 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginRight="20dp"
-                        android:text="TextView"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/adresse"
                         app:layout_constraintTop_toBottomOf="@+id/siteWebLabel" />
 
                 <TextView
-                        android:id="@+id/textView17"
+                        android:id="@+id/villeLabel"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="45dp"
@@ -199,10 +197,93 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginRight="20dp"
-                        android:text="TextView"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/ville"
                         app:layout_constraintTop_toBottomOf="@+id/adresseLabel" />
+
+                <TextView
+                        android:id="@+id/mobileLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/mobile"
+                        app:layout_constraintTop_toBottomOf="@+id/villeLabel" />
+
+                <TextView
+                        android:id="@+id/telDeuxLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/telDeux"
+                        app:layout_constraintTop_toBottomOf="@+id/mobileLabel" />
+
+                <TextView
+                        android:id="@+id/mailDeuxLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/mailDeux"
+                        app:layout_constraintTop_toBottomOf="@+id/telDeuxLabel" />
+
+                <TextView
+                        android:id="@+id/faxLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="55dp"
+                        android:layout_marginLeft="55dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/faxTitre"
+                        app:layout_constraintTop_toBottomOf="@+id/mailDeuxLabel" />
+
+                <TextView
+                        android:id="@+id/skype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:text="Skype :"
+                        android:textColor="#131D2C"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/faxTitre"
+                        app:layout_constraintVertical_bias="0.322" />
+
+                <TextView
+                        android:id="@+id/skypeLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:text="TextView"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/skype"
+                        app:layout_constraintTop_toBottomOf="@+id/faxLabel" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
