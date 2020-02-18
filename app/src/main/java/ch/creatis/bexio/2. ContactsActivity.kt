@@ -312,7 +312,7 @@ class ContactsActivity : AppCompatActivity() {
                 val intent = Intent(context, ContactsActivityNext::class.java)
                 intent.putExtra("name_un", contact.name_un)
                 intent.putExtra("name_deux", contact.name_deux)
-                intent.putExtra("adresse", contact.address)
+                intent.putExtra("address", contact.address)
                 intent.putExtra("postcode", contact.postcode)
                 intent.putExtra("city", contact.city)
                 intent.putExtra("country_id", contact.country_id)

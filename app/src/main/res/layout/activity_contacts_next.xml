@@ -62,10 +62,13 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:elevation="2dp"
+                    android:background="@drawable/next_activity_contact">
 
                 <TextView
-                        android:id="@+id/textView12"
+                        android:id="@+id/siteWeb"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -74,11 +77,12 @@
                         android:text="Site web :"
                         android:textColor="#131D2C"
                         android:textSize="14sp"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                        android:id="@+id/textView14"
+                        android:id="@+id/adresse"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -86,20 +90,22 @@
                         android:layout_marginTop="20dp"
                         android:text="Adresse :"
                         android:textColor="#131D2C"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                        app:layout_constraintTop_toBottomOf="@+id/siteWeb" />
 
                 <TextView
-                        android:id="@+id/textView18"
+                        android:id="@+id/ville"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="20dp"
-                        android:text="NPA + Ville + Pays :"
+                        android:text="Ville :"
                         android:textColor="#131D2C"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                        app:layout_constraintTop_toBottomOf="@+id/adresse" />
 
                 <TextView
                         android:id="@+id/textView30"
@@ -110,8 +116,9 @@
                         android:layout_marginTop="20dp"
                         android:text="Mobile :"
                         android:textColor="#131D2C"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                        app:layout_constraintTop_toBottomOf="@+id/ville" />
 
                 <TextView
                         android:id="@+id/textView32"
@@ -120,8 +127,9 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="20dp"
-                        android:text="Téléphone 2 :"
+                        android:text="Tél. 2 :"
                         android:textColor="#131D2C"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
@@ -132,8 +140,9 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="20dp"
-                        android:text="E-mail2 :"
+                        android:text="E-mail 2 :"
                         android:textColor="#131D2C"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView32" />
 
@@ -147,10 +156,53 @@
                         android:layout_marginBottom="20dp"
                         android:text="Fax :"
                         android:textColor="#131D2C"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView33"
                         app:layout_constraintVertical_bias="1.0" />
+
+                <TextView
+                        android:id="@+id/siteWebLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        android:text="TextView"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/siteWeb"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                        android:id="@+id/adresseLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        android:text="TextView"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/adresse"
+                        app:layout_constraintTop_toBottomOf="@+id/siteWebLabel" />
+
+                <TextView
+                        android:id="@+id/textView17"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="45dp"
+                        android:layout_marginLeft="45dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        android:text="TextView"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ville"
+                        app:layout_constraintTop_toBottomOf="@+id/adresseLabel" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
