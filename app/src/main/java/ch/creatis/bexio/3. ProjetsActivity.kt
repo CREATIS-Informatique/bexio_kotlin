@@ -118,19 +118,24 @@ class ProjetsActivity : AppCompatActivity() {
 
 
 
-                    var dateFormatprev = SimpleDateFormat("yyyy-MM-dd")
-                    var dStart = dateFormatprev.parse(startDate)
-                    var dEnd= dateFormatprev.parse(startDate)
+                    var ancienFormatdate = SimpleDateFormat("yyyy-MM-dd")
+                    var nouveauFormatDate = SimpleDateFormat("dd.MM.yy")
+                    var dStart = ancienFormatdate.parse(startDate)
+                    var changedDateStart = nouveauFormatDate.format(dStart)
+                    var changedDateEndFinal = ""
 
-                    var dateFormat = SimpleDateFormat("dd.MM.yy")
-                    var changedDateStart = dateFormat.format(dStart)
-                    var changedDateEnd = dateFormat.format(dEnd)
+
+
+                    if(endDate != "" && endDate != "null" && endDate != null){
+                        var dEnd= ancienFormatdate.parse(endDate)
+                        changedDateEndFinal = nouveauFormatDate.format(dEnd)
+                    }
 
 
 
                     val pr_state_id= response.getJSONObject(i)["pr_state_id"].toString()
                     val comment= response.getJSONObject(i)["comment"].toString()
-                    val projet = Projet(null, idBexio,nr, name,changedDateStart,changedDateEnd,pr_state_id,comment)
+                    val projet = Projet(null, idBexio,nr, name,changedDateStart,changedDateEndFinal,pr_state_id,comment)
                     projetDAO.insert(projet)
 
                 }
