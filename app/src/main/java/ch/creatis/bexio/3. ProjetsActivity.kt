@@ -111,22 +111,26 @@ class ProjetsActivity : AppCompatActivity() {
                 for (i in 0 until response.length()) {
 
                     val idBexio= response.getJSONObject(i)["id"].toString()
-                    val name_un= response.getJSONObject(i)["nr"].toString()
-                    val name_deux= response.getJSONObject(i)["name"].toString()
-                    var deliveryDate = response.getJSONObject(i)["start_date"].toString()
+                    val nr= response.getJSONObject(i)["nr"].toString()
+                    val name= response.getJSONObject(i)["name"].toString()
+                    var startDate = response.getJSONObject(i)["start_date"].toString()
+                    var endDate = response.getJSONObject(i)["end_date"].toString()
 
 
 
                     var dateFormatprev = SimpleDateFormat("yyyy-MM-dd")
-                    var d = dateFormatprev.parse(deliveryDate)
+                    var dStart = dateFormatprev.parse(startDate)
+                    var dEnd= dateFormatprev.parse(startDate)
+
                     var dateFormat = SimpleDateFormat("dd.MM.yy")
-                    var changedDate = dateFormat.format(d)
+                    var changedDateStart = dateFormat.format(dStart)
+                    var changedDateEnd = dateFormat.format(dEnd)
 
 
 
-                    val postcode= response.getJSONObject(i)["pr_state_id"].toString()
-                    val city= response.getJSONObject(i)["comment"].toString()
-                    val projet = Projet(null, idBexio,name_un, name_deux,changedDate,postcode,city)
+                    val pr_state_id= response.getJSONObject(i)["pr_state_id"].toString()
+                    val comment= response.getJSONObject(i)["comment"].toString()
+                    val projet = Projet(null, idBexio,nr, name,changedDateStart,changedDateEnd,pr_state_id,comment)
                     projetDAO.insert(projet)
 
                 }
@@ -235,6 +239,22 @@ class ProjetsAdapter(val items : ArrayList<Projet>, val context: Context) : Recy
 
     override fun onBindViewHolder(holder: ProjetsHolder, position: Int) {
 
+
+
+        val projet= items[position]
+        holder.projetsView.setOnClickListener {
+            val intent = Intent(context, ProjetsActivityNext::class.java)
+            intent.putExtra("name", projet.name)
+            intent.putExtra("start_date", projet.start_date)
+            intent.putExtra("end_date", projet.end_date)
+            intent.putExtra("comment", projet.comment)
+            intent.putExtra("nr", projet.nr)
+            intent.putExtra("pr_state_id", projet.pr_state_id)
+            context!!.startActivity(intent)
+        }
+
+
+
         holder.projectLabel?.text = items[position].name
         holder.startDate?.text = "Début: " + items[position].start_date
 
@@ -254,13 +274,6 @@ class ProjetsAdapter(val items : ArrayList<Projet>, val context: Context) : Recy
             } else {
                 holder.endDate.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.projets_items_background_ouvert))
             }
-        }
-
-
-
-        holder.projetsView.setOnClickListener {
-            val intent = Intent(context, ProjetsActivityNext::class.java)
-            context!!.startActivity(intent)
         }
 
 
