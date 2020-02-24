@@ -187,28 +187,9 @@ class TempsActivity : AppCompatActivity() {
 
 
 
-                        val sdf = SimpleDateFormat("dd.MM.yyyy")
-                        val cal = Calendar.getInstance()
-                        cal.set(Calendar.WEEK_OF_YEAR, i)
-                        cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
-                        var dateDebut = sdf.format(cal.getTime())
-
-
-
-                        val sdf2 = SimpleDateFormat("dd.MM.yyyy")
-                        val cal2 = Calendar.getInstance()
-                        cal2.set(Calendar.WEEK_OF_YEAR, i)
-                        cal2.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY)
-                        var dateFin = sdf2.format(cal2.getTime())
-
-
-
+                        // Heures totales
                         var heuretotalesSecondes = 0.0
-
-
-
                         for (temps in tempsList) {
-
                             if (temps.semaine!!.toInt() == i){
                                 val timeString = temps.duration
                                 val factors = arrayOf(3600.0, 60.0, 1.0, 0.01)
@@ -216,21 +197,38 @@ class TempsActivity : AppCompatActivity() {
                                 timeString!!.replace(".", ":").split(":").forEachIndexed { i, s -> value += factors[i] * s.toDouble() }
                                 heuretotalesSecondes += value
                             }
-
                         }
+                        val tot_seconds = heuretotalesSecondes.toInt()
+                        val hours = tot_seconds / 3600
+                        val minutes = (tot_seconds % 3600) / 60
+                        val timeString = String.format("%02d:%02d", hours, minutes)
 
 
 
-                        val semaine = Semaines(null, "$i",dateDebut, dateFin, heuretotalesSecondes.toString())
-                        if (semaine.heuresTotales != "0.0"){ semaineDAO.insert(semaine)}
+                        // Date ddébut
+                        val sdf = SimpleDateFormat("dd.MM.yy")
+                        val cal = Calendar.getInstance()
+                        cal.set(Calendar.WEEK_OF_YEAR, i)
+                        cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
+                        var dateDebut = sdf.format(cal.getTime())
+
+
+
+                        // Date fin
+                        val sdf2 = SimpleDateFormat("dd.MM.yy")
+                        val cal2 = Calendar.getInstance()
+                        cal2.set(Calendar.WEEK_OF_YEAR, i)
+                        cal2.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY)
+                        var dateFin = sdf2.format(cal2.getTime())
+
+
+
+                        val semaine = Semaines(null, "$i",dateDebut, dateFin, timeString)
+                        if (semaine.heuresTotales != "00:00"){ semaineDAO.insert(semaine)}
 
 
 
                     }
-
-
-
-
 
 
 
