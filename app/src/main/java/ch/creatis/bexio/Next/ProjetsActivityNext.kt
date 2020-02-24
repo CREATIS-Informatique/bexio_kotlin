@@ -31,7 +31,7 @@ class ProjetsActivityNext : AppCompatActivity() {
 
 
         nomProjet.text = name
-        dateDebut.text = start_date + "      " + end_date
+        dateDebut.text = start_date + " " + end_date
         description.text = comment
 
 
