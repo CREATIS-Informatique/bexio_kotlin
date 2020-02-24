@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.net.ConnectivityManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -105,17 +106,27 @@ class ProjetsActivity : AppCompatActivity() {
             val queue = Volley.newRequestQueue(this)
             val stringRequest = object : JsonArrayRequest(Method.GET, url,JSONArray(), Response.Listener<JSONArray> { response ->
 
-                println(response)
+
 
                 for (i in 0 until response.length()) {
 
                     val idBexio= response.getJSONObject(i)["id"].toString()
                     val name_un= response.getJSONObject(i)["nr"].toString()
                     val name_deux= response.getJSONObject(i)["name"].toString()
-                    val address= response.getJSONObject(i)["start_date"].toString()
+                    var deliveryDate = response.getJSONObject(i)["start_date"].toString()
+
+
+
+                    var dateFormatprev = SimpleDateFormat("yyyy-MM-dd")
+                    var d = dateFormatprev.parse(deliveryDate)
+                    var dateFormat = SimpleDateFormat("dd.MM.yy")
+                    var changedDate = dateFormat.format(d)
+
+
+
                     val postcode= response.getJSONObject(i)["pr_state_id"].toString()
                     val city= response.getJSONObject(i)["comment"].toString()
-                    val projet = Projet(null, idBexio,name_un, name_deux,address,postcode,city)
+                    val projet = Projet(null, idBexio,name_un, name_deux,changedDate,postcode,city)
                     projetDAO.insert(projet)
 
                 }
@@ -225,22 +236,31 @@ class ProjetsAdapter(val items : ArrayList<Projet>, val context: Context) : Recy
     override fun onBindViewHolder(holder: ProjetsHolder, position: Int) {
 
         holder.projectLabel?.text = items[position].name
-        holder.nr?.text = "Nº " + items[position].nr
-        holder.startDate?.text = items[position].start_date
+        holder.startDate?.text = "Début: " + items[position].start_date
+
+
 
         if (items[position].pr_state_id == "1"){
             holder.endDate?.text = "Actif"
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                holder.endDate.background = ContextCompat.getDrawable(context, R.drawable.projets_items_background_actif)
+            } else {
+                holder.endDate.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.projets_items_background_actif))
+            }
         } else if(items[position].pr_state_id == "2"){
             holder.endDate?.text = "Ouvert"
-//            holder.endDate.setBackgroundColor(R.color)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                holder.endDate.background = ContextCompat.getDrawable(context, R.drawable.projets_items_background_ouvert)
+            } else {
+                holder.endDate.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.projets_items_background_ouvert))
+            }
         }
 
 
-        holder.projetsView.setOnClickListener {
 
+        holder.projetsView.setOnClickListener {
             val intent = Intent(context, ProjetsActivityNext::class.java)
             context!!.startActivity(intent)
-
         }
 
 
@@ -267,7 +287,6 @@ class ProjetsHolder (view: View) : RecyclerView.ViewHolder(view) {
 
     val projetsView = view.projetsView
     val projectLabel = view.projetLabel
-    val nr = view.nrLabel
     val startDate = view.startDateLabel
     val endDate = view.endDateLabel
 
