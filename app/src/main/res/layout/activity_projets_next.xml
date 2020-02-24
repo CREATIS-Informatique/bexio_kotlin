@@ -45,12 +45,12 @@
                         android:text="Statut :"
                         android:textColor="#1D2734"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toTopOf="@+id/dateDebutLabel"
+                        app:layout_constraintBottom_toTopOf="@+id/dateLabel"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                        android:id="@+id/dateDebutLabel"
+                        android:id="@+id/dateLabel"
                         android:layout_width="105dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
@@ -63,7 +63,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
                 <TextView
-                        android:id="@+id/dateDebut"
+                        android:id="@+id/date"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -75,7 +75,7 @@
                         android:textColor="#FFFFFF"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toEndOf="@+id/dateDebutLabel"
+                        app:layout_constraintStart_toEndOf="@+id/dateLabel"
                         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
                 <TextView
@@ -89,7 +89,7 @@
                         android:text="Description :"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/dateDebutLabel" />
+                        app:layout_constraintTop_toBottomOf="@+id/dateLabel" />
 
                 <TextView
                         android:id="@+id/description"
@@ -107,7 +107,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/descriptionLabel"
-                        app:layout_constraintTop_toBottomOf="@+id/dateDebut" />
+                        app:layout_constraintTop_toBottomOf="@+id/date" />
 
                 <TextView
                         android:id="@+id/statutView"
@@ -145,7 +145,7 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                     <Button
-                            android:id="@+id/button2"
+                            android:id="@+id/saisirTemps"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
@@ -153,7 +153,7 @@
                             android:text="Saisir un temps" />
 
                     <Button
-                            android:id="@+id/button3"
+                            android:id="@+id/saisirTache"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
@@ -161,7 +161,7 @@
                             android:text="Créer une tâche" />
 
                     <Button
-                            android:id="@+id/button4"
+                            android:id="@+id/cloturerProjet"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"

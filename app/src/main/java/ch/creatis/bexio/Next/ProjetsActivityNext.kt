@@ -31,7 +31,11 @@ class ProjetsActivityNext : AppCompatActivity() {
 
 
         nomProjet.text = name
-        dateDebut.text = start_date + " " + end_date
+        if (end_date!= ""){
+            date.text = start_date + "  -  " + end_date
+        } else {
+            date.text = start_date
+        }
         description.text = comment
 
 
@@ -51,6 +55,10 @@ class ProjetsActivityNext : AppCompatActivity() {
                 statutView.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.projets_items_background_ouvert))
             }
         }
+
+
+
+
 
 
 
