@@ -12,7 +12,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".Next.ContactsActivityNext"></activity>
+        <activity android:name=".Next.ProjetsActivityNext"></activity>
+        <activity android:name=".Next.ContactsActivityNext" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +30,7 @@
             <intent-filter>
                 <data
                         android:host="my"
-                        android:scheme="demo"/>
+                        android:scheme="demo" />
 
                 <action android:name="android.intent.action.VIEW" />
 

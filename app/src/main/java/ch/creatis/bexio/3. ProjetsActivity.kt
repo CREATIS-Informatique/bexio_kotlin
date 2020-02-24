@@ -4,6 +4,7 @@ package ch.creatis.bexio
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import ch.creatis.bexio.Next.ContactsActivityNext
+import ch.creatis.bexio.Next.ProjetsActivityNext
 import ch.creatis.bexio.Room.AppDatabase
 import ch.creatis.bexio.Room.Projet
 import com.android.volley.Response
@@ -232,6 +235,16 @@ class ProjetsAdapter(val items : ArrayList<Projet>, val context: Context) : Recy
 //            holder.endDate.setBackgroundColor(R.color)
         }
 
+
+        holder.projetsView.setOnClickListener {
+
+            val intent = Intent(context, ProjetsActivityNext::class.java)
+            context!!.startActivity(intent)
+
+        }
+
+
+
     }
 
 
@@ -252,6 +265,7 @@ class ProjetsAdapter(val items : ArrayList<Projet>, val context: Context) : Recy
 
 class ProjetsHolder (view: View) : RecyclerView.ViewHolder(view) {
 
+    val projetsView = view.projetsView
     val projectLabel = view.projetLabel
     val nr = view.nrLabel
     val startDate = view.startDateLabel
