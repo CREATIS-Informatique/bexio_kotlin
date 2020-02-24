@@ -36,6 +36,20 @@
                     android:layout_margin="10dp">
 
                 <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="105dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="Statut :"
+                        android:textColor="#1D2734"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/dateDebutLabel"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
                         android:id="@+id/dateDebutLabel"
                         android:layout_width="105dp"
                         android:layout_height="wrap_content"
@@ -43,10 +57,10 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
-                        android:text="Début :"
+                        android:text="Début - Fin :"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
                 <TextView
                         android:id="@+id/dateDebut"
@@ -57,39 +71,12 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:text="21.02.2020"
+                        android:text="21.02.20  -  29.03.20"
                         android:textColor="#FFFFFF"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@+id/dateDebutLabel"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                        android:id="@+id/dateFinLabel"
-                        android:layout_width="105dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
-                        android:text="Fin :"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/dateDebutLabel" />
-
-                <TextView
-                        android:id="@+id/dateFin"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        android:text="23.03.2020"
-                        android:textColor="#FFFFFF"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/dateFinLabel"
-                        app:layout_constraintTop_toBottomOf="@+id/dateDebut" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
                 <TextView
                         android:id="@+id/descriptionLabel"
@@ -98,13 +85,11 @@
                         android:layout_margin="8dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"
                         android:text="Description :"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/dateFinLabel" />
+                        app:layout_constraintTop_toBottomOf="@+id/dateDebutLabel" />
 
                 <TextView
                         android:id="@+id/description"
@@ -116,12 +101,26 @@
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:layout_marginBottom="8dp"
+                        android:lines="3"
                         android:text="Mise à  jour des derniers fichier"
                         android:textColor="#FFFFFF"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/descriptionLabel"
-                        app:layout_constraintTop_toBottomOf="@+id/dateFin" />
+                        app:layout_constraintTop_toBottomOf="@+id/dateDebut" />
+
+                <TextView
+                        android:id="@+id/statutView"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="Ouvert"
+                        android:textColor="#FFFFFF"
+                        app:layout_constraintStart_toEndOf="@+id/textView12"
+                        app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

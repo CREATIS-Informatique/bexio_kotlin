@@ -134,9 +134,16 @@ class ProjetsActivity : AppCompatActivity() {
 
 
                     val pr_state_id= response.getJSONObject(i)["pr_state_id"].toString()
-                    val comment= response.getJSONObject(i)["comment"].toString()
+                    var comment= response.getJSONObject(i)["comment"].toString()
+                    if(comment == "" || comment == "null" || comment == null){
+                        comment = "Yes"
+                    }
+
+
+
                     val projet = Projet(null, idBexio,nr, name,changedDateStart,changedDateEndFinal,pr_state_id,comment)
                     projetDAO.insert(projet)
+
 
                 }
 
