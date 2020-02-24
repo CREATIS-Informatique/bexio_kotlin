@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import ch.creatis.bexio.Room.AppDatabase
+import ch.creatis.bexio.Room.Semaines
 import ch.creatis.bexio.Room.Temps
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
@@ -27,6 +28,7 @@ import org.json.JSONArray
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDate.parse
+import java.time.LocalTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -45,7 +47,7 @@ class TempsActivity : AppCompatActivity() {
 
         // -----------------------------------
 
-        var tempsList = ArrayList<Temps>()
+        var semaineList = ArrayList<Semaines>()
 
         // -----------------------------------
 
@@ -59,15 +61,15 @@ class TempsActivity : AppCompatActivity() {
 
             // Database
             val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
-            val tempsDAO = database.tempsDAO
-            tempsList = tempsDAO.getItems() as ArrayList<Temps>
+            val semaineDAO = database.semaineDAO
+            semaineList = semaineDAO.getItems() as ArrayList<Semaines>
 
 
 
             // Adapter
             RefreshRequest()
             recyclerViewTemps.layoutManager = LinearLayoutManager(this)
-            recyclerViewTemps.adapter = TempsAdapter(tempsList, this)
+            recyclerViewTemps.adapter = TempsAdapter(semaineList, this)
 
 
 
@@ -112,25 +114,154 @@ class TempsActivity : AppCompatActivity() {
             val stringRequest = object : JsonArrayRequest(Method.GET, url,
                 JSONArray(), Response.Listener<JSONArray> { response ->
 
-                    println(response)
 
-                for (i in 0 until response.length()) {
 
-                    val idBexio= response.getJSONObject(i)["id"].toString()
-                    val date= response.getJSONObject(i)["date"].toString()
-                    val duration = response.getJSONObject(i)["duration"].toString()
-                    val temps = Temps(null, idBexio,date, duration)
+                    // ------------------------------------------ Class Temps -----------------------------------------------
 
-                    if(response.getJSONObject(i)["user_id"] == 1){
-                        tempsDAO.insert(temps)
+                    for (i in 0 until response.length()) {
+
+                        val idBexio= response.getJSONObject(i)["id"].toString()
+                        val date= response.getJSONObject(i)["date"].toString()
+                        var duration = response.getJSONObject(i)["duration"].toString()
+                        if (duration.length == 4){ duration = "0$duration"}
+
+
+
+                        // Ajout du numéro de la semaine
+                        val dateConverter = SimpleDateFormat("yyyy-MM-dd").parse(date)
+                        val calendar = Calendar.getInstance()
+                        calendar.time = dateConverter
+                        val semaine = calendar.get(Calendar.WEEK_OF_YEAR).toString()
+
+
+
+                        // Création de la classe
+                        val temps = Temps(null, idBexio,date, duration, semaine)
+
+
+
+                        // Tri selon l'utilisateur
+                        if(response.getJSONObject(i)["user_id"] == 1){
+                            tempsDAO.insert(temps)
+                        }
 
                     }
 
-                }
+                    // ------------------------------------------ Class Temps -----------------------------------------------
 
 
 
-                numberOfRequestsToMake--
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    // ------------------------------------------ Class Semaines -----------------------------------------------
+
+
+                    // Semaines
+                    val semaineDAO = database.semaineDAO
+                    semaineDAO.delete()
+
+
+
+                    // Temps
+                    val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
+                    val tempsDAO = database.tempsDAO
+                    val tempsList = tempsDAO.getItems() as ArrayList<Temps>
+
+
+
+                    for (i in 1..52) {
+
+
+
+                        val sdf = SimpleDateFormat("dd.MM.yyyy")
+                        val cal = Calendar.getInstance()
+                        cal.set(Calendar.WEEK_OF_YEAR, i)
+                        cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
+                        var dateDebut = sdf.format(cal.getTime())
+
+
+
+                        val sdf2 = SimpleDateFormat("dd.MM.yyyy")
+                        val cal2 = Calendar.getInstance()
+                        cal2.set(Calendar.WEEK_OF_YEAR, i)
+                        cal2.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY)
+                        var dateFin = sdf2.format(cal2.getTime())
+
+
+
+                        var heuretotalesSecondes = 0.0
+
+
+
+                        for (temps in tempsList) {
+
+                            if (temps.semaine!!.toInt() == i){
+                                val timeString = temps.duration
+                                val factors = arrayOf(3600.0, 60.0, 1.0, 0.01)
+                                var value = 0.0
+                                timeString!!.replace(".", ":").split(":").forEachIndexed { i, s -> value += factors[i] * s.toDouble() }
+                                heuretotalesSecondes += value
+                            }
+
+                        }
+
+
+
+                        val semaine = Semaines(null, "$i",dateDebut, dateFin, heuretotalesSecondes.toString())
+                        if (semaine.heuresTotales != "0.0"){ semaineDAO.insert(semaine)}
+
+
+
+                    }
+
+
+
+
+
+
+
+                    // ------------------------------------------ Class Semaines -----------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    numberOfRequestsToMake--
                 if (numberOfRequestsToMake == 0) { requestEndInternet() }
 
 
@@ -187,8 +318,8 @@ class TempsActivity : AppCompatActivity() {
 
         } else {
             val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
-            val tempsDAO = database.tempsDAO
-            tempsList = tempsDAO.getItems() as ArrayList<Temps>
+            val semaineDAO = database.semaineDAO
+            semaineList = semaineDAO.getItems() as ArrayList<Semaines>
             refreshViewTemps.isRefreshing = false
         }
 
@@ -214,7 +345,7 @@ class TempsActivity : AppCompatActivity() {
 
 
 
-class TempsAdapter(val items : ArrayList<Temps>, val context: Context) : RecyclerView.Adapter<TempsHolder>() {
+class TempsAdapter(val items : ArrayList<Semaines>, val context: Context) : RecyclerView.Adapter<TempsHolder>() {
 
 
 
@@ -228,29 +359,29 @@ class TempsAdapter(val items : ArrayList<Temps>, val context: Context) : Recycle
 
 
 
-        val dateConverter = SimpleDateFormat("yyyy-MM-dd").parse(items[position].date)
-        val calendar = Calendar.getInstance()
-        calendar.time = dateConverter
+//        val dateConverter = SimpleDateFormat("yyyy-MM-dd").parse(items[position].date)
+//        val calendar = Calendar.getInstance()
+//        calendar.time = dateConverter
+//        var firstDay = calendar.get(calendar.firstDayOfWeek)
 
 
 
-        val weekOfYear = calendar.get(Calendar.WEEK_OF_YEAR)
-        var firstDay = calendar.get(calendar.firstDayOfWeek)
+//        //-------------------------------
+//
+//        val time = items[position].duration
+//        val sdf = SimpleDateFormat("HH:mm")
+//        val date = sdf.parse(time)
+//
+//        //-------------------------------
 
 
 
-        holder.viewDate?.text = weekOfYear.toString()
-        holder.viewFirstDay.text = firstDay.toString()
-        holder.viewDuration?.text = items[position].duration
+        holder.viewDate?.text = items[position].numeroSemaine
+        holder.viewFirstDay.text = items[position].dateDebut
+        holder.viewLastDay.text = items[position].dateFin
+        holder.viewDuration?.text = items[position].heuresTotales.toString()
 
-        //-------------------------------
 
-        val time = items[position].duration
-        val sdf = SimpleDateFormat("HH:mm")
-        val date = sdf.parse(time)
-        println(date)
-
-        //-------------------------------
 
     }
 

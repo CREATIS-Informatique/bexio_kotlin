@@ -72,7 +72,38 @@ data class Projet(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var idBexio
 
 
 @Entity(tableName = "temps")
-data class Temps(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var idBexio: String?, var date: String?, var duration: String?) {
+data class Temps(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var idBexio: String?, var date: String?, var duration: String?, var semaine: String?) {
+
+
+
+    // ----------- Search View ------------
+
+    //    fun getNomFiltered(): String? {
+    //        return nom
+    //    }
+    //
+    //    fun getPrenomFiltered(): String? {
+    //        return prenom
+    //    }
+    //
+    //    fun getServiceFiltered(): String? {
+    //        return service
+    //    }
+    //
+    //    fun getEmplacementFiltered(): String? {
+    //        return emplacement
+    //    }
+
+    // ------------------------------------
+
+
+
+}
+
+
+
+@Entity(tableName = "semaines")
+data class Semaines(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var numeroSemaine: String?, var dateDebut: String?, var dateFin: String?, var heuresTotales: String?) {
 
 
 

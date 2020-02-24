@@ -13,7 +13,7 @@
             android:id="@+id/color"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="#E53935"
+            android:background="@drawable/temps_items_indicator"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tempsLabel"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +32,7 @@
             android:text="Semaine"
             android:textColor="#131D2C"
             android:textSize="14sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/textView9"
             app:layout_constraintStart_toStartOf="@id/color"
             app:layout_constraintTop_toTopOf="parent" />
@@ -57,6 +58,7 @@
             android:gravity="center"
             android:text="Du"
             android:textColor="#131D2C"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/textView10"
             app:layout_constraintStart_toEndOf="@+id/tempsLabel"
             app:layout_constraintTop_toTopOf="parent" />
@@ -69,6 +71,7 @@
             android:gravity="center"
             android:text="Au"
             android:textColor="#131D2C"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/textView11"
             app:layout_constraintStart_toEndOf="@+id/textView9"
             app:layout_constraintTop_toTopOf="parent" />
@@ -83,6 +86,7 @@
             android:gravity="center"
             android:text="Hrs Total"
             android:textColor="#131D2C"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView10"
             app:layout_constraintTop_toTopOf="parent" />

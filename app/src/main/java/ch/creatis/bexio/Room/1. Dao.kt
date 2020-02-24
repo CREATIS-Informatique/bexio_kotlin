@@ -97,6 +97,35 @@ interface TempsDAO {
 
 
 @Dao
+interface SemaineDAO{
+
+
+
+    @Query("DELETE FROM semaines")
+    fun delete()
+
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(items: Semaines)
+
+
+
+    @Query("SELECT * FROM semaines ORDER BY numeroSemaine DESC")
+    fun getItems(): List<Semaines>
+
+
+
+    // @Query("SELECT * FROM contacts WHERE type == :type ORDER BY nom")
+    // fun getItemsByType(type: String): List<Temps>
+
+
+
+}
+
+
+
+@Dao
 interface TachesDAO {
 
 
