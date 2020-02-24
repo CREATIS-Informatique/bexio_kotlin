@@ -2,6 +2,7 @@ package ch.creatis.bexio.Next
 
 
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -58,7 +59,12 @@ class ProjetsActivityNext : AppCompatActivity() {
 
 
 
+        saisirTemps.setOnClickListener {
 
+            val intent = Intent(this, ProjetsActivityNextSaisieTemps::class.java)
+            startActivity(intent)
+
+        }
 
 
 
