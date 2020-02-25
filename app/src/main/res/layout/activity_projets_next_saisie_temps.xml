@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/all_background_home"
-        tools:context=".Next.TabProjets.ProjetsActivityNextSaisieTemps">
+        tools:context=".Next.Projets.ProjetsActivityNextSaisieTemps">
 
     <TextView
             android:id="@+id/activitiesLabel"

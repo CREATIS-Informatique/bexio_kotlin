@@ -1,4 +1,4 @@
-package ch.creatis.bexio.Next.TabProjets
+package ch.creatis.bexio.Next.Projets.Tab
 
 
 

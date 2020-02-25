@@ -7,7 +7,8 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
-import ch.creatis.bexio.Next.TabProjets.ProjetsActivityNextSaisieTemps
+import ch.creatis.bexio.Next.Projets.ProjetsActivityNextSaisieTaches
+import ch.creatis.bexio.Next.Projets.ProjetsActivityNextSaisieTemps
 import ch.creatis.bexio.R
 import kotlinx.android.synthetic.main.activity_projets_next.*
 
@@ -63,6 +64,15 @@ class ProjetsActivityNext : AppCompatActivity() {
         saisirTemps.setOnClickListener {
 
             val intent = Intent(this, ProjetsActivityNextSaisieTemps::class.java)
+            startActivity(intent)
+
+        }
+
+
+
+        saisirTache.setOnClickListener {
+
+            val intent = Intent(this, ProjetsActivityNextSaisieTaches::class.java)
             startActivity(intent)
 
         }
