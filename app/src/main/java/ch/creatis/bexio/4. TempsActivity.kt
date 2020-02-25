@@ -4,9 +4,9 @@ package ch.creatis.bexio
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.net.ConnectivityManager
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,21 +16,18 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import ch.creatis.bexio.Next.ProjetsActivityNext
+import ch.creatis.bexio.Next.TempsActivityNext
 import ch.creatis.bexio.Room.AppDatabase
 import ch.creatis.bexio.Room.Semaines
 import ch.creatis.bexio.Room.Temps
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.activity_temps.*
-import kotlinx.android.synthetic.main.activity_temps_items.view.*
+import kotlinx.android.synthetic.main.activity_temps_items_semaine_a.*
+import kotlinx.android.synthetic.main.activity_temps_items_semaine.view.*
 import org.json.JSONArray
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDate.parse
-import java.time.LocalTime
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -55,7 +52,7 @@ class TempsActivity : AppCompatActivity() {
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_temps)
+            setContentView(R.layout.activity_temps_items_semaine_a)
 
 
 
@@ -348,7 +345,7 @@ class TempsAdapter(val items : ArrayList<Semaines>, val context: Context) : Recy
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TempsHolder {
-        return TempsHolder(LayoutInflater.from(context).inflate(R.layout.activity_temps_items, parent, false))
+        return TempsHolder(LayoutInflater.from(context).inflate(R.layout.activity_temps_items_semaine, parent, false))
     }
 
 
@@ -380,6 +377,20 @@ class TempsAdapter(val items : ArrayList<Semaines>, val context: Context) : Recy
         holder.viewDuration?.text = items[position].heuresTotales.toString()
 
 
+        holder.semaineView.setOnClickListener {
+
+            val intent = Intent(context, TempsActivityNext::class.java)
+//            intent.putExtra("name", projet.name)
+//            intent.putExtra("start_date", projet.start_date)
+//            intent.putExtra("end_date", projet.end_date)
+//            intent.putExtra("comment", projet.comment)
+//            intent.putExtra("nr", projet.nr)
+//            intent.putExtra("pr_state_id", projet.pr_state_id)
+            context!!.startActivity(intent)
+
+        }
+
+
 
     }
 
@@ -397,6 +408,7 @@ class TempsAdapter(val items : ArrayList<Semaines>, val context: Context) : Recy
 
 class TempsHolder (view: View) : RecyclerView.ViewHolder(view) {
 
+    val semaineView = view.semaineView
     val viewDate = view.semaineNbrLabel
     val viewFirstDay = view.firstDayLabel
     val viewLastDay = view.lastDayLabel
