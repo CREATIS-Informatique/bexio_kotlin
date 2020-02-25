@@ -17,12 +17,16 @@ class ProjetsActivityNextSaisieTemps : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_projets_next_saisie_temps)
 
-        val fragmentAdapter =
-            MyPagerAdapter(supportFragmentManager)
+
+
+        // --------------- TAB
+        val fragmentAdapter = MyPagerAdapter(supportFragmentManager)
         viewpager_main.adapter = fragmentAdapter
-
         tabs_main.setupWithViewPager(viewpager_main)
+        // --------------- TAB
 
+
+        // --------------- Spinner
 
         val spinner = findViewById<Spinner>(R.id.spinnerActivities)
         var list_of_items = arrayOf("Marketing", "Administration", "Comptabilité")
@@ -30,8 +34,7 @@ class ProjetsActivityNextSaisieTemps : AppCompatActivity() {
 
 
         if (spinner != null) {
-            val adapter = ArrayAdapter(this,
-                android.R.layout.simple_spinner_item, list_of_items)
+            val adapter = ArrayAdapter(this, R.layout.spinner_color, list_of_items)
 
 
             spinner.adapter = adapter
@@ -39,7 +42,7 @@ class ProjetsActivityNextSaisieTemps : AppCompatActivity() {
 
                 override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
 
-                    activitiesSelect.text = list_of_items[position]
+//                    activitiesSelect.text = list_of_items[position]
 
                 }
 
@@ -56,6 +59,10 @@ class ProjetsActivityNextSaisieTemps : AppCompatActivity() {
 
 
         }
+
+
+        // --------------- Spinner
+
 
 
 

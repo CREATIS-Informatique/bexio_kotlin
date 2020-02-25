@@ -189,6 +189,7 @@ class LoginActivity : AppCompatActivity() {
             // -------------------------------------------------------------------------------------
 
             var responseJsonObj = JSONObject(response)
+            println(response)
             editor.putString("ACCESSTOKEN", responseJsonObj.getString("access_token"))
             editor.putString("REFRESHTOKEN", responseJsonObj.getString("refresh_token"))
             editor.putString("IDTOKEN", responseJsonObj.getString("id_token"))
