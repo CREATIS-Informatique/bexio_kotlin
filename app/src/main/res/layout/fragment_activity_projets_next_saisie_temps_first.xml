@@ -40,7 +40,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-                android:id="@+id/mDatePicker"
+                android:id="@+id/datePicker"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="40dp"
@@ -52,7 +52,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
         <TimePicker
-                android:id="@+id/timePicker1"
+                android:id="@+id/timePicker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -75,10 +75,10 @@
                 android:text="Button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                app:layout_constraintTop_toBottomOf="@+id/dureeDate" />
 
         <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/dureeDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -92,7 +92,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/timePicker1" />
+                app:layout_constraintTop_toBottomOf="@+id/timePicker" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
