@@ -118,7 +118,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-        webView.loadUrl("https://idp.bexio.com/authorize?response_type=code&client_id=7baa8853-0f2d-48f5-aa7e-1baf94879d53&redirect_uri=my://demo&state=creatis2019&scope=openid profile offline_access contact_show project_show task_show monitoring_edit")
+        webView.loadUrl("https://idp.bexio.com/authorize?response_type=code&client_id=7baa8853-0f2d-48f5-aa7e-1baf94879d53&redirect_uri=my://demo&state=creatis2019&scope=openid profile offline_access contact_show project_show task_edit task_show monitoring_edit")
 
 
 

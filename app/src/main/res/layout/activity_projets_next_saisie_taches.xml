@@ -25,12 +25,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-            android:id="@+id/textView18"
+            android:id="@+id/objetLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:text="Objet :"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
@@ -38,12 +38,12 @@
             app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <TextView
-            android:id="@+id/textView20"
+            android:id="@+id/dateLimiteLabel"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:gravity="center_vertical"
             android:text="À traiter avant le :"
             android:textColor="#FFFFFF"
@@ -52,7 +52,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/dateLimite"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -64,20 +64,20 @@
             android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+            app:layout_constraintTop_toBottomOf="@+id/dateLimiteLabel" />
 
     <TextView
-            android:id="@+id/textView24"
+            android:id="@+id/interlocuteurLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="40dp"
             android:text="Interlocuteur"
             android:textColor="#172130"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+            app:layout_constraintTop_toBottomOf="@+id/dateLimite" />
 
     <TextView
             android:id="@+id/textView25"
@@ -89,10 +89,10 @@
             android:text="Theodros Mulugeta"
             android:textColor="#172130"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView24" />
+            app:layout_constraintTop_toBottomOf="@+id/interlocuteurLabel" />
 
     <TextView
-            android:id="@+id/textView26"
+            android:id="@+id/remarqueLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -105,25 +105,25 @@
             app:layout_constraintTop_toBottomOf="@+id/textView25" />
 
     <Button
-            android:id="@+id/button3"
+            android:id="@+id/calendarButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/projets_bouton_calendrier_white"
-            app:layout_constraintBottom_toTopOf="@+id/textView23"
-            app:layout_constraintEnd_toStartOf="@+id/button4" />
+            app:layout_constraintBottom_toTopOf="@+id/dateLimite"
+            app:layout_constraintEnd_toStartOf="@+id/timeButton" />
 
     <Button
-            android:id="@+id/button4"
+            android:id="@+id/timeButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/projets_bouton_time_white"
-            app:layout_constraintBottom_toTopOf="@+id/textView23"
+            app:layout_constraintBottom_toTopOf="@+id/dateLimite"
             app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -135,9 +135,10 @@
             android:layout_marginRight="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView26">
+            app:layout_constraintTop_toBottomOf="@+id/remarqueLabel">
 
         <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/remarquesInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Remarques" />
@@ -146,18 +147,34 @@
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
             android:layout_width="0dp"
-            android:layout_height="46dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginEnd="25dp"
             android:layout_marginRight="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView18">
+            app:layout_constraintTop_toBottomOf="@+id/objetLabel">
 
         <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/objetInput"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:hint="Objet" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+            android:id="@+id/envoyerButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/next_activity_projets"
+            android:text="Envoyer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
