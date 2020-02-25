@@ -86,9 +86,8 @@ interface TempsDAO {
     fun getItems(): List<Temps>
 
 
-
-    // @Query("SELECT * FROM contacts WHERE type == :type ORDER BY nom")
-    // fun getItemsByType(type: String): List<Temps>
+    @Query("SELECT * FROM temps WHERE semaine == :numero")
+    fun getTempsByNumeroSemaine(numero: String): List<Temps>
 
 
 
@@ -116,8 +115,7 @@ interface SemaineDAO{
 
 
 
-    // @Query("SELECT * FROM contacts WHERE type == :type ORDER BY nom")
-    // fun getItemsByType(type: String): List<Temps>
+
 
 
 

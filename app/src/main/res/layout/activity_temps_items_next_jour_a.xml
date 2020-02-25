@@ -28,7 +28,7 @@
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/refreshViewTemps"
+            android:id="@+id/refreshViewTempsJour"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:elevation="2dp"
@@ -39,7 +39,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewTemps"
+                android:id="@+id/recyclerViewTempsJour"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="30dp"

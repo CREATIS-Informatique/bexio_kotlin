@@ -16,7 +16,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import ch.creatis.bexio.Next.ProjetsActivityNext
 import ch.creatis.bexio.Next.TempsActivityNext
 import ch.creatis.bexio.Room.AppDatabase
 import ch.creatis.bexio.Room.Semaines
@@ -380,12 +379,7 @@ class TempsAdapter(val items : ArrayList<Semaines>, val context: Context) : Recy
         holder.semaineView.setOnClickListener {
 
             val intent = Intent(context, TempsActivityNext::class.java)
-//            intent.putExtra("name", projet.name)
-//            intent.putExtra("start_date", projet.start_date)
-//            intent.putExtra("end_date", projet.end_date)
-//            intent.putExtra("comment", projet.comment)
-//            intent.putExtra("nr", projet.nr)
-//            intent.putExtra("pr_state_id", projet.pr_state_id)
+            intent.putExtra("numeroSemaine", items[position].numeroSemaine)
             context!!.startActivity(intent)
 
         }
