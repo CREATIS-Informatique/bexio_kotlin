@@ -7,7 +7,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
-import ch.creatis.bexio.Next.Tab.ProjetsActivityNextSaisieTemps
+import ch.creatis.bexio.Next.TabProjets.ProjetsActivityNextSaisieTemps
 import ch.creatis.bexio.R
 import kotlinx.android.synthetic.main.activity_projets_next.*
 

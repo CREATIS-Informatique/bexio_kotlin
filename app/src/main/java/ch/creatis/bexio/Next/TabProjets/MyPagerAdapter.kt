@@ -1,10 +1,8 @@
-package ch.creatis.bexio.Next.Tab
+package ch.creatis.bexio.Next.TabProjets
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import ch.creatis.bexio.Next.Tab.ActivityProjetsNextSaisieTempsFirst
-import ch.creatis.bexio.Next.Tab.ActivityProjetsNextSaisieTempsSecond
 
 class MyPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 

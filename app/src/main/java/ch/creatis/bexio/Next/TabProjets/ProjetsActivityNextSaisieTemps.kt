@@ -1,4 +1,4 @@
-package ch.creatis.bexio.Next.Tab
+package ch.creatis.bexio.Next.TabProjets
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.TextView
 import ch.creatis.bexio.R
 import kotlinx.android.synthetic.main.activity_projets_next_saisie_temps.*
 
@@ -24,7 +23,7 @@ class ProjetsActivityNextSaisieTemps : AppCompatActivity() {
 
 
         val spinner = findViewById<Spinner>(R.id.spinnerActivities)
-        var list_of_items = arrayOf("Item 1", "Item 2", "Item 3")
+        var list_of_items = arrayOf("Marketing", "Administration", "Comptabilité")
 
 
 
