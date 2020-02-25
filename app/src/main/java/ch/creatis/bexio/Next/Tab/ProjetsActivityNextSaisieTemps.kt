@@ -1,4 +1,4 @@
-package ch.creatis.bexio.Next
+package ch.creatis.bexio.Next.Tab
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +17,10 @@ class ProjetsActivityNextSaisieTemps : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_projets_next_saisie_temps)
 
+        val fragmentAdapter = MyPagerAdapter(supportFragmentManager)
+        viewpager_main.adapter = fragmentAdapter
+
+        tabs_main.setupWithViewPager(viewpager_main)
 
 
         val spinner = findViewById<Spinner>(R.id.spinnerActivities)
