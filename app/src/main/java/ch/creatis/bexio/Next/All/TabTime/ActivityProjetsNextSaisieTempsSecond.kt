@@ -52,27 +52,27 @@ class ActivityProjetsNextSaisieTempsSecond : Fragment() {
 
         // -----------------------------------------------------------------------------------------
 
-        var calendrierDate = Calendar.getInstance()
-        val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            calendrierDate.set(Calendar.YEAR, year)
-            calendrierDate.set(Calendar.MONTH, monthOfYear)
-            calendrierDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+        var calendrierDateDebut = Calendar.getInstance()
+        val dateSetListenerDebut = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            calendrierDateDebut.set(Calendar.YEAR, year)
+            calendrierDateDebut.set(Calendar.MONTH, monthOfYear)
+            calendrierDateDebut.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             val myFormat = "yyyy-MM-dd"
             val sdf = SimpleDateFormat(myFormat, Locale.US)
-            var dateInfoDebut = sdf.format(calendrierDate.time)
+            var dateInfoDebut = sdf.format(calendrierDateDebut.time)
 
 
 
             // Version suisse
             val myFormatTwo = "dd.MM.yyyy"
             val sdfTwo = SimpleDateFormat(myFormatTwo, Locale.US)
-            jourDebutDateRappel.text = sdfTwo.format(calendrierDate.time)
+            jourDebutDateRappel.text = sdfTwo.format(calendrierDateDebut.time)
 
         }
 
 
 
-        jourDebutCalendarButton.setOnClickListener { DatePickerDialog(context!!, dateSetListener, calendrierDate.get(Calendar.YEAR), calendrierDate.get(Calendar.MONTH), calendrierDate.get(Calendar.DAY_OF_MONTH)).show() }
+        jourDebutCalendarButton.setOnClickListener { DatePickerDialog(context!!, dateSetListenerDebut, calendrierDateDebut.get(Calendar.YEAR), calendrierDateDebut.get(Calendar.MONTH), calendrierDateDebut.get(Calendar.DAY_OF_MONTH)).show() }
 
 
 
@@ -103,13 +103,40 @@ class ActivityProjetsNextSaisieTempsSecond : Fragment() {
         // -----------------------------------------------------------------------------------------
 
 
+        var calendrierDateFin = Calendar.getInstance()
+        val dateSetListenerFin = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            calendrierDateFin.set(Calendar.YEAR, year)
+            calendrierDateFin.set(Calendar.MONTH, monthOfYear)
+            calendrierDateFin.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            val myFormat = "yyyy-MM-dd"
+            val sdf = SimpleDateFormat(myFormat, Locale.US)
+            var dateInfoFin = sdf.format(calendrierDateFin.time)
 
 
-        jourFinCalendarButton.setOnClickListener {
 
+            // Version suisse
+            val myFormatTwo = "dd.MM.yyyy"
+            val sdfTwo = SimpleDateFormat(myFormatTwo, Locale.US)
+            jourFinDateRappel.text = sdfTwo.format(calendrierDateFin.time)
 
 
         }
+
+
+        jourFinCalendarButton.setOnClickListener { DatePickerDialog(context!!, dateSetListenerFin, calendrierDateFin.get(Calendar.YEAR), calendrierDateFin.get(Calendar.MONTH), calendrierDateFin.get(Calendar.DAY_OF_MONTH)).show() }
+
+
+
+
+
+        // -----------------------------------------------------------------------------------------
+
+        envoyerPlusieurJourButton.setOnClickListener {
+
+
+        }
+
+
 
 
 
