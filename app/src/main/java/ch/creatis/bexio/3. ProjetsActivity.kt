@@ -139,25 +139,26 @@ class ProjetsActivity : AppCompatActivity() {
                     }
 
 
-                    val pr_state_id= response.getJSONObject(i)["pr_state_id"].toString().toInt()
 
-                    var pr_project_type_id = response.getJSONObject(i)["pr_project_type_id"].toString().toInt()
+//               val pr_state_id= response.getJSONObject(i)["pr_state_id"].toString().toInt()
+//
+//                var pr_project_type_id = response.getJSONObject(i)["pr_project_type_id"].toString().toInt()
+//
+//                val contact_id= response.getJSONObject(i)["contact_id"].toString().toInt()
+//
+//                val contact_sub_id= response.getJSONObject(i)["contact_sub_id"].toString().toInt()
+//
+//                val pr_invoice_type_id= response.getJSONObject(i)["pr_invoice_type_id"].toString().toInt()
+//
+//                val pr_invoice_type_amount= response.getJSONObject(i)["pr_invoice_type_amount"].toString()
+//
+//                val pr_budget_type_id= response.getJSONObject(i)["pr_budget_type_id"].toString().toInt()
+//
+//                val pr_budget_type_amount= response.getJSONObject(i)["pr_budget_type_amount"].toString()
 
-                    val contact_id= response.getJSONObject(i)["contact_id"].toString().toInt()
-
-                    val contact_sub_id= response.getJSONObject(i)["contact_sub_id"].toString().toInt()
-
-                    val pr_invoice_type_id= response.getJSONObject(i)["pr_invoice_type_id"].toString().toInt()
-
-                    val pr_invoice_type_amount= response.getJSONObject(i)["pr_invoice_type_amount"].toString()
-
-                    val pr_budget_type_id= response.getJSONObject(i)["pr_budget_type_id"].toString().toInt()
-
-                    val pr_budget_type_amount= response.getJSONObject(i)["pr_budget_type_amount"].toString()
 
 
-
-                    val projet = Projet(null, idBexio,nr, name,changedDateStart,changedDateEndFinal,comment,pr_state_id,pr_project_type_id, contact_id, contact_sub_id,pr_invoice_type_id,pr_invoice_type_amount,pr_budget_type_id,pr_budget_type_amount)
+                    val projet = Projet(null, idBexio,nr, name,changedDateStart,changedDateEndFinal,comment,1,1, 1, 1,1,"200",1,"200")
                     projetDAO.insert(projet)
 
 

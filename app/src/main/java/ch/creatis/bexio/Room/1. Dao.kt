@@ -158,7 +158,7 @@ interface TachesDAO {
 
 
 
-    @Query("SELECT * FROM taches ORDER BY status DESC")
+    @Query("SELECT * FROM taches ORDER BY todo_status_id DESC")
     fun getItems(): List<Tache>
 
 
