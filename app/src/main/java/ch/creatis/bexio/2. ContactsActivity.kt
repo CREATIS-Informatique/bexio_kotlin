@@ -139,13 +139,13 @@ class ContactsActivity : AppCompatActivity() {
             // -----------------------------------------------------------------------------------------
 
             val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
-            val url = "https://api.bexio.com/2.0/contact"
             val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
 
             // -----------------------------------------------------------------------------------------
 
 
 
+            val url = "https://api.bexio.com/2.0/contact"
             val queue = Volley.newRequestQueue(this)
             val stringRequest = object : JsonArrayRequest(Method.GET, url,JSONArray(), Response.Listener<JSONArray> { response ->
 
@@ -246,6 +246,8 @@ class ContactsActivity : AppCompatActivity() {
 
             queue.add(stringRequest)
             numberOfRequestsToMake++
+
+
 
         }
 

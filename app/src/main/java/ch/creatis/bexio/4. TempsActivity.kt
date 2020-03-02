@@ -108,20 +108,14 @@ class TempsActivity : AppCompatActivity() {
             // -----------------------------------------------------------------------------------------
 
             val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
-            val url = "https://api.bexio.com/2.0/timesheet"
             val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
 
             // -----------------------------------------------------------------------------------------
 
 
-
+            val url = "https://api.bexio.com/2.0/timesheet"
             val queue = Volley.newRequestQueue(this)
-            val stringRequest = object : JsonArrayRequest(Method.GET, url,
-                JSONArray(), Response.Listener<JSONArray> { response ->
-
-
-                    println(response)
-
+            val stringRequest = object : JsonArrayRequest(Method.GET, url, JSONArray(), Response.Listener<JSONArray> { response ->
 
 
 

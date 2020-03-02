@@ -112,16 +112,15 @@ class TacheActivity : AppCompatActivity() {
         // -----------------------------------------------------------------------------------------
 
         val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
-        val url = "https://api.bexio.com/2.0/task"
         val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
 
         // -----------------------------------------------------------------------------------------
 
 
 
-        val queue = Volley.newRequestQueue(this)
-        val stringRequest = object : JsonArrayRequest(Method.GET, url,
-            JSONArray(), Response.Listener<JSONArray> { response ->
+        val urlTache = "https://api.bexio.com/2.0/task"
+        val queueTache = Volley.newRequestQueue(this)
+        val stringRequestTache = object : JsonArrayRequest(Method.GET, urlTache, JSONArray(), Response.Listener<JSONArray> { response ->
 
 
 
@@ -160,7 +159,7 @@ class TacheActivity : AppCompatActivity() {
 
 
 
-        queue.add(stringRequest)
+        queueTache.add(stringRequestTache)
         numberOfRequestsToMake++
 
 

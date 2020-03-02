@@ -10,8 +10,6 @@ import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.room.Room
-import ch.creatis.bexio.Room.AppDatabase
-import ch.creatis.bexio.Room.Contact
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
@@ -30,8 +28,10 @@ import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.util.Log
-import ch.creatis.bexio.Room.Activite
-import ch.creatis.bexio.Room.User
+import ch.creatis.bexio.Room.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.HashMap
 
 
 class LoginActivity : AppCompatActivity() {
@@ -45,7 +45,10 @@ class LoginActivity : AppCompatActivity() {
 
     var activiteListDatabase = mutableListOf<Activite>()
     var contactListDatabase = mutableListOf<Contact>()
+    var projetListDatabase = mutableListOf<Projet>()
     var userListDatabase = mutableListOf<User>()
+    var tacheListDatabase= mutableListOf<Tache>()
+    var tempsListDatabase = mutableListOf<Temps>()
 
 
 
@@ -390,9 +393,11 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-        val url = "https://api.bexio.com/2.0/contact"
-        val queue = Volley.newRequestQueue(this)
-        val stringRequest = object : JsonArrayRequest(Method.GET, url, JSONArray(), Response.Listener<JSONArray> { response ->
+        val urlContact = "https://api.bexio.com/2.0/contact"
+        val queueContact = Volley.newRequestQueue(this)
+        val stringRequestContact = object : JsonArrayRequest(Method.GET, urlContact, JSONArray(), Response.Listener<JSONArray> { response ->
+
+
 
                 for (i in 0 until response.length()) {
                     val idBexio= response.getJSONObject(i)["id"].toString()
@@ -410,8 +415,13 @@ class LoginActivity : AppCompatActivity() {
                     val fax= response.getJSONObject(i)["fax"].toString()
                     val url= response.getJSONObject(i)["url"].toString()
                     val skype_name= response.getJSONObject(i)["skype_name"].toString()
+
+
+
                     val contact = Contact(null, idBexio,name_un, name_deux,address,postcode,city,country_id,mail,mail_second,phone_fixed,phone_fixed_second,phone_mobile,fax,url,skype_name)
                     contactListDatabase.add(contact)
+
+
                 }
 
 
@@ -441,7 +451,88 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-        queue.add(stringRequest)
+        queueContact.add(stringRequestContact)
+        numberOfRequestsToMake++
+
+
+
+        // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+        val urlProjet = "https://api.bexio.com/2.0/pr_project"
+        val queueProjet = Volley.newRequestQueue(this)
+        val stringRequestProjet = object : JsonArrayRequest(Method.GET, urlProjet,JSONArray(), Response.Listener<JSONArray> { response ->
+
+
+
+            for (i in 0 until response.length()) {
+
+                val idBexio= response.getJSONObject(i)["id"].toString()
+                val nr= response.getJSONObject(i)["nr"].toString()
+                val name= response.getJSONObject(i)["name"].toString()
+                var startDate = response.getJSONObject(i)["start_date"].toString()
+                var endDate = response.getJSONObject(i)["end_date"].toString()
+
+
+
+                var ancienFormatdate = SimpleDateFormat("yyyy-MM-dd")
+                var nouveauFormatDate = SimpleDateFormat("dd.MM.yy")
+                var dStart = ancienFormatdate.parse(startDate)
+                var changedDateStart = nouveauFormatDate.format(dStart)
+                var changedDateEndFinal = ""
+
+
+
+                if(endDate != "" && endDate != "null" && endDate != null){
+                    var dEnd= ancienFormatdate.parse(endDate)
+                    changedDateEndFinal = nouveauFormatDate.format(dEnd)
+                }
+
+
+
+                val pr_state_id= response.getJSONObject(i)["pr_state_id"].toString()
+                var comment= response.getJSONObject(i)["comment"].toString()
+                if(comment == "" || comment == "null" || comment == null){
+                    comment = ""
+                }
+
+
+
+                val projet = Projet(null, idBexio,nr, name,changedDateStart,changedDateEndFinal,pr_state_id,comment)
+                projetListDatabase.add(projet)
+
+
+
+            }
+
+
+
+            numberOfRequestsToMake--
+            if (numberOfRequestsToMake == 0) { requestEndInternet() }
+
+
+
+        }, Response.ErrorListener {
+
+            numberOfRequestsToMake--
+            hasRequestFailed = true
+            if (numberOfRequestsToMake == 0) { requestEndInternet() }
+
+        })
+
+        {
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Accept"] = "application/json"
+                headers["Authorization"] = "Bearer $accessToken"
+                return headers
+            }
+        }
+
+
+
+        queueProjet.add(stringRequestProjet)
         numberOfRequestsToMake++
 
 
@@ -473,7 +564,6 @@ class LoginActivity : AppCompatActivity() {
 
 
                 val user = User(null, idBexio,salutation_type, firstname,lastname,email,is_superadminCheck,is_accountantCheck)
-                println(user)
                 userListDatabase.add(user)
 
 
@@ -516,6 +606,206 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+        val urlTache = "https://api.bexio.com/2.0/task"
+        val queueTache = Volley.newRequestQueue(this)
+        val stringRequestTache = object : JsonArrayRequest(Method.GET, urlTache, JSONArray(), Response.Listener<JSONArray> { response ->
+
+
+
+            for (i in 0 until response.length()) {
+
+                val idBexio = response.getJSONObject(i)["id"].toString()
+                val subject= response.getJSONObject(i)["subject"].toString()
+                val statuts= response.getJSONObject(i)["todo_status_id"].toString()
+                val taches = Tache(null,idBexio,subject,statuts)
+                tacheListDatabase.add(taches)
+
+            }
+
+
+            numberOfRequestsToMake--
+            if (numberOfRequestsToMake == 0) { requestEndInternet() }
+
+
+
+        }, Response.ErrorListener {
+
+            numberOfRequestsToMake--
+            hasRequestFailed = true
+            if (numberOfRequestsToMake == 0) { requestEndInternet() }
+
+        })
+
+        {
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Accept"] = "application/json"
+                headers["Authorization"] = "Bearer $accessToken"
+                return headers
+            }
+        }
+
+
+
+        queueTache.add(stringRequestTache)
+        numberOfRequestsToMake++
+
+
+
+        // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+        val urlTemps = "https://api.bexio.com/2.0/timesheet"
+        val queueTemps = Volley.newRequestQueue(this)
+        val stringRequestTemps = object : JsonArrayRequest(Method.GET, urlTemps, JSONArray(), Response.Listener<JSONArray> { response ->
+
+
+
+            // ------------------------------------------ Class Temps -----------------------------------------------
+
+            for (i in 0 until response.length()) {
+
+
+                val idBexio= response.getJSONObject(i)["id"].toString()
+                val date= response.getJSONObject(i)["date"].toString()
+                var duration = response.getJSONObject(i)["duration"].toString()
+                if (duration.length == 4){ duration = "0$duration"}
+                // Ajout du numéro de la semaine
+                val dateConverter = SimpleDateFormat("yyyy-MM-dd").parse(date)
+                val calendar = Calendar.getInstance()
+                calendar.time = dateConverter
+                val semaine = calendar.get(Calendar.WEEK_OF_YEAR).toString()
+                var text = response.getJSONObject(i)["text"].toString()
+
+
+
+                // Création de la classe
+                val temps = Temps(null, idBexio,date, duration, semaine,text)
+
+                // Tri selon l'utilisateur
+                if(response.getJSONObject(i)["user_id"] == 1){ tempsListDatabase.add(temps)}
+
+            }
+
+            // ------------------------------------------ Class Temps -----------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // ------------------------------------------ Class Semaines -----------------------------------------------
+
+
+//                    // Semaines
+//                    val semaineDAO = database.semaineDAO
+//                    semaineDAO.delete()
+//
+//
+//
+//                    // Temps
+//                    val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
+//                    val tempsDAO = database.tempsDAO
+//                    val tempsList = tempsDAO.getItems() as ArrayList<Temps>
+//
+//
+//
+//                    for (i in 1..52) {
+//
+//
+//
+//                        // Heures totales
+//                        var heuretotalesSecondes = 0.0
+//                        for (temps in tempsList) {
+//                            if (temps.semaine!!.toInt() == i){
+//                                val timeString = temps.duration
+//                                val factors = arrayOf(3600.0, 60.0, 1.0, 0.01)
+//                                var value = 0.0
+//                                timeString!!.replace(".", ":").split(":").forEachIndexed { i, s -> value += factors[i] * s.toDouble() }
+//                                heuretotalesSecondes += value
+//                            }
+//                        }
+//                        val tot_seconds = heuretotalesSecondes.toInt()
+//                        val hours = tot_seconds / 3600
+//                        val minutes = (tot_seconds % 3600) / 60
+//                        val timeString = String.format("%02d:%02d", hours, minutes)
+//
+//
+//
+//                        // Date ddébut
+//                        val sdf = SimpleDateFormat("dd.MM.yy")
+//                        val cal = Calendar.getInstance()
+//                        cal.set(Calendar.WEEK_OF_YEAR, i)
+//                        cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
+//                        var dateDebut = sdf.format(cal.getTime())
+//
+//
+//
+//                        // Date fin
+//                        val sdf2 = SimpleDateFormat("dd.MM.yy")
+//                        val cal2 = Calendar.getInstance()
+//                        cal2.set(Calendar.WEEK_OF_YEAR, i)
+//                        cal2.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY)
+//                        var dateFin = sdf2.format(cal2.getTime())
+//
+//
+//
+//                        val semaine = Semaines(null, "$i",dateDebut, dateFin, timeString)
+//                        if (semaine.heuresTotales != "00:00"){ semaineDAO.insert(semaine)}
+//
+//
+//
+//                    }
+//
+
+
+            // ------------------------------------------ Class Semaines -----------------------------------------------
+
+
+
+            numberOfRequestsToMake--
+            if (numberOfRequestsToMake == 0) { requestEndInternet() }
+
+
+
+        }, Response.ErrorListener {
+
+            numberOfRequestsToMake--
+            hasRequestFailed = true
+            if (numberOfRequestsToMake == 0) { requestEndInternet() }
+
+        })
+
+        {
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Accept"] = "application/json"
+                headers["Authorization"] = "Bearer $accessToken"
+                return headers
+            }
+        }
+
+
+
+        queueTemps.add(stringRequestTemps)
+        numberOfRequestsToMake++
+
+
+
     }
 
 
@@ -548,6 +838,8 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+        // -----------------------------------------------------------------------------------------
+
         val activiteDAO = database.activiteDAO
         activiteDAO.delete()
         for (activite in activiteListDatabase){ activiteDAO.insert(activite)}
@@ -560,9 +852,29 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+        val projetDAO = database.projetDAO
+        projetDAO.delete()
+        for (projet in projetListDatabase){ projetDAO.insert(projet)}
+
+
+
         val userDAO = database.userDAO
         userDAO.delete()
         for (user in userListDatabase){userDAO.insert(user)}
+
+
+
+        val tacheDAO = database.tacheDAO
+        tacheDAO.delete()
+        for (tache in tacheListDatabase){tacheDAO.insert(tache)}
+
+
+
+        val tempsDao = database.tempsDAO
+        tempsDao.delete()
+        for (temps in tempsListDatabase){tempsDao.insert(temps)}
+
+        // -----------------------------------------------------------------------------------------
 
 
 
