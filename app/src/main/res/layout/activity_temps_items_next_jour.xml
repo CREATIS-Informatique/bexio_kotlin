@@ -2,13 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/jourTempsView"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_margin="10dp"
         android:background="@drawable/temps_items_background"
         android:elevation="3dp"
-        tools:context="Next.TempsActivityNext"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:context="Next.TempsActivityNext">
 
     <FrameLayout
             android:id="@+id/color"
@@ -60,22 +61,20 @@
             android:text="Du"
             android:textColor="#131D2C"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/textView10"
+            app:layout_constraintEnd_toStartOf="@+id/textView11"
             app:layout_constraintStart_toEndOf="@+id/tempsLabel"
             app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/firstDayLabel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:gravity="center"
-            android:text="Au"
             android:textColor="#131D2C"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/textView11"
-            app:layout_constraintStart_toEndOf="@+id/textView9"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/durationLabel"
+            app:layout_constraintStart_toEndOf="@+id/semaineNbrLabel" />
 
     <TextView
             android:id="@+id/textView11"
@@ -89,45 +88,20 @@
             android:textColor="#131D2C"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView10"
+            app:layout_constraintStart_toEndOf="@+id/textView9"
             app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-            android:id="@+id/firstDayLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:gravity="center"
-            android:text="18.11.2019"
-            android:textColor="#131D2C"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/lastDayLabel"
-            app:layout_constraintStart_toEndOf="@+id/semaineNbrLabel" />
-
-    <TextView
-            android:id="@+id/lastDayLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:gravity="center"
-            android:text="22.11.2019"
-            android:textColor="#131D2C"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/durationLabel"
-            app:layout_constraintStart_toEndOf="@+id/firstDayLabel" />
 
     <TextView
             android:id="@+id/durationLabel"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="19dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             android:gravity="center"
-            android:text="21.0"
             android:textColor="#131D2C"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/lastDayLabel" />
+            app:layout_constraintStart_toEndOf="@+id/firstDayLabel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -120,28 +120,33 @@ class TempsActivity : AppCompatActivity() {
                 JSONArray(), Response.Listener<JSONArray> { response ->
 
 
+                    println(response)
+
+
+
+
+
 
                     // ------------------------------------------ Class Temps -----------------------------------------------
 
                     for (i in 0 until response.length()) {
 
+
                         val idBexio= response.getJSONObject(i)["id"].toString()
                         val date= response.getJSONObject(i)["date"].toString()
                         var duration = response.getJSONObject(i)["duration"].toString()
                         if (duration.length == 4){ duration = "0$duration"}
-
-
-
                         // Ajout du numéro de la semaine
                         val dateConverter = SimpleDateFormat("yyyy-MM-dd").parse(date)
                         val calendar = Calendar.getInstance()
                         calendar.time = dateConverter
                         val semaine = calendar.get(Calendar.WEEK_OF_YEAR).toString()
+                        var text = response.getJSONObject(i)["text"].toString()
 
 
 
                         // Création de la classe
-                        val temps = Temps(null, idBexio,date, duration, semaine)
+                        val temps = Temps(null, idBexio,date, duration, semaine,text)
 
 
 
