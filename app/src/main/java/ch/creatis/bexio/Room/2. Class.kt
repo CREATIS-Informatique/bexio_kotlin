@@ -7,6 +7,34 @@ import androidx.room.PrimaryKey
 
 
 
+@Entity(tableName = "activites")
+data class Activite(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var idBexio: String?, var name: String?, var default_is_billable: String?, var default_price_per_hour: String?, var account_id: String?) {
+
+
+
+    // ----------- Search View ------------
+
+    //
+    //    fun getPrenomFiltered(): String? {
+    //        return prenom
+    //    }
+    //
+    //    fun getServiceFiltered(): String? {
+    //        return service
+    //    }
+    //
+    //    fun getEmplacementFiltered(): String? {
+    //        return emplacement
+    //    }
+
+    // ------------------------------------
+
+
+
+}
+
+
+
 @Entity(tableName = "contacts")
 data class Contact(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var idBexio: String?, var name_un: String?, var name_deux: String?, var address: String?, var postcode: String?, var city: String?,var country_id: String?, var mail: String?,var mail_second: String?, var phone_fixed: String?, var phone_fixed_second: String?, var phone_mobile: String?, var fax: String?, var url: String?, var skype_name: String?) {
 
@@ -134,6 +162,37 @@ data class Tache(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var idBexio:
 
 @Entity(tableName = "temps")
 data class Temps(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var idBexio: String?, var date: String?, var duration: String?, var semaine: String?, var text: String? ) {
+
+
+
+    // ----------- Search View ------------
+
+    //    fun getNomFiltered(): String? {
+    //        return nom
+    //    }
+    //
+    //    fun getPrenomFiltered(): String? {
+    //        return prenom
+    //    }
+    //
+    //    fun getServiceFiltered(): String? {
+    //        return service
+    //    }
+    //
+    //    fun getEmplacementFiltered(): String? {
+    //        return emplacement
+    //    }
+
+    // ------------------------------------
+
+
+
+}
+
+
+
+@Entity(tableName = "users")
+data class User(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var idBexio: Int?, var salutation_type: String?, var firstname: String?, var lastname: String?, var email: String?, var is_superadmin: Boolean?, var is_accountant: Boolean?) {
 
 
 

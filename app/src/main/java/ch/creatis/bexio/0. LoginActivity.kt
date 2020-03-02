@@ -30,6 +30,8 @@ import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.util.Log
+import ch.creatis.bexio.Room.Activite
+import ch.creatis.bexio.Room.User
 
 
 class LoginActivity : AppCompatActivity() {
@@ -38,7 +40,12 @@ class LoginActivity : AppCompatActivity() {
 
     private var numberOfRequestsToMake = 0
     private var hasRequestFailed = false
+
+
+
+    var activiteListDatabase = mutableListOf<Activite>()
     var contactListDatabase = mutableListOf<Contact>()
+    var userListDatabase = mutableListOf<User>()
 
 
 
@@ -316,14 +323,74 @@ class LoginActivity : AppCompatActivity() {
 
         // -----------------------------------------------------------------------------------------
 
+
+
         val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
-        val url = "https://api.bexio.com/2.0/contact"
         val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
 
-        // -----------------------------------------------------------------------------------------
+
+
+        // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
+        val urlActivite = "https://api.bexio.com/2.0/client_service"
+        val queueActivite = Volley.newRequestQueue(this)
+        val stringRequestActivite = object : JsonArrayRequest(Method.GET, urlActivite, JSONArray(), Response.Listener<JSONArray> { response ->
+
+            for (i in 0 until response.length()) {
+                val idBexio= response.getJSONObject(i)["id"].toString()
+                val name= response.getJSONObject(i)["name"].toString()
+                val default_is_billable= response.getJSONObject(i)["default_is_billable"].toString()
+                val default_price_per_hour= response.getJSONObject(i)["default_price_per_hour"].toString()
+                val account_id= response.getJSONObject(i)["account_id"].toString()
+
+
+
+                val activite = Activite(null, idBexio,name, default_is_billable,default_price_per_hour,account_id)
+                activiteListDatabase.add(activite)
+
+
+
+            }
+
+
+            numberOfRequestsToMake--
+            if (numberOfRequestsToMake == 0) { requestEndInternet() }
+
+
+
+        }, Response.ErrorListener {
+
+
+            numberOfRequestsToMake--
+            hasRequestFailed = true
+            if (numberOfRequestsToMake == 0) { requestEndInternet() }
+
+
+        })
+
+        {
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Accept"] = "application/json"
+                headers["Authorization"] = "Bearer $accessToken"
+                return headers
+            }
+        }
+
+
+
+        queueActivite.add(stringRequestActivite)
+        numberOfRequestsToMake++
+
+
+
+        // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+        val url = "https://api.bexio.com/2.0/contact"
         val queue = Volley.newRequestQueue(this)
         val stringRequest = object : JsonArrayRequest(Method.GET, url, JSONArray(), Response.Listener<JSONArray> { response ->
 
@@ -379,6 +446,76 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+        // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+        val urlUser = "https://api.bexio.com/3.0/users"
+        val queueUser = Volley.newRequestQueue(this)
+        val stringRequestUser = object : JsonArrayRequest(Method.GET, urlUser, JSONArray(), Response.Listener<JSONArray> { response ->
+
+            for (i in 0 until response.length()) {
+                val idBexio= response.getJSONObject(i)["id"].toString().toInt()
+                val salutation_type= response.getJSONObject(i)["salutation_type"].toString()
+                val firstname= response.getJSONObject(i)["firstname"].toString()
+                val lastname= response.getJSONObject(i)["lastname"].toString()
+                val email= response.getJSONObject(i)["email"].toString()
+
+
+
+                var is_superadminCheck = false
+                var is_accountantCheck = false
+//                val is_superadmin= response.getJSONObject(i)["is_superadmin"].toString()
+//                val is_accountant = response.getJSONObject(i)["is_accountant"].toString()
+//                if (is_superadmin != ""){ is_superadminCheck = is_superadmin.toBoolean() }
+//                if (is_accountant != ""){ is_accountantCheck = is_accountant.toBoolean() }
+
+
+
+                val user = User(null, idBexio,salutation_type, firstname,lastname,email,is_superadminCheck,is_accountantCheck)
+                println(user)
+                userListDatabase.add(user)
+
+
+
+            }
+
+
+            numberOfRequestsToMake--
+            if (numberOfRequestsToMake == 0) { requestEndInternet() }
+
+
+
+        }, Response.ErrorListener {
+
+
+            numberOfRequestsToMake--
+            hasRequestFailed = true
+            if (numberOfRequestsToMake == 0) { requestEndInternet() }
+
+
+        })
+
+        {
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Accept"] = "application/json"
+                headers["Authorization"] = "Bearer $accessToken"
+                return headers
+            }
+        }
+
+
+
+        queueUser.add(stringRequestUser)
+        numberOfRequestsToMake++
+
+
+
+        // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
     }
 
 
@@ -411,9 +548,21 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+        val activiteDAO = database.activiteDAO
+        activiteDAO.delete()
+        for (activite in activiteListDatabase){ activiteDAO.insert(activite)}
+
+
+
         val contactDAO = database.contactDAO
         contactDAO.delete()
         for (contact in contactListDatabase){ contactDAO.insert(contact)}
+
+
+
+        val userDAO = database.userDAO
+        userDAO.delete()
+        for (user in userListDatabase){userDAO.insert(user)}
 
 
 

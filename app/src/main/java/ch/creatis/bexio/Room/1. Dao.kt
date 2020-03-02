@@ -10,6 +10,30 @@ import androidx.room.Query
 
 
 @Dao
+interface ActiviteDAO {
+
+
+
+    @Query("DELETE FROM activites")
+    fun delete()
+
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(items: Activite)
+
+
+
+    @Query("SELECT * FROM activites ORDER BY name ASC")
+    fun getItems(): List<Activite>
+
+
+
+}
+
+
+
+@Dao
 interface ContactDAO {
 
 
@@ -136,6 +160,35 @@ interface TachesDAO {
 
     @Query("SELECT * FROM taches ORDER BY status DESC")
     fun getItems(): List<Tache>
+
+
+
+    // @Query("SELECT * FROM taches WHERE type == :type ORDER BY nom")
+    // fun getItemsByType(type: String): List<Tache>
+
+
+
+}
+
+
+
+@Dao
+interface USersDAO {
+
+
+
+    @Query("DELETE FROM users")
+    fun delete()
+
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(items: User)
+
+
+
+    @Query("SELECT * FROM users ORDER BY idBexio DESC")
+    fun getItems(): List<User>
 
 
 
