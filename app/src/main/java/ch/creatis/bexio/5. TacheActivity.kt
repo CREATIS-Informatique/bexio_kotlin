@@ -123,7 +123,6 @@ class TacheActivity : AppCompatActivity() {
         val stringRequest = object : JsonArrayRequest(Method.GET, url,
             JSONArray(), Response.Listener<JSONArray> { response ->
 
-                println(response)
 
 
                 for (i in 0 until response.length()) {
