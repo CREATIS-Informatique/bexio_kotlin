@@ -2,18 +2,33 @@ package ch.creatis.bexio.Next.All.TabTime
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ch.creatis.bexio.R
+import com.android.volley.AuthFailureError
+import com.android.volley.Response
+import com.android.volley.VolleyError
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.fragment_activity_projets_next_saisie_temps_second.*
+import org.json.JSONArray
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class ActivityProjetsNextSaisieTempsSecond : Fragment() {
+
+
+
+    var startDuree = ""
+    var startDate = ""
+    var endDuree = ""
+    var endDate = ""
 
 
 
@@ -36,8 +51,14 @@ class ActivityProjetsNextSaisieTempsSecond : Fragment() {
         val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
             calendrierDuree.set(Calendar.HOUR_OF_DAY, hour)
             calendrierDuree.set(Calendar.MINUTE, minute)
-            var dureeInfoDebut = SimpleDateFormat("HH:mm").format(calendrierDuree.time)
-            jourDebutHeureRappel.text = dureeInfoDebut
+            var dureeInfoDebut = SimpleDateFormat("HH:mm:ss").format(calendrierDuree.time)
+            startDuree = dureeInfoDebut
+
+
+
+            // version suisse
+            jourDebutHeureRappel.text = SimpleDateFormat("HH:mm").format(calendrierDuree.time)
+
         }
 
 
@@ -59,7 +80,7 @@ class ActivityProjetsNextSaisieTempsSecond : Fragment() {
             calendrierDateDebut.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             val myFormat = "yyyy-MM-dd"
             val sdf = SimpleDateFormat(myFormat, Locale.US)
-            var dateInfoDebut = sdf.format(calendrierDateDebut.time)
+            startDate = sdf.format(calendrierDateDebut.time)
 
 
 
@@ -86,8 +107,13 @@ class ActivityProjetsNextSaisieTempsSecond : Fragment() {
         val timeSetListenerFin = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
             calendrierDureeFin.set(Calendar.HOUR_OF_DAY, hour)
             calendrierDureeFin.set(Calendar.MINUTE, minute)
-            var dureeInfoFin = SimpleDateFormat("HH:mm").format(calendrierDureeFin.time)
-            jourFinHeureRappel.text = dureeInfoFin
+            var dureeInfoFin = SimpleDateFormat("HH:mm:ss").format(calendrierDureeFin.time)
+            endDuree = dureeInfoFin
+
+
+
+            // version suisse
+            jourFinHeureRappel.text = SimpleDateFormat("HH:mm").format(calendrierDuree.time)
         }
 
 
@@ -110,7 +136,7 @@ class ActivityProjetsNextSaisieTempsSecond : Fragment() {
             calendrierDateFin.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             val myFormat = "yyyy-MM-dd"
             val sdf = SimpleDateFormat(myFormat, Locale.US)
-            var dateInfoFin = sdf.format(calendrierDateFin.time)
+            endDate = sdf.format(calendrierDateFin.time)
 
 
 
@@ -133,6 +159,90 @@ class ActivityProjetsNextSaisieTempsSecond : Fragment() {
 
         envoyerPlusieurJourButton.setOnClickListener {
 
+
+
+            var startFinal = startDate + startDuree
+            var endfinal = endDate + endDuree
+
+
+
+            // -----------------------------------------------------------------------------------------
+
+            val sharedPreferences = context!!.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
+            val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
+
+            // -----------------------------------------------------------------------------------------
+
+
+
+            var url = "https://api.bexio.com/2.0/timesheet"
+
+
+
+            val jsonArray = JSONArray()
+            val jsonObject = JSONObject()
+            val jsonObjectTracking = JSONObject()
+
+            try
+            {
+                jsonObjectTracking.put("type", "range")
+                jsonObjectTracking.put("start", startFinal)
+                jsonObjectTracking.put("end", endfinal)
+
+            }
+            catch (e:Exception) {
+            }
+
+
+
+            try
+            {
+                jsonObject.put("user_id", 2)
+                jsonObject.put("client_service_id", 2)
+                jsonObject.put("allowable_bill", false)
+                jsonObject.put("tracking", jsonObjectTracking)
+                jsonArray.put(jsonObject)
+            }
+            catch (e:Exception) {
+            }
+
+
+
+            val stringRequest = object: JsonObjectRequest(
+                Method.POST, url, jsonObject, object: Response.Listener<JSONObject> {
+
+                    override fun onResponse(response: JSONObject?) {
+                        println(response)
+
+
+                    } },
+
+
+
+                object: Response.ErrorListener {
+                    override fun onErrorResponse(error: VolleyError) {
+                        println(error)
+
+                    }
+                })
+
+
+
+            {
+                @Throws(AuthFailureError::class)
+                override fun getHeaders():Map<String, String> {
+                    val headers = HashMap<String, String>()
+                    headers.put("Accept", "application/json")
+                    headers.put("Content-Type", "application/json")
+                    headers.put("Authorization", "Bearer $accessToken")
+                    return headers
+                }
+            }
+
+
+
+            val requestQueue = Volley.newRequestQueue(context)
+            requestQueue.add(stringRequest)
 
         }
 
