@@ -491,7 +491,6 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-                val pr_state_id= response.getJSONObject(i)["pr_state_id"].toString()
                 var comment= response.getJSONObject(i)["comment"].toString()
                 if(comment == "" || comment == "null" || comment == null){
                     comment = ""
@@ -499,7 +498,25 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-                val projet = Projet(null, idBexio,nr, name,changedDateStart,changedDateEndFinal,pr_state_id,comment)
+//                val pr_state_id= response.getJSONObject(i)["pr_state_id"].toString().toInt()
+//
+//                var pr_project_type_id = response.getJSONObject(i)["pr_project_type_id"].toString().toInt()
+//
+//                val contact_id= response.getJSONObject(i)["contact_id"].toString().toInt()
+//
+//                val contact_sub_id= response.getJSONObject(i)["contact_sub_id"].toString().toInt()
+//
+//                val pr_invoice_type_id= response.getJSONObject(i)["pr_invoice_type_id"].toString().toInt()
+//
+//                val pr_invoice_type_amount= response.getJSONObject(i)["pr_invoice_type_amount"].toString()
+//
+//                val pr_budget_type_id= response.getJSONObject(i)["pr_budget_type_id"].toString().toInt()
+//
+//                val pr_budget_type_amount= response.getJSONObject(i)["pr_budget_type_amount"].toString()
+
+
+
+                val projet = Projet(null, idBexio,nr, name,changedDateStart,changedDateEndFinal,comment,1,1, 1, 1,1,"200",1,"200")
                 projetListDatabase.add(projet)
 
 
@@ -615,9 +632,29 @@ class LoginActivity : AppCompatActivity() {
             for (i in 0 until response.length()) {
 
                 val idBexio = response.getJSONObject(i)["id"].toString()
+                val user_id= response.getJSONObject(i)["user_id"].toString().toInt()
+                val finish_date= response.getJSONObject(i)["finish_date"].toString()
                 val subject= response.getJSONObject(i)["subject"].toString()
-                val statuts= response.getJSONObject(i)["todo_status_id"].toString()
-                val taches = Tache(null,idBexio,subject,statuts)
+
+
+
+//                val place= response.getJSONObject(i)["place"].toString().toInt()
+//                val info= response.getJSONObject(i)["info"].toString()
+//                val contact_id= response.getJSONObject(i)["contact_id"].toString().toInt()
+//                val sub_contact_id= response.getJSONObject(i)["sub_contact_id"].toString().toInt()
+//                val project_id= response.getJSONObject(i)["project_id"].toString().toInt()
+//                val entry_id= response.getJSONObject(i)["entry_id"].toString().toInt()
+//                val module_id= response.getJSONObject(i)["module_id"].toString().toInt()
+//                val todo_status_id= response.getJSONObject(i)["todo_status_id"].toString().toInt()
+//                val todo_priority_id= response.getJSONObject(i)["todo_priority_id"].toString().toInt()
+//                val has_reminder= response.getJSONObject(i)["has_reminder"].toString().toBoolean()
+//                val remember_type_id= response.getJSONObject(i)["remember_type_id"].toString().toInt()
+//                val remember_time_id= response.getJSONObject(i)["remember_time_id"].toString().toInt()
+//                val communication_kind_id= response.getJSONObject(i)["communication_kind_id"].toString().toInt()
+
+
+
+                val taches = Tache(null,idBexio,user_id,finish_date,subject,1,"1",1,1,1,1,1,1,1,false,1,1,1)
                 tacheListDatabase.add(taches)
 
             }

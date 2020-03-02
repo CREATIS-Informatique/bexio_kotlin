@@ -133,15 +133,31 @@ class ProjetsActivity : AppCompatActivity() {
 
 
 
-                    val pr_state_id= response.getJSONObject(i)["pr_state_id"].toString()
                     var comment= response.getJSONObject(i)["comment"].toString()
                     if(comment == "" || comment == "null" || comment == null){
                         comment = ""
                     }
 
 
+                    val pr_state_id= response.getJSONObject(i)["pr_state_id"].toString().toInt()
 
-                    val projet = Projet(null, idBexio,nr, name,changedDateStart,changedDateEndFinal,pr_state_id,comment)
+                    var pr_project_type_id = response.getJSONObject(i)["pr_project_type_id"].toString().toInt()
+
+                    val contact_id= response.getJSONObject(i)["contact_id"].toString().toInt()
+
+                    val contact_sub_id= response.getJSONObject(i)["contact_sub_id"].toString().toInt()
+
+                    val pr_invoice_type_id= response.getJSONObject(i)["pr_invoice_type_id"].toString().toInt()
+
+                    val pr_invoice_type_amount= response.getJSONObject(i)["pr_invoice_type_amount"].toString()
+
+                    val pr_budget_type_id= response.getJSONObject(i)["pr_budget_type_id"].toString().toInt()
+
+                    val pr_budget_type_amount= response.getJSONObject(i)["pr_budget_type_amount"].toString()
+
+
+
+                    val projet = Projet(null, idBexio,nr, name,changedDateStart,changedDateEndFinal,comment,pr_state_id,pr_project_type_id, contact_id, contact_sub_id,pr_invoice_type_id,pr_invoice_type_amount,pr_budget_type_id,pr_budget_type_amount)
                     projetDAO.insert(projet)
 
 
@@ -273,14 +289,14 @@ class ProjetsAdapter(val items : ArrayList<Projet>, val context: Context) : Recy
 
 
 
-        if (items[position].pr_state_id == "1"){
+        if (items[position].pr_state_id == 1){
             holder.endDate?.text = "Actif"
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 holder.endDate.background = ContextCompat.getDrawable(context, R.drawable.projets_items_background_actif)
             } else {
                 holder.endDate.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.projets_items_background_actif))
             }
-        } else if(items[position].pr_state_id == "2"){
+        } else if(items[position].pr_state_id == 2){
             holder.endDate?.text = "Ouvert"
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 holder.endDate.background = ContextCompat.getDrawable(context, R.drawable.projets_items_background_ouvert)
