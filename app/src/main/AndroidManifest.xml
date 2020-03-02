@@ -12,7 +12,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".Next.TempsActivityNext"></activity>
+        <activity android:name=".Next.TachesActivityNext"></activity>
+        <activity android:name=".Next.TempsActivityNext" />
         <activity android:name=".Next.All.ProjetsActivityNextSaisieTaches" />
         <activity android:name=".Next.All.ProjetsActivityNextSaisieTemps" />
         <activity android:name=".Next.ProjetsActivityNext" />

@@ -13,10 +13,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import ch.creatis.bexio.Next.All.ProjetsActivityNextSaisieTaches
+import ch.creatis.bexio.Next.All.ProjetsActivityNextSaisieTemps
+import ch.creatis.bexio.Next.TachesActivityNext
 import ch.creatis.bexio.Room.AppDatabase
 import ch.creatis.bexio.Room.Tache
 import com.android.volley.Response
@@ -225,6 +228,17 @@ class TachesAdapter(val items : ArrayList<Tache>, val context: Context) : Recycl
         holder.viewObjet.text = items[position].subject
         if(items[position].status == "1"){ holder.viewStatus.text = "Suspens" }
 
+
+
+        holder.tacheView.setOnClickListener {
+
+            val intent = Intent(context, TachesActivityNext::class.java)
+            context.startActivity(intent)
+
+        }
+
+
+
     }
 
 
@@ -241,6 +255,7 @@ class TachesAdapter(val items : ArrayList<Tache>, val context: Context) : Recycl
 
 class TachesHolder (view: View) : RecyclerView.ViewHolder(view) {
 
+    val tacheView = view.tacheView
     val viewObjet = view.objetLabel
     val viewStatus = view.statutLabel
 
