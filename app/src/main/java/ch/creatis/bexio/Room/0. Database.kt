@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 
 
 
-@Database(entities = [Contact::class, Projet::class, Temps::class,Semaines::class, Tache::class], version = 20)
+@Database(entities = [Contact::class, Projet::class, Semaines::class, Tache::class,Temps::class], version = 21)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -16,13 +16,9 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract val contactDAO: ContactDAO
     abstract val projetDAO: ProjetDAO
-    abstract val tempsDAO: TempsDAO
     abstract val semaineDAO: SemaineDAO
     abstract val tacheDAO: TachesDAO
-
-
-    // Vaultlists
-    // abstract val categoryannonceDAO: CategoryAnnonceDAO
+    abstract val tempsDAO: TempsDAO
 
 
 
