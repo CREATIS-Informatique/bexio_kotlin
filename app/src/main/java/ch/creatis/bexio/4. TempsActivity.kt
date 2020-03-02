@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import ch.creatis.bexio.Next.All.ProjetsActivityNextSaisieTemps
 import ch.creatis.bexio.Next.TempsActivityNext
 import ch.creatis.bexio.Room.AppDatabase
 import ch.creatis.bexio.Room.Semaines
@@ -73,6 +74,14 @@ class TempsActivity : AppCompatActivity() {
             refreshViewTemps.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this, R.color.colorPrimary))
             refreshViewTemps.setColorSchemeColors(Color.WHITE)
             refreshViewTemps.setOnRefreshListener { if(numberOfRequestsToMake == 0){ if (isConnected()) {RefreshRequest()} else { Alerte() } } }
+
+
+
+            // addTimeButton
+            addTimeButton.setOnClickListener {
+                val intent = Intent(this, ProjetsActivityNextSaisieTemps::class.java)
+                startActivity(intent)
+            }
 
 
 

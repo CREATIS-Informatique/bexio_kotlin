@@ -1,23 +1,17 @@
-package ch.creatis.bexio.Next.Projets
+package ch.creatis.bexio.Next.All
 
 import android.app.DatePickerDialog
-import android.app.PendingIntent.getActivity
 import android.app.TimePickerDialog
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.SyncStateContract
 import android.util.Log
-import android.widget.Toast
 import ch.creatis.bexio.R
 import com.android.volley.AuthFailureError
-import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.activity_projets_next.*
 import kotlinx.android.synthetic.main.activity_projets_next_saisie_taches.*
 import org.json.JSONArray
 import org.json.JSONObject

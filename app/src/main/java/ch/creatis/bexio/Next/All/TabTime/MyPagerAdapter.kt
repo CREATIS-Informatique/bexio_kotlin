@@ -1,4 +1,4 @@
-package ch.creatis.bexio.Next.Projets.Tab
+package ch.creatis.bexio.Next.All.TabTime
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

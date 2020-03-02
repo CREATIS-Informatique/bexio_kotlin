@@ -1,4 +1,4 @@
-package ch.creatis.bexio.Next.Projets
+package ch.creatis.bexio.Next.All
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import ch.creatis.bexio.Next.Projets.Tab.MyPagerAdapter
+import ch.creatis.bexio.Next.All.TabTime.MyPagerAdapter
 import ch.creatis.bexio.R
 import kotlinx.android.synthetic.main.activity_projets_next_saisie_temps.*
 
@@ -20,10 +20,14 @@ class ProjetsActivityNextSaisieTemps : AppCompatActivity() {
 
 
         // --------------- TAB
-        val fragmentAdapter = MyPagerAdapter(supportFragmentManager)
+
+        val fragmentAdapter =
+            MyPagerAdapter(supportFragmentManager)
         viewpager_main.adapter = fragmentAdapter
         tabs_main.setupWithViewPager(viewpager_main)
+
         // --------------- TAB
+
 
 
         // --------------- Spinner

@@ -4,6 +4,7 @@ package ch.creatis.bexio
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import ch.creatis.bexio.Next.All.ProjetsActivityNextSaisieTaches
 import ch.creatis.bexio.Room.AppDatabase
 import ch.creatis.bexio.Room.Tache
 import com.android.volley.Response
@@ -72,6 +74,14 @@ class TacheActivity : AppCompatActivity() {
         refreshViewTaches.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this, R.color.colorPrimary))
         refreshViewTaches.setColorSchemeColors(Color.WHITE)
         refreshViewTaches.setOnRefreshListener { if(numberOfRequestsToMake == 0){ if (isConnected()) {RefreshRequest()} else { Alerte() } } }
+
+
+
+        // Add Task
+        addTaskButton.setOnClickListener {
+            val intent = Intent(this, ProjetsActivityNextSaisieTaches::class.java)
+            startActivity(intent)
+        }
 
 
 
