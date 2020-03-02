@@ -127,9 +127,29 @@ class TacheActivity : AppCompatActivity() {
                 for (i in 0 until response.length()) {
 
                     val idBexio = response.getJSONObject(i)["id"].toString()
+                    val user_id= response.getJSONObject(i)["user_id"].toString().toInt()
+                    val finish_date= response.getJSONObject(i)["finish_date"].toString()
                     val subject= response.getJSONObject(i)["subject"].toString()
-                    val statuts= response.getJSONObject(i)["todo_status_id"].toString()
-                    val taches = Tache(null,idBexio,subject,statuts)
+
+
+
+//                val place= response.getJSONObject(i)["place"].toString().toInt()
+//                val info= response.getJSONObject(i)["info"].toString()
+//                val contact_id= response.getJSONObject(i)["contact_id"].toString().toInt()
+//                val sub_contact_id= response.getJSONObject(i)["sub_contact_id"].toString().toInt()
+//                val project_id= response.getJSONObject(i)["project_id"].toString().toInt()
+//                val entry_id= response.getJSONObject(i)["entry_id"].toString().toInt()
+//                val module_id= response.getJSONObject(i)["module_id"].toString().toInt()
+//                val todo_status_id= response.getJSONObject(i)["todo_status_id"].toString().toInt()
+//                val todo_priority_id= response.getJSONObject(i)["todo_priority_id"].toString().toInt()
+//                val has_reminder= response.getJSONObject(i)["has_reminder"].toString().toBoolean()
+//                val remember_type_id= response.getJSONObject(i)["remember_type_id"].toString().toInt()
+//                val remember_time_id= response.getJSONObject(i)["remember_time_id"].toString().toInt()
+//                val communication_kind_id= response.getJSONObject(i)["communication_kind_id"].toString().toInt()
+
+
+
+                    val taches = Tache(null,idBexio,user_id,finish_date,subject,1,"1",1,1,1,1,1,1,1,false,1,1,1)
                     tachesDAO.insert(taches)
 
                 }
@@ -224,7 +244,7 @@ class TachesAdapter(val items : ArrayList<Tache>, val context: Context) : Recycl
     override fun onBindViewHolder(holder: TachesHolder, position: Int) {
 
         holder.viewObjet.text = items[position].subject
-        if(items[position].status == "1"){ holder.viewStatus.text = "Suspens" }
+        if(items[position].todo_status_id == 1){ holder.viewStatus.text = "Suspens" }
 
 
 
