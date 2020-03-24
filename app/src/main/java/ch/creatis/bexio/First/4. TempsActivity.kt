@@ -1,4 +1,4 @@
-package ch.creatis.bexio
+package ch.creatis.bexio.First
 
 
 
@@ -16,8 +16,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import ch.creatis.bexio.Next.All.ProjetsActivityNextSaisieTemps
-import ch.creatis.bexio.Next.TempsActivityItemsNextSemaineDescription
+import ch.creatis.bexio.R
+import ch.creatis.bexio.TachesTemps.Temps.ProjetsActivityNextSaisieTemps
+import ch.creatis.bexio.FirstSecond.TempsActivityItemsNextSemaineDescription
 import ch.creatis.bexio.Room.AppDatabase
 import ch.creatis.bexio.Room.Semaines
 import ch.creatis.bexio.Room.Temps
@@ -66,12 +67,15 @@ class TempsActivity : AppCompatActivity() {
             // Adapter
             RefreshRequest()
             recyclerViewTemps.layoutManager = LinearLayoutManager(this)
-            recyclerViewTemps.adapter = TempsAdapter(semaineList, this)
+            recyclerViewTemps.adapter =
+                TempsAdapter(semaineList, this)
 
 
 
             // RefreshView
-            refreshViewTemps.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this, R.color.colorPrimary))
+            refreshViewTemps.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this,
+                R.color.colorPrimary
+            ))
             refreshViewTemps.setColorSchemeColors(Color.WHITE)
             refreshViewTemps.setOnRefreshListener { if(numberOfRequestsToMake == 0){ if (isConnected()) {RefreshRequest()} else { Alerte() } } }
 
@@ -352,7 +356,13 @@ class TempsAdapter(val items : ArrayList<Semaines>, val context: Context) : Recy
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TempsHolder {
-        return TempsHolder(LayoutInflater.from(context).inflate(R.layout.activity_temps_items_semaine, parent, false))
+        return TempsHolder(
+            LayoutInflater.from(context).inflate(
+                R.layout.activity_temps_items_semaine,
+                parent,
+                false
+            )
+        )
     }
 
 

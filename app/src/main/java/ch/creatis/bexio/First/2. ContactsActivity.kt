@@ -1,4 +1,4 @@
-package ch.creatis.bexio
+package ch.creatis.bexio.First
 
 
 
@@ -15,13 +15,13 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.*
-import ch.creatis.bexio.Next.ContactsActivityNext
+import ch.creatis.bexio.R
+import ch.creatis.bexio.FirstSecond.ContactsActivityNext
 import ch.creatis.bexio.Room.AppDatabase
 import ch.creatis.bexio.Room.Contact
 import com.android.volley.Response
@@ -76,7 +76,9 @@ class ContactsActivity : AppCompatActivity() {
 
 
         // RefreshView
-        refreshViewContacts.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this, R.color.colorPrimary))
+        refreshViewContacts.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this,
+            R.color.colorPrimary
+        ))
         refreshViewContacts.setColorSchemeColors(Color.WHITE)
         refreshViewContacts.setOnRefreshListener { if(numberOfRequestsToMake == 0){ if (isConnected()) {RefreshRequest()} else { Alerte() } } }
 

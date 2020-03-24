@@ -1,4 +1,4 @@
-package ch.creatis.bexio.Next.All.TabTime
+package ch.creatis.bexio.TachesTemps.Temps.Pager
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog

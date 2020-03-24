@@ -1,4 +1,4 @@
-package ch.creatis.bexio.Next
+package ch.creatis.bexio.FirstSecond
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

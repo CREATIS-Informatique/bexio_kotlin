@@ -1,4 +1,4 @@
-package ch.creatis.bexio
+package ch.creatis.bexio.First
 
 
 
@@ -13,13 +13,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import ch.creatis.bexio.Next.All.ProjetsActivityNextSaisieTaches
-import ch.creatis.bexio.Next.All.ProjetsActivityNextSaisieTemps
-import ch.creatis.bexio.Next.TachesActivityNext
+import ch.creatis.bexio.R
+import ch.creatis.bexio.TachesTemps.Taches.ProjetsActivityNextSaisieTaches
+import ch.creatis.bexio.FirstSecond.TachesActivityNext
 import ch.creatis.bexio.Room.AppDatabase
 import ch.creatis.bexio.Room.Tache
 import com.android.volley.Response
@@ -55,7 +54,8 @@ class TacheActivity : AppCompatActivity() {
 
 
         recyclerViewTaches.layoutManager = LinearLayoutManager(this)
-        recyclerViewTaches.adapter = TachesAdapter(tachesList, this)
+        recyclerViewTaches.adapter =
+            TachesAdapter(tachesList, this)
 
 
 
@@ -69,12 +69,15 @@ class TacheActivity : AppCompatActivity() {
         // Adapter
         RefreshRequest()
         recyclerViewTaches.layoutManager = LinearLayoutManager(this)
-        recyclerViewTaches.adapter = TachesAdapter(tachesList, this)
+        recyclerViewTaches.adapter =
+            TachesAdapter(tachesList, this)
 
 
 
         // RefreshView
-        refreshViewTaches.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this, R.color.colorPrimary))
+        refreshViewTaches.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this,
+            R.color.colorPrimary
+        ))
         refreshViewTaches.setColorSchemeColors(Color.WHITE)
         refreshViewTaches.setOnRefreshListener { if(numberOfRequestsToMake == 0){ if (isConnected()) {RefreshRequest()} else { Alerte() } } }
 
@@ -236,7 +239,13 @@ class TachesAdapter(val items : ArrayList<Tache>, val context: Context) : Recycl
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TachesHolder {
-        return TachesHolder(LayoutInflater.from(context).inflate(R.layout.activity_taches_items, parent, false))
+        return TachesHolder(
+            LayoutInflater.from(context).inflate(
+                R.layout.activity_taches_items,
+                parent,
+                false
+            )
+        )
     }
 
 

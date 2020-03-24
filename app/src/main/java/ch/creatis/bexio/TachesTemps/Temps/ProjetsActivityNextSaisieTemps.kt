@@ -1,4 +1,4 @@
-package ch.creatis.bexio.Next.All
+package ch.creatis.bexio.TachesTemps.Temps
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,11 +7,10 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.room.Room
-import ch.creatis.bexio.Next.All.TabTime.MyPagerAdapter
+import ch.creatis.bexio.TachesTemps.Temps.Pager.MyPagerAdapter
 import ch.creatis.bexio.R
 import ch.creatis.bexio.Room.Activite
 import ch.creatis.bexio.Room.AppDatabase
-import ch.creatis.bexio.Room.Projet
 import kotlinx.android.synthetic.main.activity_projets_next_saisie_temps.*
 
 class ProjetsActivityNextSaisieTemps : AppCompatActivity() {

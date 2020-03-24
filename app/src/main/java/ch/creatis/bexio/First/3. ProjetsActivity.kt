@@ -1,4 +1,4 @@
-package ch.creatis.bexio
+package ch.creatis.bexio.First
 
 
 
@@ -17,20 +17,17 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import ch.creatis.bexio.Next.ContactsActivityNext
-import ch.creatis.bexio.Next.ProjetsActivityNext
+import ch.creatis.bexio.R
+import ch.creatis.bexio.FirstSecond.ProjetsActivityNext
 import ch.creatis.bexio.Room.AppDatabase
 import ch.creatis.bexio.Room.Projet
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.activity_contacts.*
 import kotlinx.android.synthetic.main.activity_projets.*
 import kotlinx.android.synthetic.main.activity_projets_items.view.*
 import org.json.JSONArray
-import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -68,12 +65,15 @@ class ProjetsActivity : AppCompatActivity() {
         // Adapter
         RefreshRequest()
         recyclerViewProjets.layoutManager = LinearLayoutManager(this)
-        recyclerViewProjets.adapter = ProjetsAdapter(projectList, this)
+        recyclerViewProjets.adapter =
+            ProjetsAdapter(projectList, this)
 
 
 
         // RefreshView
-        refreshViewProjets.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this, R.color.colorPrimary))
+        refreshViewProjets.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this,
+            R.color.colorPrimary
+        ))
         refreshViewProjets.setColorSchemeColors(Color.WHITE)
         refreshViewProjets.setOnRefreshListener { if(numberOfRequestsToMake == 0){ if (isConnected()) {RefreshRequest()} else { Alerte() } } }
 
@@ -293,16 +293,24 @@ class ProjetsAdapter(val items : ArrayList<Projet>, val context: Context) : Recy
         if (items[position].pr_state_id == 1){
             holder.endDate?.text = "Actif"
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                holder.endDate.background = ContextCompat.getDrawable(context, R.drawable.projets_items_background_actif)
+                holder.endDate.background = ContextCompat.getDrawable(context,
+                    R.drawable.projets_items_background_actif
+                )
             } else {
-                holder.endDate.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.projets_items_background_actif))
+                holder.endDate.setBackgroundDrawable(ContextCompat.getDrawable(context,
+                    R.drawable.projets_items_background_actif
+                ))
             }
         } else if(items[position].pr_state_id == 2){
             holder.endDate?.text = "Ouvert"
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                holder.endDate.background = ContextCompat.getDrawable(context, R.drawable.projets_items_background_ouvert)
+                holder.endDate.background = ContextCompat.getDrawable(context,
+                    R.drawable.projets_items_background_ouvert
+                )
             } else {
-                holder.endDate.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.projets_items_background_ouvert))
+                holder.endDate.setBackgroundDrawable(ContextCompat.getDrawable(context,
+                    R.drawable.projets_items_background_ouvert
+                ))
             }
         }
 

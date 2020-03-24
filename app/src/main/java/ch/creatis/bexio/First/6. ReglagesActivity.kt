@@ -1,9 +1,10 @@
-package ch.creatis.bexio
+package ch.creatis.bexio.First
 
 
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import ch.creatis.bexio.R
 import kotlinx.android.synthetic.main.activity_reglages.*
 
 

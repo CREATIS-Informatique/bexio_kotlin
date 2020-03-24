@@ -1,4 +1,4 @@
-package ch.creatis.bexio
+package ch.creatis.bexio.First
 
 
 
@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import android.os.Build
+import ch.creatis.bexio.R
 import kotlinx.android.synthetic.main.activity_a_main.*
 
 
@@ -34,7 +35,10 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(this, ContactsActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left
+            )
 
         }
 
@@ -46,7 +50,10 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(this, ProjetsActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left
+            )
 
         }
 
@@ -58,7 +65,10 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(this, TempsActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left
+            )
 
         }
 
@@ -70,7 +80,10 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(this, TacheActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left
+            )
 
         }
 
@@ -82,7 +95,10 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(this, ReglagesActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left
+            )
 
         }
 

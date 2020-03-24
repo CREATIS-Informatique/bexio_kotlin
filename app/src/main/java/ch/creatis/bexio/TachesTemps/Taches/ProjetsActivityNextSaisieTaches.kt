@@ -1,4 +1,4 @@
-package ch.creatis.bexio.Next.All
+package ch.creatis.bexio.TachesTemps.Taches
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog

@@ -9,7 +9,7 @@
         android:background="@drawable/temps_items_background"
         android:elevation="3dp"
         android:orientation="vertical"
-        tools:context="Next.TempsActivityNext">
+        tools:context="FirstSecond.TempsActivityNext">
 
     <FrameLayout
             android:id="@+id/color"

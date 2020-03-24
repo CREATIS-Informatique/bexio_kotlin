@@ -1,13 +1,19 @@
-package ch.creatis.bexio.Next
+package ch.creatis.bexio.FirstSecond
+
+
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import ch.creatis.bexio.Next.All.ProjetsActivityNextSaisieTemps
+import ch.creatis.bexio.TachesTemps.Temps.ProjetsActivityNextSaisieTemps
 import ch.creatis.bexio.R
 import kotlinx.android.synthetic.main.activity_taches_next.*
 
+
+
 class TachesActivityNext : AppCompatActivity() {
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +31,7 @@ class TachesActivityNext : AppCompatActivity() {
 
 
     }
+
 
 
 }

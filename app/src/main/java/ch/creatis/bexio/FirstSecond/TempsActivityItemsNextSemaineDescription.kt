@@ -1,4 +1,4 @@
-package ch.creatis.bexio.Next
+package ch.creatis.bexio.FirstSecond
 
 
 
@@ -9,16 +9,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import ch.creatis.bexio.Next.All.ProjetsActivityNextSaisieTaches
 import ch.creatis.bexio.R
 import ch.creatis.bexio.Room.AppDatabase
-import ch.creatis.bexio.Room.Semaines
 import ch.creatis.bexio.Room.Temps
-import ch.creatis.bexio.TempsAdapter
 import kotlinx.android.synthetic.main.activity_temps_items_next_jour.view.*
 import kotlinx.android.synthetic.main.activity_temps_items_next_jour_a.*
 

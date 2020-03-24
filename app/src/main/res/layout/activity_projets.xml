@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF"
-        tools:context=".ProjetsActivity">
+        tools:context=".First.ProjetsActivity">
 
     <TextView
             android:id="@+id/projetLabel"

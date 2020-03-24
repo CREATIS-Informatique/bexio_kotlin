@@ -1,4 +1,4 @@
-package ch.creatis.bexio.Next
+package ch.creatis.bexio.FirstSecond
 
 import android.content.Intent
 import android.net.Uri
