@@ -138,7 +138,15 @@ class TacheActivity : AppCompatActivity() {
 
 //                val place= response.getJSONObject(i)["place"].toString().toInt()
 //                val info= response.getJSONObject(i)["info"].toString()
-//                val contact_id= response.getJSONObject(i)["contact_id"].toString().toInt()
+
+
+
+                val contact_idT = response.getJSONObject(i)["contact_id"].toString()
+                var contact_id = 0
+                if (contact_idT != "null"){ contact_id = response.getJSONObject(i)["contact_id"].toString().toInt() }
+
+
+
 //                val sub_contact_id= response.getJSONObject(i)["sub_contact_id"].toString().toInt()
 //                val project_id= response.getJSONObject(i)["project_id"].toString().toInt()
 //                val entry_id= response.getJSONObject(i)["entry_id"].toString().toInt()
@@ -152,10 +160,13 @@ class TacheActivity : AppCompatActivity() {
 
 
 
-                    val taches = Tache(null,idBexio,user_id,finish_date,subject,1,"1",1,1,1,1,1,1,1,false,1,1,1)
+                    val taches = Tache(null,idBexio,user_id,finish_date,subject,0,"string",contact_id,0,0,0,0,0,0,false,0,0,0)
                     tachesDAO.insert(taches)
 
+
+
                 }
+
 
 
                 numberOfRequestsToMake--
