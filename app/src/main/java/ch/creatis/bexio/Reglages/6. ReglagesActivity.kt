@@ -1,4 +1,4 @@
-package ch.creatis.bexio.First
+package ch.creatis.bexio.Reglages
 
 
 

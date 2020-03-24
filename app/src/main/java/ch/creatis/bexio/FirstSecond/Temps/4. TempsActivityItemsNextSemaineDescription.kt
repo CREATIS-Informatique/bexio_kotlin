@@ -1,4 +1,4 @@
-package ch.creatis.bexio.FirstSecond
+package ch.creatis.bexio.FirstSecond.Temps
 
 
 
@@ -42,7 +42,8 @@ class TempsActivityItemsNextSemaineDescription : AppCompatActivity() {
 
 
         recyclerViewTempsJour.layoutManager = LinearLayoutManager(this)
-        recyclerViewTempsJour.adapter = TempsAdapterNext(tempsList, this)
+        recyclerViewTempsJour.adapter =
+            TempsAdapterNext(tempsList, this)
 
 
 
@@ -59,7 +60,11 @@ class TempsAdapterNext(val items : ArrayList<Temps>, val context: Context) : Rec
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TempsHolderNext {
-        return TempsHolderNext(LayoutInflater.from(context).inflate(R.layout.activity_temps_items_next_jour, parent, false))
+        return TempsHolderNext(
+            LayoutInflater.from(
+                context
+            ).inflate(R.layout.activity_temps_items_next_jour, parent, false)
+        )
     }
 
 

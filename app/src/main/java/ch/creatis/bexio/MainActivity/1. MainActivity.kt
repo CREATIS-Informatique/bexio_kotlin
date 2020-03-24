@@ -1,4 +1,4 @@
-package ch.creatis.bexio.First
+package ch.creatis.bexio.MainActivity
 
 
 
@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import android.os.Build
+import ch.creatis.bexio.First.*
 import ch.creatis.bexio.R
+import ch.creatis.bexio.Reglages.ReglagesActivity
 import kotlinx.android.synthetic.main.activity_a_main.*
 
 

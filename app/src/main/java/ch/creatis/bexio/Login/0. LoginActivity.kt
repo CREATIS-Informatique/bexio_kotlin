@@ -1,4 +1,4 @@
-package ch.creatis.bexio.First
+package ch.creatis.bexio.Login
 
 
 
@@ -10,6 +10,7 @@ import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.room.Room
+import ch.creatis.bexio.MainActivity.MainActivity
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest

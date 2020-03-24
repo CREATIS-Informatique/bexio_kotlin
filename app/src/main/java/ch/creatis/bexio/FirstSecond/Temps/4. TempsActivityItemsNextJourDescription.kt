@@ -1,4 +1,4 @@
-package ch.creatis.bexio.FirstSecond
+package ch.creatis.bexio.FirstSecond.Temps
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
