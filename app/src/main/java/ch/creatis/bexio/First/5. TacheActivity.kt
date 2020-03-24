@@ -54,8 +54,7 @@ class TacheActivity : AppCompatActivity() {
 
 
         recyclerViewTaches.layoutManager = LinearLayoutManager(this)
-        recyclerViewTaches.adapter =
-            TachesAdapter(tachesList, this)
+        recyclerViewTaches.adapter = TachesAdapter(tachesList, this)
 
 
 
@@ -148,7 +147,9 @@ class TacheActivity : AppCompatActivity() {
 
 
 //                val sub_contact_id= response.getJSONObject(i)["sub_contact_id"].toString().toInt()
-//                val project_id= response.getJSONObject(i)["project_id"].toString().toInt()
+                    val project_idT = response.getJSONObject(i)["project_id"].toString()
+                    var project_id = 0
+                    if (project_idT != "null"){ project_id = response.getJSONObject(i)["project_id"].toString().toInt() }
 //                val entry_id= response.getJSONObject(i)["entry_id"].toString().toInt()
 //                val module_id= response.getJSONObject(i)["module_id"].toString().toInt()
 //                val todo_status_id= response.getJSONObject(i)["todo_status_id"].toString().toInt()
@@ -160,7 +161,7 @@ class TacheActivity : AppCompatActivity() {
 
 
 
-                    val taches = Tache(null,idBexio,user_id,finish_date,subject,0,"string",contact_id,0,0,0,0,0,0,false,0,0,0)
+                    val taches = Tache(null,idBexio,user_id,finish_date,subject,0,"string",contact_id,0,project_id,0,0,0,0,false,0,0,0)
                     tachesDAO.insert(taches)
 
 
@@ -271,6 +272,7 @@ class TachesAdapter(val items : ArrayList<Tache>, val context: Context) : Recycl
         val tache= items[position]
         holder.tacheView.setOnClickListener {
             val intent = Intent(context, TachesActivityNext::class.java)
+            intent.putExtra("project_id", tache.project_id)
             intent.putExtra("user_id", tache.user_id)
             intent.putExtra("finish_date", tache.finish_date)
             intent.putExtra("subject", tache.subject)

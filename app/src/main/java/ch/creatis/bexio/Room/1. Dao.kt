@@ -52,6 +52,11 @@ interface ContactDAO {
     fun getItems(): List<Contact>
 
 
+    @Query("SELECT * FROM contacts WHERE idBexio == :idBexio")
+    // Retourne une classe et non une liste de classe comme d'habitude
+    fun getItemsByIdbexio(idBexio: Int): Contact
+
+
 
     // @Query("SELECT * FROM contacts WHERE type == :type ORDER BY nom")
     // fun getItemsByType(type: String): List<Contact>
@@ -79,6 +84,12 @@ interface ProjetDAO {
 
     @Query("SELECT * FROM projets ORDER BY name DESC")
     fun getItems(): List<Projet>
+
+
+
+    @Query("SELECT * FROM projets WHERE idBexio == :idBexio")
+    // Retourne une classe et non une liste de classe comme d'habitude
+    fun getItemsByIdbexio(idBexio: Int): Projet
 
 
 
@@ -190,6 +201,10 @@ interface USersDAO {
     @Query("SELECT * FROM users ORDER BY idBexio DESC")
     fun getItems(): List<User>
 
+
+    @Query("SELECT * FROM users WHERE idBexio == :idBexio")
+    // Retourne une classe et non une liste de classe comme d'habitude
+    fun getItemsByIdbexio(idBexio: Int): User
 
 
     // @Query("SELECT * FROM taches WHERE type == :type ORDER BY nom")
