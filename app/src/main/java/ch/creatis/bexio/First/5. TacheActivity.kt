@@ -268,11 +268,14 @@ class TachesAdapter(val items : ArrayList<Tache>, val context: Context) : Recycl
 
 
 
+        val tache= items[position]
         holder.tacheView.setOnClickListener {
-
             val intent = Intent(context, TachesActivityNext::class.java)
+            intent.putExtra("user_id", tache.user_id)
+            intent.putExtra("finish_date", tache.finish_date)
+            intent.putExtra("subject", tache.subject)
+            intent.putExtra("contact_id", tache.contact_id)
             context.startActivity(intent)
-
         }
 
 

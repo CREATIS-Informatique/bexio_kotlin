@@ -21,6 +21,21 @@ class TachesActivityNext : AppCompatActivity() {
 
 
 
+        var user_id = intent.getStringExtra("user_id")
+        var finish_date = intent.getStringExtra("finish_date")
+        var subject = intent.getStringExtra("subject")
+        var contact_id = intent.getIntExtra("contact_id",0)
+
+
+
+        projectName.text = "Test"
+        tacheName.text = subject
+        dureeName.text = finish_date
+        interlocuteurName.text = user_id
+        contactName.text = contact_id.toString()
+
+
+
         saisirTempsTache.setOnClickListener {
 
             val intent = Intent(this, ProjetsActivityNextSaisieTemps::class.java)
