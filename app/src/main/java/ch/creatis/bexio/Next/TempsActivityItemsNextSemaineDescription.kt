@@ -23,7 +23,8 @@ import kotlinx.android.synthetic.main.activity_temps_items_next_jour.view.*
 import kotlinx.android.synthetic.main.activity_temps_items_next_jour_a.*
 
 
-class TempsActivityNext : AppCompatActivity() {
+
+class TempsActivityItemsNextSemaineDescription : AppCompatActivity() {
 
 
 
