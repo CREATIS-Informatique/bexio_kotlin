@@ -647,7 +647,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-                val taches = Tache(null,idBexio,user_id,finish_date,subject,1,"1",1,1,1,1,1,1,1,false,1,1,1)
+                val taches = Tache(null,idBexio,user_id,finish_date,subject,1,"1",1,1,0,1,1,1,1,false,1,1,1)
                 tacheListDatabase.add(taches)
 
             }

@@ -53,11 +53,6 @@ class TacheActivity : AppCompatActivity() {
 
 
 
-        recyclerViewTaches.layoutManager = LinearLayoutManager(this)
-        recyclerViewTaches.adapter = TachesAdapter(tachesList, this)
-
-
-
         // Database
         val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
         val tachesDAO = database.tacheDAO
@@ -65,18 +60,19 @@ class TacheActivity : AppCompatActivity() {
 
 
 
-        // Adapter
-        RefreshRequest()
+        // Rafraîchit la tableView
         recyclerViewTaches.layoutManager = LinearLayoutManager(this)
-        recyclerViewTaches.adapter =
-            TachesAdapter(tachesList, this)
+        recyclerViewTaches.adapter = TachesAdapter(tachesList, this)
+
+
+
+        // Adapter - Fonction interne qui rafraîchit la tableView
+//        RefreshRequest()
 
 
 
         // RefreshView
-        refreshViewTaches.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this,
-            R.color.colorPrimary
-        ))
+        refreshViewTaches.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this, R.color.colorPrimary))
         refreshViewTaches.setColorSchemeColors(Color.WHITE)
         refreshViewTaches.setOnRefreshListener { if(numberOfRequestsToMake == 0){ if (isConnected()) {RefreshRequest()} else { Alerte() } } }
 
@@ -222,6 +218,12 @@ class TacheActivity : AppCompatActivity() {
             val tachesDAO = database.tacheDAO
             tachesList = tachesDAO.getItems() as ArrayList<Tache>
             refreshViewTaches.isRefreshing = false
+
+
+
+            // Très important - Rafraîchit la tableView après la requête
+            recyclerViewTaches.layoutManager = LinearLayoutManager(this)
+            recyclerViewTaches.adapter = TachesAdapter(tachesList, this)
         }
 
     }
@@ -251,25 +253,21 @@ class TachesAdapter(val items : ArrayList<Tache>, val context: Context) : Recycl
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TachesHolder {
-        return TachesHolder(
-            LayoutInflater.from(context).inflate(
-                R.layout.activity_taches_items,
-                parent,
-                false
-            )
-        )
+        return TachesHolder(LayoutInflater.from(context).inflate(R.layout.activity_taches_items, parent, false))
     }
 
 
 
     override fun onBindViewHolder(holder: TachesHolder, position: Int) {
 
+        // Sujet
         holder.viewObjet.text = items[position].subject
+        // Statut
         if(items[position].todo_status_id == 1){ holder.viewStatus.text = "Suspens" }
 
 
 
-        val tache= items[position]
+        var tache= items[position]
         holder.tacheView.setOnClickListener {
             val intent = Intent(context, TachesActivityNext::class.java)
             intent.putExtra("project_id", tache.project_id)
