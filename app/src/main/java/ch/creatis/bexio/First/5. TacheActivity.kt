@@ -281,6 +281,7 @@ class TachesAdapter(val items : ArrayList<Tache>, val context: Context) : Recycl
             intent.putExtra("finish_date", tache.finish_date)
             intent.putExtra("subject", tache.subject)
             intent.putExtra("contact_id", tache.contact_id)
+            intent.putExtra("todo_status_id", tache.todo_status_id)
             context.startActivity(intent)
         }
 

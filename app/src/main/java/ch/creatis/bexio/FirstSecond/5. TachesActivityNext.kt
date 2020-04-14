@@ -30,6 +30,8 @@ class TachesActivityNext : AppCompatActivity() {
         var user_id = intent.getIntExtra("user_id",0)
         var finish_date = intent.getStringExtra("finish_date")
         var contact_id = intent.getIntExtra("contact_id",0)
+        // Reprend directement sa valeur
+        var todo_status_id = intent.getIntExtra("todo_status_id",0)
 
 
 
@@ -63,6 +65,16 @@ class TachesActivityNext : AppCompatActivity() {
 //        interlocuteurName.text = userId.firstname + " " + userId.lastname
         dureeName.text = finish_date
 //        contactName.text = contactId.name_un + " " + contactId.name_deux
+
+
+
+        if(todo_status_id == 1){
+            statutName.text = "En suspens"
+            statutName.setBackgroundResource(R.drawable.taches_activity_items_status_en_suspens)
+        } else if (todo_status_id == 5){
+            statutName.text = "Terminé"
+            statutName.setBackgroundResource(R.drawable.taches_activity_items_status_termine)
+        }
 
 
 
