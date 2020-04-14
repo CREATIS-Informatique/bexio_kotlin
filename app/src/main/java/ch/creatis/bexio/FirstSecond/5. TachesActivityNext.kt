@@ -35,22 +35,24 @@ class TachesActivityNext : AppCompatActivity() {
 
         // --------------------------------------------------- Database
         val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
+        val projetsDAO = database.projetDAO
+        val usersDAO = database.userDAO
+        val contactsDAO = database.contactDAO
 
 
 
         // --------------------------------------------------- Les variables Projet
-        val projetsDAO = database.projetDAO
+
+        // Projet ID
         var projetId = ""
         if (project_id == 0){ projetId = "" } else{
             projetId = projetsDAO.getItemsByIdbexio(project_id).name.toString()
         }
 
         // Users
-        val usersDAO = database.userDAO
         var userId = usersDAO.getItemsByIdbexio(user_id)
 
         // Contacts
-        val contactsDAO = database.contactDAO
         var contactId = contactsDAO.getItemsByIdbexio(contact_id)
 
 

@@ -144,7 +144,7 @@ class TacheActivity : AppCompatActivity() {
                     if (project_idT != "null"){ project_id = response.getJSONObject(i)["project_id"].toString().toInt() }
 //                val entry_id= response.getJSONObject(i)["entry_id"].toString().toInt()
 //                val module_id= response.getJSONObject(i)["module_id"].toString().toInt()
-//                val todo_status_id= response.getJSONObject(i)["todo_status_id"].toString().toInt()
+                val todo_status_id= response.getJSONObject(i)["todo_status_id"].toString().toInt()
 //                val todo_priority_id= response.getJSONObject(i)["todo_priority_id"].toString().toInt()
 //                val has_reminder= response.getJSONObject(i)["has_reminder"].toString().toBoolean()
 //                val remember_type_id= response.getJSONObject(i)["remember_type_id"].toString().toInt()
@@ -153,7 +153,8 @@ class TacheActivity : AppCompatActivity() {
 
 
 
-                    val taches = Tache(null,idBexio,user_id,finish_date,subject,0,"string",contact_id,0,project_id,0,0,0,0,false,0,0,0)
+                    val taches = Tache(null,idBexio,user_id,finish_date,subject,0,"string",contact_id,0,project_id,0,0,todo_status_id,0,false,0,0,0)
+                    println(taches.todo_status_id)
                     tachesDAO.insert(taches)
 
 
@@ -256,10 +257,19 @@ class TachesAdapter(val items : ArrayList<Tache>, val context: Context) : Recycl
 
     override fun onBindViewHolder(holder: TachesHolder, position: Int) {
 
+
+
         // Sujet
         holder.viewObjet.text = items[position].subject
+
         // Statut
-        if(items[position].todo_status_id == 1){ holder.viewStatus.text = "Suspens" }
+        if(items[position].todo_status_id == 1){
+            holder.viewStatus.text = "En suspens"
+            holder.viewStatus.setBackgroundResource(R.drawable.taches_activity_items_status_en_suspens)
+        } else if (items[position].todo_status_id == 5){
+            holder.viewStatus.text = "Terminé"
+            holder.viewStatus.setBackgroundResource(R.drawable.taches_activity_items_status_termine)
+        }
 
 
 

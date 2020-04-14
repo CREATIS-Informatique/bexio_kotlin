@@ -6,8 +6,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@drawable/taches_items_background"
+        android:background="@drawable/taches_activity_items_global_view_background"
         android:orientation="vertical">
+
+    <TextView
+            android:id="@+id/statutLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/reglages_background_button_enregistrer"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="En suspens"
+            android:textColor="@android:color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
             android:id="@+id/objetLabel"
@@ -25,20 +40,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/statutLabel" />
-
-    <TextView
-            android:id="@+id/statutLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/reglages_background_button_enregistrer"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="En suspens"
-            android:textColor="@android:color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

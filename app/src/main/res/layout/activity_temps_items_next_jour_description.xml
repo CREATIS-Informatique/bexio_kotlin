@@ -220,7 +220,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/taches_items_background"
+            android:background="@drawable/taches_activity_items_global_view_background"
             android:text="Modifier"
             app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
