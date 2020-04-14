@@ -624,7 +624,7 @@ class LoginActivity : AppCompatActivity() {
 
             for (i in 0 until response.length()) {
 
-                val idBexio = response.getJSONObject(i)["id"].toString()
+                val idBexio = response.getJSONObject(i)["id"].toString().toInt()
                 val user_id= response.getJSONObject(i)["user_id"].toString().toInt()
                 val finish_date= response.getJSONObject(i)["finish_date"].toString()
                 val subject= response.getJSONObject(i)["subject"].toString()

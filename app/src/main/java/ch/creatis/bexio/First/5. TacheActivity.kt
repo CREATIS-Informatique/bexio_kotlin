@@ -120,7 +120,7 @@ class TacheActivity : AppCompatActivity() {
 
                 for (i in 0 until response.length()) {
 
-                    val idBexio = response.getJSONObject(i)["id"].toString()
+                    val idBexio = response.getJSONObject(i)["id"].toString().toInt()
                     val user_id= response.getJSONObject(i)["user_id"].toString().toInt()
                     val finish_date= response.getJSONObject(i)["finish_date"].toString()
                     val subject= response.getJSONObject(i)["subject"].toString()
@@ -276,6 +276,7 @@ class TachesAdapter(val items : ArrayList<Tache>, val context: Context) : Recycl
         var tache= items[position]
         holder.tacheView.setOnClickListener {
             val intent = Intent(context, TachesActivityNext::class.java)
+            intent.putExtra("idBexio", tache.idBexio)
             intent.putExtra("project_id", tache.project_id)
             intent.putExtra("user_id", tache.user_id)
             intent.putExtra("finish_date", tache.finish_date)

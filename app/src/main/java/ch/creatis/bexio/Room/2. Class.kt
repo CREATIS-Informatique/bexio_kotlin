@@ -130,7 +130,7 @@ data class Semaines(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var numer
 
 
 @Entity(tableName = "taches")
-data class Tache(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var idBexio: String?, var user_id:Int?, var finish_date:String?, var subject:String?, var place:Int?, var info:String?, var contact_id:Int?, var sub_contact_id:Int?, var project_id: Int?, var entry_id:Int?, var module_id:Int?, var todo_status_id:Int?, var todo_priority_id: Int?, var has_reminder: Boolean?, var remember_type_id: Int?, var remember_time_id:Int?, var communication_kind_id:Int?){
+data class Tache(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var idBexio: Int?, var user_id:Int?, var finish_date:String?, var subject:String?, var place:Int?, var info:String?, var contact_id:Int?, var sub_contact_id:Int?, var project_id: Int?, var entry_id:Int?, var module_id:Int?, var todo_status_id:Int?, var todo_priority_id: Int?, var has_reminder: Boolean?, var remember_type_id: Int?, var remember_time_id:Int?, var communication_kind_id:Int?){
 
 
 
