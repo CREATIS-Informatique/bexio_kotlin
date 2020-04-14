@@ -22,11 +22,9 @@ class TachesActivityNext : AppCompatActivity() {
         setContentView(R.layout.activity_taches_next)
 
 
+        // --------------------------------------------------- Intent
 
         // Chaque DAO a une méthode qui lui permet de retrouver selon  l'id fournit, à quelle objet il appartient
-
-
-
         var project_id = intent.getIntExtra("project_id",0)
         var subject = intent.getStringExtra("subject")
         var user_id = intent.getIntExtra("user_id",0)
@@ -35,12 +33,12 @@ class TachesActivityNext : AppCompatActivity() {
 
 
 
-        // Init database globale
+        // --------------------------------------------------- Database
         val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
 
 
 
-        // Projets
+        // --------------------------------------------------- Les variables Projet
         val projetsDAO = database.projetDAO
         var projetId = ""
         if (project_id == 0){ projetId = "" } else{
@@ -57,6 +55,7 @@ class TachesActivityNext : AppCompatActivity() {
 
 
 
+        // --------------------------------------------------- Les labels
         projectName.text = projetId
         tacheName.text = subject
 //        interlocuteurName.text = userId.firstname + " " + userId.lastname
@@ -65,9 +64,21 @@ class TachesActivityNext : AppCompatActivity() {
 
 
 
+        // --------------------------------------------------- Les boutons
+
+        // Saisir un temps
         saisirTempsTache.setOnClickListener {
             val intent = Intent(this, ProjetsActivityNextSaisieTemps::class.java)
             startActivity(intent)
+        }
+
+
+
+        // Tâche effectuée
+        tacheEffectue.setOnClickListener {
+
+
+
         }
 
 

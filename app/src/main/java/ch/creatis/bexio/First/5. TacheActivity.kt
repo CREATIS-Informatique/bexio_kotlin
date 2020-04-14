@@ -60,20 +60,16 @@ class TacheActivity : AppCompatActivity() {
 
 
 
-        // Rafraîchit la tableView
+        // TableView avec les donnée de la base de données
         recyclerViewTaches.layoutManager = LinearLayoutManager(this)
         recyclerViewTaches.adapter = TachesAdapter(tachesList, this)
-
-
-
-        // Adapter - Fonction interne qui rafraîchit la tableView
-//        RefreshRequest()
 
 
 
         // RefreshView
         refreshViewTaches.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this, R.color.colorPrimary))
         refreshViewTaches.setColorSchemeColors(Color.WHITE)
+        // Met à jour la base de donnée quand l'utilisateur Swipe !
         refreshViewTaches.setOnRefreshListener { if(numberOfRequestsToMake == 0){ if (isConnected()) {RefreshRequest()} else { Alerte() } } }
 
 
