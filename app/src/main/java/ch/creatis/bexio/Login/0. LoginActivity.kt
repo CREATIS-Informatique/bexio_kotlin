@@ -136,6 +136,8 @@ class LoginActivity : AppCompatActivity() {
     // 2
     fun getAccessTokenFirstTime(){
 
+
+
         val sharedPreferences = getSharedPreferences("Bexio", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         var codeToken = sharedPreferences.getString("CODETOKEN", "")
@@ -146,12 +148,18 @@ class LoginActivity : AppCompatActivity() {
         val queue = Volley.newRequestQueue(this)
         val stringRequest = StringRequest(Request.Method.POST, url, Response.Listener<String> { response ->
 
+
+
+            // Cache la WebView
+            webView.visibility = View.INVISIBLE
+
+
+
             var responseJsonObj = JSONObject(response)
-            println(response)
+
 
             // -------------------------------------------------------------------------------------
 
-            webView.visibility = View.INVISIBLE
             editor.putString("ACCESSTOKEN", responseJsonObj.getString("access_token"))
             editor.putString("REFRESHTOKEN", responseJsonObj.getString("refresh_token"))
             editor.putString("IDTOKEN", responseJsonObj.getString("id_token"))
@@ -196,7 +204,6 @@ class LoginActivity : AppCompatActivity() {
             // -------------------------------------------------------------------------------------
 
             var responseJsonObj = JSONObject(response)
-            println(response)
             editor.putString("ACCESSTOKEN", responseJsonObj.getString("access_token"))
             editor.putString("REFRESHTOKEN", responseJsonObj.getString("refresh_token"))
             editor.putString("IDTOKEN", responseJsonObj.getString("id_token"))

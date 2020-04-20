@@ -94,7 +94,7 @@ class TempsActivity : AppCompatActivity() {
             // Selected Year View
             selectedYear.text = Calendar.getInstance().get(Calendar.YEAR).toString()
 
-            
+
 
         }
 
