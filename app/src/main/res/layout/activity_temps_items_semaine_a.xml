@@ -23,7 +23,7 @@
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/refreshViewTemps"
             app:layout_constraintEnd_toStartOf="@+id/addTimeButton"
-            app:layout_constraintStart_toEndOf="@+id/textView32"
+            app:layout_constraintStart_toEndOf="@+id/selectedYear"
             app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -64,14 +64,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-            android:id="@+id/textView32"
+            android:id="@+id/selectedYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
-            android:text="2019"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/refreshViewTemps"
             app:layout_constraintStart_toStartOf="parent"

@@ -3,6 +3,7 @@ package ch.creatis.bexio.First
 
 
 import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -82,13 +83,18 @@ class TempsActivity : AppCompatActivity() {
 
 
 
-            // addTimeButton
+            // add Time Button
             addTimeButton.setOnClickListener {
                 val intent = Intent(this, ProjetsActivityNextSaisieTemps::class.java)
                 startActivity(intent)
             }
 
 
+
+            // Selected Year View
+            selectedYear.text = Calendar.getInstance().get(Calendar.YEAR).toString()
+
+            
 
         }
 
@@ -221,7 +227,9 @@ class TempsActivity : AppCompatActivity() {
                     // Temps
                     val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
                     val tempsDAO = database.tempsDAO
-                    val tempsList = tempsDAO.getItems("2019") as ArrayList<Temps>
+                    // Récupère l'année en cours
+                    val date = Calendar.getInstance().get(Calendar.YEAR).toString()
+                    val tempsList = tempsDAO.getItems(date) as ArrayList<Temps>
 
 
 
