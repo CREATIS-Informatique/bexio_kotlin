@@ -188,7 +188,7 @@ class TempsActivity : AppCompatActivity() {
 
 
                         // Tri selon l'utilisateur
-                        if(response.getJSONObject(i)["user_id"] == 1){
+                        if(response.getJSONObject(i)["user_id"] == 3){
                             tempsDAO.insert(temps)
                         }
 
@@ -265,7 +265,7 @@ class TempsActivity : AppCompatActivity() {
 
 
                         // Date fin
-                        val sdf2 = SimpleDateFormat("dd.MM")
+                        val sdf2 = SimpleDateFormat("dd.MM.yy")
                         val cal2 = Calendar.getInstance()
                         cal2.set(Calendar.WEEK_OF_YEAR, i)
                         cal2.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY)

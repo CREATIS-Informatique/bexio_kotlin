@@ -129,6 +129,58 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -150,12 +202,8 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-            // Cache la WebView
-            webView.visibility = View.INVISIBLE
-
-
-
             var responseJsonObj = JSONObject(response)
+
 
 
             // -------------------------------------------------------------------------------------
@@ -165,6 +213,11 @@ class LoginActivity : AppCompatActivity() {
             editor.putString("IDTOKEN", responseJsonObj.getString("id_token"))
             editor.commit()
             makeAllDataRequest()
+
+
+
+            // Cache la WebView
+            webView.visibility = View.INVISIBLE
 
             // -------------------------------------------------------------------------------------
 
@@ -770,6 +823,8 @@ class LoginActivity : AppCompatActivity() {
         val queueUser = Volley.newRequestQueue(this)
         val stringRequestUser = object : JsonArrayRequest(Method.GET, urlUser, JSONArray(), Response.Listener<JSONArray> { response ->
 
+
+
             for (i in 0 until response.length()) {
                 val idBexio= response.getJSONObject(i)["id"].toString().toInt()
                 val salutation_type= response.getJSONObject(i)["salutation_type"].toString()
@@ -905,6 +960,41 @@ class LoginActivity : AppCompatActivity() {
 
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
