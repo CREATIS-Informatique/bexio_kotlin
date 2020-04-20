@@ -28,6 +28,7 @@ import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_temps_items_semaine_a.*
 import kotlinx.android.synthetic.main.activity_temps_items_semaine.view.*
 import org.json.JSONArray
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -117,6 +118,7 @@ class TempsActivity : AppCompatActivity() {
             // -----------------------------------------------------------------------------------------
 
 
+
             val url = "https://api.bexio.com/2.0/timesheet"
             val queue = Volley.newRequestQueue(this)
             val stringRequest = object : JsonArrayRequest(Method.GET, url, JSONArray(), Response.Listener<JSONArray> { response ->
@@ -130,21 +132,52 @@ class TempsActivity : AppCompatActivity() {
                     for (i in 0 until response.length()) {
 
 
+
                         val idBexio= response.getJSONObject(i)["id"].toString()
-                        val date= response.getJSONObject(i)["date"].toString()
                         var duration = response.getJSONObject(i)["duration"].toString()
                         if (duration.length == 4){ duration = "0$duration"}
-                        // Ajout du numéro de la semaine
-                        val dateConverter = SimpleDateFormat("yyyy-MM-dd").parse(date)
+
+
+
+                        // ------------------------------ Date -------------------------------------
+                        // Format d'entrée
+                        var inputFormat:DateFormat = SimpleDateFormat("yyyy-MM-dd")
+                        // Format de sortie
+                        var outputFormat: DateFormat = SimpleDateFormat("dd.MM.yyyy")
+                        // Converter
+                        var convert = inputFormat.parse(response.getJSONObject(i)["date"].toString())
+
+
+
+                        // Ajout de la date
+                        var date = outputFormat.format(convert)
+
+
+
+                        // --------------------------- Init de l'objet ----------------------------
+                        val dateConverter = SimpleDateFormat("dd.MM.yyyy").parse(date)
                         val calendar = Calendar.getInstance()
                         calendar.time = dateConverter
+
+
+
+                        // Ajout de la semaine
                         val semaine = calendar.get(Calendar.WEEK_OF_YEAR).toString()
+
+
+
+                        // Ajout de l'année
+                        val annee = calendar.get(Calendar.YEAR).toString()
+
+
+
+                        // Ajoute du texte
                         var text = response.getJSONObject(i)["text"].toString()
 
 
 
                         // Création de la classe
-                        val temps = Temps(null, idBexio,date, duration, semaine,text)
+                        val temps = Temps(null, idBexio, date, duration, semaine, annee, text)
 
 
 
@@ -178,6 +211,7 @@ class TempsActivity : AppCompatActivity() {
                     // ------------------------------------------ Class Semaines -----------------------------------------------
 
 
+
                     // Semaines
                     val semaineDAO = database.semaineDAO
                     semaineDAO.delete()
@@ -187,7 +221,7 @@ class TempsActivity : AppCompatActivity() {
                     // Temps
                     val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
                     val tempsDAO = database.tempsDAO
-                    val tempsList = tempsDAO.getItems() as ArrayList<Temps>
+                    val tempsList = tempsDAO.getItems("2019") as ArrayList<Temps>
 
 
 
@@ -214,7 +248,7 @@ class TempsActivity : AppCompatActivity() {
 
 
                         // Date ddébut
-                        val sdf = SimpleDateFormat("dd.MM.yy")
+                        val sdf = SimpleDateFormat("dd.MM")
                         val cal = Calendar.getInstance()
                         cal.set(Calendar.WEEK_OF_YEAR, i)
                         cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
@@ -223,7 +257,7 @@ class TempsActivity : AppCompatActivity() {
 
 
                         // Date fin
-                        val sdf2 = SimpleDateFormat("dd.MM.yy")
+                        val sdf2 = SimpleDateFormat("dd.MM")
                         val cal2 = Calendar.getInstance()
                         cal2.set(Calendar.WEEK_OF_YEAR, i)
                         cal2.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY)

@@ -117,8 +117,9 @@ interface TempsDAO {
 
 
 
-    @Query("SELECT * FROM temps ORDER BY idBexio DESC")
-    fun getItems(): List<Temps>
+    @Query("SELECT * FROM temps WHERE annee == :annee ORDER BY idBexio DESC ")
+    fun getItems(annee: String): List<Temps>
+
 
 
     @Query("SELECT * FROM temps WHERE semaine == :numero")

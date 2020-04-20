@@ -711,7 +711,7 @@ class LoginActivity : AppCompatActivity() {
 
 
                 // Création de la classe
-                val temps = Temps(null, idBexio,date, duration, semaine,text)
+                val temps = Temps(null, idBexio,date, duration, semaine, "2020",text)
 
                 // Tri selon l'utilisateur
                 if(response.getJSONObject(i)["user_id"] == 1){ tempsListDatabase.add(temps)}
