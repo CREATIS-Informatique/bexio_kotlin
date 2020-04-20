@@ -39,9 +39,9 @@ class LoginActivity : AppCompatActivity() {
     var activiteListDatabase = mutableListOf<Activite>()
     var contactListDatabase = mutableListOf<Contact>()
     var projetListDatabase = mutableListOf<Projet>()
-    var userListDatabase = mutableListOf<User>()
     var tacheListDatabase= mutableListOf<Tache>()
     var tempsListDatabase = mutableListOf<Temps>()
+    var userListDatabase = mutableListOf<User>()
 
 
 
@@ -558,71 +558,6 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-        val urlUser = "https://api.bexio.com/3.0/users"
-        val queueUser = Volley.newRequestQueue(this)
-        val stringRequestUser = object : JsonArrayRequest(Method.GET, urlUser, JSONArray(), Response.Listener<JSONArray> { response ->
-
-            for (i in 0 until response.length()) {
-                val idBexio= response.getJSONObject(i)["id"].toString().toInt()
-                val salutation_type= response.getJSONObject(i)["salutation_type"].toString()
-                val firstname= response.getJSONObject(i)["firstname"].toString()
-                val lastname= response.getJSONObject(i)["lastname"].toString()
-                val email= response.getJSONObject(i)["email"].toString()
-
-
-
-                var is_superadminCheck = false
-                var is_accountantCheck = false
-//                val is_superadmin= response.getJSONObject(i)["is_superadmin"].toString()
-//                val is_accountant = response.getJSONObject(i)["is_accountant"].toString()
-//                if (is_superadmin != ""){ is_superadminCheck = is_superadmin.toBoolean() }
-//                if (is_accountant != ""){ is_accountantCheck = is_accountant.toBoolean() }
-
-
-
-                val user = User(null, idBexio,salutation_type, firstname,lastname,email,is_superadminCheck,is_accountantCheck)
-                userListDatabase.add(user)
-
-
-
-            }
-
-
-            numberOfRequestsToMake--
-            if (numberOfRequestsToMake == 0) { requestEndInternet() }
-
-
-
-        }, Response.ErrorListener {
-
-
-            numberOfRequestsToMake--
-            hasRequestFailed = true
-            if (numberOfRequestsToMake == 0) { requestEndInternet() }
-
-
-        })
-
-        {
-            override fun getHeaders(): MutableMap<String, String> {
-                val headers = HashMap<String, String>()
-                headers["Accept"] = "application/json"
-                headers["Authorization"] = "Bearer $accessToken"
-                return headers
-            }
-        }
-
-
-
-        queueUser.add(stringRequestUser)
-        numberOfRequestsToMake++
-
-
-
-        // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
         val urlTache = "https://api.bexio.com/2.0/task"
         val queueTache = Volley.newRequestQueue(this)
         val stringRequestTache = object : JsonArrayRequest(Method.GET, urlTache, JSONArray(), Response.Listener<JSONArray> { response ->
@@ -729,22 +664,6 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             // ------------------------------------------ Class Semaines -----------------------------------------------
 
 
@@ -843,6 +762,71 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+        // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+        val urlUser = "https://api.bexio.com/3.0/users"
+        val queueUser = Volley.newRequestQueue(this)
+        val stringRequestUser = object : JsonArrayRequest(Method.GET, urlUser, JSONArray(), Response.Listener<JSONArray> { response ->
+
+            for (i in 0 until response.length()) {
+                val idBexio= response.getJSONObject(i)["id"].toString().toInt()
+                val salutation_type= response.getJSONObject(i)["salutation_type"].toString()
+                val firstname= response.getJSONObject(i)["firstname"].toString()
+                val lastname= response.getJSONObject(i)["lastname"].toString()
+                val email= response.getJSONObject(i)["email"].toString()
+
+
+
+                var is_superadminCheck = false
+                var is_accountantCheck = false
+//                val is_superadmin= response.getJSONObject(i)["is_superadmin"].toString()
+//                val is_accountant = response.getJSONObject(i)["is_accountant"].toString()
+//                if (is_superadmin != ""){ is_superadminCheck = is_superadmin.toBoolean() }
+//                if (is_accountant != ""){ is_accountantCheck = is_accountant.toBoolean() }
+
+
+
+                val user = User(null, idBexio,salutation_type, firstname,lastname,email,is_superadminCheck,is_accountantCheck)
+                userListDatabase.add(user)
+
+
+
+            }
+
+
+            numberOfRequestsToMake--
+            if (numberOfRequestsToMake == 0) { requestEndInternet() }
+
+
+
+        }, Response.ErrorListener {
+
+
+            numberOfRequestsToMake--
+            hasRequestFailed = true
+            if (numberOfRequestsToMake == 0) { requestEndInternet() }
+
+
+        })
+
+        {
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Accept"] = "application/json"
+                headers["Authorization"] = "Bearer $accessToken"
+                return headers
+            }
+        }
+
+
+
+        queueUser.add(stringRequestUser)
+        numberOfRequestsToMake++
+
+
+
     }
 
 
@@ -895,12 +879,6 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-        val userDAO = database.userDAO
-        userDAO.delete()
-        for (user in userListDatabase){userDAO.insert(user)}
-
-
-
         val tacheDAO = database.tacheDAO
         tacheDAO.delete()
         for (tache in tacheListDatabase){tacheDAO.insert(tache)}
@@ -910,6 +888,12 @@ class LoginActivity : AppCompatActivity() {
         val tempsDao = database.tempsDAO
         tempsDao.delete()
         for (temps in tempsListDatabase){tempsDao.insert(temps)}
+
+
+
+        val userDAO = database.userDAO
+        userDAO.delete()
+        for (user in userListDatabase){userDAO.insert(user)}
 
         // -----------------------------------------------------------------------------------------
 
