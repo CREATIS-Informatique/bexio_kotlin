@@ -60,7 +60,12 @@ class TacheActivity : AppCompatActivity() {
 
 
 
-        // TableView avec les donnée de la base de données
+        // Très important - Fait une requête
+        RefreshRequest()
+
+
+
+        // Recycler View
         recyclerViewTaches.layoutManager = LinearLayoutManager(this)
         recyclerViewTaches.adapter = TachesAdapter(tachesList, this)
 

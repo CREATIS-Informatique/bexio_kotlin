@@ -67,8 +67,9 @@ class ContactsActivity : AppCompatActivity() {
 
 
 
-        // Adapter
+        // Très important - Fait une requête
         RefreshRequest()
+        // Recycler View
         recyclerViewContacts.layoutManager = LinearLayoutManager(this)
             mAdapter = ContactsAdapter(contactList, this)
             recyclerViewContacts.adapter = mAdapter
@@ -76,9 +77,7 @@ class ContactsActivity : AppCompatActivity() {
 
 
         // RefreshView
-        refreshViewContacts.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this,
-            R.color.colorPrimary
-        ))
+        refreshViewContacts.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this, R.color.colorPrimary))
         refreshViewContacts.setColorSchemeColors(Color.WHITE)
         refreshViewContacts.setOnRefreshListener { if(numberOfRequestsToMake == 0){ if (isConnected()) {RefreshRequest()} else { Alerte() } } }
 
@@ -278,6 +277,16 @@ class ContactsActivity : AppCompatActivity() {
                 val contactDAO = database.contactDAO
                 contactList = contactDAO.getItems() as ArrayList<Contact>
                 refreshViewContacts.isRefreshing = false
+
+
+
+                // Très important - Rafraîchit la tableView après la requête
+                recyclerViewContacts.layoutManager = LinearLayoutManager(this)
+                mAdapter = ContactsAdapter(contactList, this)
+                recyclerViewContacts.adapter = mAdapter
+
+
+
             }
 
         }

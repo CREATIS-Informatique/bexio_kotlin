@@ -66,18 +66,19 @@ class TempsActivity : AppCompatActivity() {
 
 
 
-            // Adapter
+            // Très important - Fait une requête
             RefreshRequest()
+
+
+
+            // Recycler View
             recyclerViewTemps.layoutManager = LinearLayoutManager(this)
-            recyclerViewTemps.adapter =
-                TempsAdapter(semaineList, this)
+            recyclerViewTemps.adapter = TempsAdapter(semaineList, this)
 
 
 
             // RefreshView
-            refreshViewTemps.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this,
-                R.color.colorPrimary
-            ))
+            refreshViewTemps.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this, R.color.colorPrimary))
             refreshViewTemps.setColorSchemeColors(Color.WHITE)
             refreshViewTemps.setOnRefreshListener { if(numberOfRequestsToMake == 0){ if (isConnected()) {RefreshRequest()} else { Alerte() } } }
 
@@ -369,6 +370,12 @@ class TempsActivity : AppCompatActivity() {
             val semaineDAO = database.semaineDAO
             semaineList = semaineDAO.getItems() as ArrayList<Semaines>
             refreshViewTemps.isRefreshing = false
+
+
+
+            // Très important - Rafraîchit la tableView après la requête
+            recyclerViewTemps.layoutManager = LinearLayoutManager(this)
+            recyclerViewTemps.adapter = TempsAdapter(semaineList, this)
         }
 
     }

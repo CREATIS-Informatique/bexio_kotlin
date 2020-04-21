@@ -62,18 +62,19 @@ class ProjetsActivity : AppCompatActivity() {
 
 
 
-        // Adapter
+        // Très important - Fait une requête
         RefreshRequest()
+
+
+
+        // Adapter
         recyclerViewProjets.layoutManager = LinearLayoutManager(this)
-        recyclerViewProjets.adapter =
-            ProjetsAdapter(projectList, this)
+        recyclerViewProjets.adapter = ProjetsAdapter(projectList, this)
 
 
 
         // RefreshView
-        refreshViewProjets.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this,
-            R.color.colorPrimary
-        ))
+        refreshViewProjets.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this, R.color.colorPrimary))
         refreshViewProjets.setColorSchemeColors(Color.WHITE)
         refreshViewProjets.setOnRefreshListener { if(numberOfRequestsToMake == 0){ if (isConnected()) {RefreshRequest()} else { Alerte() } } }
 
@@ -222,6 +223,12 @@ class ProjetsActivity : AppCompatActivity() {
             val projectDAO = database.projetDAO
             projectList = projectDAO.getItems() as ArrayList<Projet>
             refreshViewProjets.isRefreshing = false
+
+
+
+            // Très important - Rafraîchit la tableView après la requête
+            recyclerViewProjets.layoutManager = LinearLayoutManager(this)
+            recyclerViewProjets.adapter = ProjetsAdapter(projectList, this)
         }
 
     }
@@ -301,30 +308,6 @@ class ProjetsAdapter(val items : ArrayList<Projet>, val context: Context) : Recy
             holder.projetStatusLabel.text = "Archivé"
             holder.projetStatusLabel.setBackgroundResource(R.drawable.projets_activity_items_status_archive)
         }
-
-//        if (items[position].pr_state_id == 1){
-//            holder.endDate?.text = "Actif"
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//                holder.endDate.background = ContextCompat.getDrawable(context,
-//                    R.drawable.projets_items_background_actif
-//                )
-//            } else {
-//                holder.endDate.setBackgroundDrawable(ContextCompat.getDrawable(context,
-//                    R.drawable.projets_items_background_actif
-//                ))
-//            }
-//        } else if(items[position].pr_state_id == 2){
-//            holder.endDate?.text = "Ouvert"
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//                holder.endDate.background = ContextCompat.getDrawable(context,
-//                    R.drawable.projets_items_background_ouvert
-//                )
-//            } else {
-//                holder.endDate.setBackgroundDrawable(ContextCompat.getDrawable(context,
-//                    R.drawable.projets_items_background_ouvert
-//                ))
-//            }
-//        }
 
 
 
