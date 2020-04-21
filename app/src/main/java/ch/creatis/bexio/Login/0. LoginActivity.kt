@@ -80,13 +80,14 @@ import kotlin.collections.HashMap
 
 
 
-        // Première installation de l'application si le Refresh Token n'est pas vide alors il requête avec le Refresh Token
+        // Première installation
         if(refreshToken == ""){
-
             webViewIsVisible() }
 
-        else {
 
+
+        // Régulier
+        else {
             getAccessTokenAllTime()
 
         }
@@ -377,15 +378,11 @@ import kotlin.collections.HashMap
             editor.putString("companyUserIdDecode", companyUserIdDecode)
             editor.commit()
 
-            // -------------------------------------------------------------------------------------
 
 
-
-            makeAllDataRequest()
-
-
-
-            // -------------------------------------------------------------------------------------
+            // Connexion régulière
+            val intentAct = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intentAct)
 
 
 
