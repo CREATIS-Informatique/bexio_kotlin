@@ -35,10 +35,8 @@ class MainActivity : AppCompatActivity() {
 
         // Prénom et nom
         val sharedPreferences = getSharedPreferences("Bexio", Context.MODE_PRIVATE)
-        var givenName = sharedPreferences.getString("given_name", "")
-        var family_name = sharedPreferences.getString("family_name", "")
-        prenomTextView.text = givenName
-        nomTextView.text = family_name
+        var sub = sharedPreferences.getString("sub", "")
+        subTextView.text = sub
 
 
 

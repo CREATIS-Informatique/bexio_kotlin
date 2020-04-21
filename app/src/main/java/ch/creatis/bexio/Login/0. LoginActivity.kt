@@ -21,6 +21,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import ch.creatis.bexio.R
 import ch.creatis.bexio.Room.*
+import com.auth0.android.jwt.JWT
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
@@ -265,16 +266,41 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-            var responseJsonObj = JSONObject(response)
-
-
-
             // -------------------------------------------------------------------------------------
 
+            var responseJsonObj = JSONObject(response)
             editor.putString("ACCESSTOKEN", responseJsonObj.getString("access_token"))
             editor.putString("REFRESHTOKEN", responseJsonObj.getString("refresh_token"))
             editor.putString("IDTOKEN", responseJsonObj.getString("id_token"))
             editor.commit()
+
+            // -------------------------------------------------------------------------------------
+
+
+
+            // Décodage du JWT
+
+            var acessToken = sharedPreferences.getString("ACCESSTOKEN", "")
+            var jwtDecode = JWT(acessToken!!)
+
+
+
+            var sub = jwtDecode.getClaim("sub")
+            var subDecode = sub.asString()
+
+            var companyUserId = jwtDecode.getClaim("company_user_id")
+            var companyUserIdDecode = companyUserId.asString()
+
+
+
+            editor.putString("subDecode", subDecode)
+            editor.putString("companyUserIdDecode", companyUserIdDecode)
+            editor.commit()
+
+            // -------------------------------------------------------------------------------------
+
+
+
             makeAllDataRequest()
 
 
@@ -328,13 +354,36 @@ class LoginActivity : AppCompatActivity() {
             editor.putString("IDTOKEN", responseJsonObj.getString("id_token"))
             editor.commit()
 
+            // -------------------------------------------------------------------------------------
 
 
-            userInfos()
+
+            // Décodage du JWT
+
+            var acessToken = sharedPreferences.getString("ACCESSTOKEN", "")
+            var jwtDecode = JWT(acessToken!!)
+
+
+
+            var sub = jwtDecode.getClaim("sub")
+            var subDecode = sub.asString()
+
+            var companyUserId = jwtDecode.getClaim("company_user_id")
+            var companyUserIdDecode = companyUserId.asString()
+
+
+
+            editor.putString("subDecode", subDecode)
+            editor.putString("companyUserIdDecode", companyUserIdDecode)
+            editor.commit()
+
+            // -------------------------------------------------------------------------------------
 
 
 
             makeAllDataRequest()
+
+
 
             // -------------------------------------------------------------------------------------
 
@@ -352,67 +401,62 @@ class LoginActivity : AppCompatActivity() {
 
     // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+    // Inutile mais si besoin !
 
+//    fun userInfos(){
 
-    // String Request
-    // Header
-
-    fun userInfos(){
-
-
-
-        // -----------------------------------------------------------------------------------------
-
-        val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-
-        val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
-        println("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
-        println(accessToken)
-
-        val idtoken = sharedPreferences.getString("IDTOKEN", "")
-        println("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
-        println(idtoken)
-
-        // -----------------------------------------------------------------------------------------
-
-
-
-        val url = "https://idp.bexio.com/userinfo"
-        val queue = Volley.newRequestQueue(this)
-
-        val stringRequest = object: StringRequest(Method.GET, url, Response.Listener<String> { response ->
-
-
-            var responseJsonObj = JSONObject(response)
-            editor.putString("sub", responseJsonObj.getString("sub"))
-            editor.putString("given_name", responseJsonObj.getString("given_name"))
-            editor.putString("family_name", responseJsonObj.getString("family_name"))
-            editor.commit()
-
-            numberOfRequestsToMake--
-            if (numberOfRequestsToMake == 0) { requestEndInternet() }
-        },
-            Response.ErrorListener {
-                numberOfRequestsToMake--
-                hasRequestFailed = true
-                if (numberOfRequestsToMake == 0) { requestEndInternet() }
-            })
-        {
-            override fun getHeaders(): MutableMap<String, String> {
-                val headers = HashMap<String, String>()
-                headers["Accept"] = "application/json"
-                headers["Authorization"] = "Bearer $accessToken"
-                return headers
-            }
-        }
-
-        queue.add(stringRequest)
-        numberOfRequestsToMake++
-
-
-
-    }
+//        // -----------------------------------------------------------------------------------------
+//
+//        val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
+//        val editor = sharedPreferences.edit()
+//
+//        val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
+//        println("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
+//        println(accessToken)
+//
+//        val idtoken = sharedPreferences.getString("IDTOKEN", "")
+//        println("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
+//        println(idtoken)
+//
+//        // -----------------------------------------------------------------------------------------
+//
+//
+//
+//        val url = "https://idp.bexio.com/userinfo"
+//        val queue = Volley.newRequestQueue(this)
+//
+//        val stringRequest = object: StringRequest(Method.GET, url, Response.Listener<String> { response ->
+//
+//
+//            var responseJsonObj = JSONObject(response)
+//            editor.putString("sub", responseJsonObj.getString("sub"))
+//            editor.putString("given_name", responseJsonObj.getString("given_name"))
+//            editor.putString("family_name", responseJsonObj.getString("family_name"))
+//            editor.commit()
+//
+//            numberOfRequestsToMake--
+//            if (numberOfRequestsToMake == 0) { requestEndInternet() }
+//        },
+//            Response.ErrorListener {
+//                numberOfRequestsToMake--
+//                hasRequestFailed = true
+//                if (numberOfRequestsToMake == 0) { requestEndInternet() }
+//            })
+//        {
+//            override fun getHeaders(): MutableMap<String, String> {
+//                val headers = HashMap<String, String>()
+//                headers["Accept"] = "application/json"
+//                headers["Authorization"] = "Bearer $accessToken"
+//                return headers
+//            }
+//        }
+//
+//        queue.add(stringRequest)
+//        numberOfRequestsToMake++
+//
+//
+//
+//    }
 
 
 
