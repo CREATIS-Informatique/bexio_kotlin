@@ -45,6 +45,18 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -56,7 +68,13 @@ class LoginActivity : AppCompatActivity() {
 
 
         val sharedPreferences = getSharedPreferences("Bexio", Context.MODE_PRIVATE)
+
+
+
         var clientidsettings = sharedPreferences.getString("CLIENTID", "")
+
+
+
         var refreshToken = sharedPreferences.getString("REFRESHTOKEN", "")
 
 
@@ -75,6 +93,48 @@ class LoginActivity : AppCompatActivity() {
 
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -121,7 +181,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-        webView.loadUrl("https://idp.bexio.com/authorize?response_type=code&client_id=7baa8853-0f2d-48f5-aa7e-1baf94879d53&redirect_uri=my://demo&state=creatis2019&scope=openid profile offline_access contact_show project_show task_edit task_show monitoring_edit")
+        webView.loadUrl("https://idp.bexio.com/authorize?response_type=code&client_id=7baa8853-0f2d-48f5-aa7e-1baf94879d53&redirect_uri=my://demo&state=creatis2019&scope= openid profile offline_access contact_show project_show task_edit task_show monitoring_edit")
 
 
 
@@ -192,6 +252,9 @@ class LoginActivity : AppCompatActivity() {
 
         val sharedPreferences = getSharedPreferences("Bexio", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
+
+
+
         var codeToken = sharedPreferences.getString("CODETOKEN", "")
         val url = "https://idp.bexio.com/token?grant_type=authorization_code&code=$codeToken&client_id=7baa8853-0f2d-48f5-aa7e-1baf94879d53&redirect_uri=my://demo&client_secret=H_qo-zE3jEsxGGhkwu9Cfv4UnUtXPXadKGqvQ47d-i94nojffdpVcQKqOErTVZc4Zbuyw_lVWjKAZpj6uor-7w"
 
@@ -242,6 +305,9 @@ class LoginActivity : AppCompatActivity() {
 
         val sharedPreferences = getSharedPreferences("Bexio", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
+
+
+
         var refreshToken = sharedPreferences.getString("REFRESHTOKEN", "")
 
 
@@ -264,6 +330,10 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+            userInfos()
+
+
+
             makeAllDataRequest()
 
             // -------------------------------------------------------------------------------------
@@ -280,14 +350,62 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+    // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
+    // String Request
+    // Header
+
+    fun userInfos(){
 
 
 
+        // -----------------------------------------------------------------------------------------
+
+        val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
+
+        // -----------------------------------------------------------------------------------------
 
 
+
+        val url = "https://idp.bexio.com/userinfo"
+        val queue = Volley.newRequestQueue(this)
+
+        val stringRequest = object: StringRequest(Method.GET, url, Response.Listener<String> { response ->
+
+
+            var responseJsonObj = JSONObject(response)
+            editor.putString("sub", responseJsonObj.getString("sub"))
+            editor.putString("given_name", responseJsonObj.getString("given_name"))
+            editor.putString("family_name", responseJsonObj.getString("family_name"))
+            editor.commit()
+
+            numberOfRequestsToMake--
+            if (numberOfRequestsToMake == 0) { requestEndInternet() }
+        },
+            Response.ErrorListener {
+                numberOfRequestsToMake--
+                hasRequestFailed = true
+                if (numberOfRequestsToMake == 0) { requestEndInternet() }
+            })
+        {
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Accept"] = "application/json"
+                headers["Authorization"] = "Bearer $accessToken"
+                return headers
+            }
+        }
+
+        queue.add(stringRequest)
+        numberOfRequestsToMake++
+
+
+
+    }
 
 
 
@@ -960,41 +1078,6 @@ class LoginActivity : AppCompatActivity() {
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

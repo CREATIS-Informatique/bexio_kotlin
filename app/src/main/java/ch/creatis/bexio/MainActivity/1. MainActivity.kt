@@ -2,6 +2,7 @@ package ch.creatis.bexio.MainActivity
 
 
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -29,6 +30,15 @@ class MainActivity : AppCompatActivity() {
 
 
         TransparentTopBar()
+
+
+
+        // Prénom et nom
+        val sharedPreferences = getSharedPreferences("Bexio", Context.MODE_PRIVATE)
+        var givenName = sharedPreferences.getString("given_name", "")
+        var family_name = sharedPreferences.getString("family_name", "")
+        prenomTextView.text = givenName
+        nomTextView.text = family_name
 
 
 

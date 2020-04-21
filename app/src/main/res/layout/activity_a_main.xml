@@ -13,7 +13,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:text="Pocket  Bexio"
@@ -22,7 +21,7 @@
             app:layout_constraintBottom_toTopOf="@+id/ContactsFrame"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/nomTextView" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ContactsFrame"
@@ -235,6 +234,37 @@
                 app:srcCompat="@drawable/ic_action_settings" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+            android:id="@+id/prenomTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Prénom"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+            android:id="@+id/nomTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Nom"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/prenomTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
