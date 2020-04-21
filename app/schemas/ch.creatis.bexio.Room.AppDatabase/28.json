@@ -1,0 +1,561 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 28,
+    "identityHash": "f8fd9d2451cb85e8a669323b74df5e59",
+    "entities": [
+      {
+        "tableName": "activites",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idRoom` INTEGER PRIMARY KEY AUTOINCREMENT, `idBexio` TEXT, `name` TEXT, `default_is_billable` TEXT, `default_price_per_hour` TEXT, `account_id` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "idRoom",
+            "columnName": "idRoom",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "idBexio",
+            "columnName": "idBexio",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "default_is_billable",
+            "columnName": "default_is_billable",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "default_price_per_hour",
+            "columnName": "default_price_per_hour",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "account_id",
+            "columnName": "account_id",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idRoom"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "contacts",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idRoom` INTEGER PRIMARY KEY AUTOINCREMENT, `idBexio` TEXT, `name_un` TEXT, `name_deux` TEXT, `address` TEXT, `postcode` TEXT, `city` TEXT, `country_id` TEXT, `mail` TEXT, `mail_second` TEXT, `phone_fixed` TEXT, `phone_fixed_second` TEXT, `phone_mobile` TEXT, `fax` TEXT, `url` TEXT, `skype_name` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "idRoom",
+            "columnName": "idRoom",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "idBexio",
+            "columnName": "idBexio",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name_un",
+            "columnName": "name_un",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name_deux",
+            "columnName": "name_deux",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "postcode",
+            "columnName": "postcode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "city",
+            "columnName": "city",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "country_id",
+            "columnName": "country_id",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mail",
+            "columnName": "mail",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mail_second",
+            "columnName": "mail_second",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "phone_fixed",
+            "columnName": "phone_fixed",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "phone_fixed_second",
+            "columnName": "phone_fixed_second",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "phone_mobile",
+            "columnName": "phone_mobile",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fax",
+            "columnName": "fax",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "url",
+            "columnName": "url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "skype_name",
+            "columnName": "skype_name",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idRoom"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "projets",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idRoom` INTEGER PRIMARY KEY AUTOINCREMENT, `idBexio` TEXT, `nr` TEXT, `name` TEXT, `start_date` TEXT, `end_date` TEXT, `comment` TEXT, `pr_state_id` INTEGER, `pr_project_type_id` INTEGER, `contact_id` INTEGER, `contact_sub_id` INTEGER, `pr_invoice_type_id` INTEGER, `pr_invoice_type_amount` TEXT, `pr_budget_type_id` INTEGER, `pr_budget_type_amount` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "idRoom",
+            "columnName": "idRoom",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "idBexio",
+            "columnName": "idBexio",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nr",
+            "columnName": "nr",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "start_date",
+            "columnName": "start_date",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "end_date",
+            "columnName": "end_date",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "comment",
+            "columnName": "comment",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pr_state_id",
+            "columnName": "pr_state_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pr_project_type_id",
+            "columnName": "pr_project_type_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "contact_id",
+            "columnName": "contact_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "contact_sub_id",
+            "columnName": "contact_sub_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pr_invoice_type_id",
+            "columnName": "pr_invoice_type_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pr_invoice_type_amount",
+            "columnName": "pr_invoice_type_amount",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pr_budget_type_id",
+            "columnName": "pr_budget_type_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pr_budget_type_amount",
+            "columnName": "pr_budget_type_amount",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idRoom"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "semaines",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idRoom` INTEGER PRIMARY KEY AUTOINCREMENT, `numeroSemaine` TEXT, `dateDebut` TEXT, `dateFin` TEXT, `heuresTotales` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "idRoom",
+            "columnName": "idRoom",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "numeroSemaine",
+            "columnName": "numeroSemaine",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateDebut",
+            "columnName": "dateDebut",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateFin",
+            "columnName": "dateFin",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "heuresTotales",
+            "columnName": "heuresTotales",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idRoom"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "taches",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idRoom` INTEGER PRIMARY KEY AUTOINCREMENT, `idBexio` INTEGER, `user_id` INTEGER, `finish_date` TEXT, `subject` TEXT, `place` INTEGER, `info` TEXT, `contact_id` INTEGER, `sub_contact_id` INTEGER, `project_id` INTEGER, `entry_id` INTEGER, `module_id` INTEGER, `todo_status_id` INTEGER, `todo_priority_id` INTEGER, `has_reminder` INTEGER, `remember_type_id` INTEGER, `remember_time_id` INTEGER, `communication_kind_id` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "idRoom",
+            "columnName": "idRoom",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "idBexio",
+            "columnName": "idBexio",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "user_id",
+            "columnName": "user_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "finish_date",
+            "columnName": "finish_date",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "subject",
+            "columnName": "subject",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "place",
+            "columnName": "place",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "info",
+            "columnName": "info",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "contact_id",
+            "columnName": "contact_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sub_contact_id",
+            "columnName": "sub_contact_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "project_id",
+            "columnName": "project_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "entry_id",
+            "columnName": "entry_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "module_id",
+            "columnName": "module_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "todo_status_id",
+            "columnName": "todo_status_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "todo_priority_id",
+            "columnName": "todo_priority_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "has_reminder",
+            "columnName": "has_reminder",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "remember_type_id",
+            "columnName": "remember_type_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "remember_time_id",
+            "columnName": "remember_time_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "communication_kind_id",
+            "columnName": "communication_kind_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idRoom"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "temps",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idRoom` INTEGER PRIMARY KEY AUTOINCREMENT, `idBexio` TEXT, `date` TEXT, `duration` TEXT, `semaine` TEXT, `annee` TEXT, `text` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "idRoom",
+            "columnName": "idRoom",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "idBexio",
+            "columnName": "idBexio",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "duration",
+            "columnName": "duration",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "semaine",
+            "columnName": "semaine",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "annee",
+            "columnName": "annee",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "text",
+            "columnName": "text",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idRoom"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "users",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idRoom` INTEGER PRIMARY KEY AUTOINCREMENT, `idBexio` INTEGER, `salutation_type` TEXT, `firstname` TEXT, `lastname` TEXT, `email` TEXT, `is_superadmin` INTEGER, `is_accountant` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "idRoom",
+            "columnName": "idRoom",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "idBexio",
+            "columnName": "idBexio",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "salutation_type",
+            "columnName": "salutation_type",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "firstname",
+            "columnName": "firstname",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lastname",
+            "columnName": "lastname",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "is_superadmin",
+            "columnName": "is_superadmin",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "is_accountant",
+            "columnName": "is_accountant",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idRoom"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"f8fd9d2451cb85e8a669323b74df5e59\")"
+    ]
+  }
+}
