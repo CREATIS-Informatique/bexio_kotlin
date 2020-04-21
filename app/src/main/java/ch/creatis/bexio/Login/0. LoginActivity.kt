@@ -72,10 +72,6 @@ import kotlin.collections.HashMap
 
 
 
-        var clientidsettings = sharedPreferences.getString("CLIENTID", "")
-
-
-
         var refreshToken = sharedPreferences.getString("REFRESHTOKEN", "")
 
 
