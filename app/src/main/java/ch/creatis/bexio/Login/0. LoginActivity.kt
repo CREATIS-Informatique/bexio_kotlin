@@ -172,15 +172,10 @@ import kotlin.collections.HashMap
 
 
 
-                        var codeToken = sharedPreferences.getString("CODETOKEN", "")
-                        if (codeToken!!.length == 22){
-
-                            // Cache la WebView
-                            webView.visibility = View.INVISIBLE
-
                             // Première installation
                             getAccessTokenFirstTime()
-                        }
+
+
 
                     // -------------------------------------------------------------------------------------
 
@@ -273,6 +268,11 @@ import kotlin.collections.HashMap
 
         val queue = Volley.newRequestQueue(this)
         val stringRequest = StringRequest(Request.Method.POST, url, Response.Listener<String> { response ->
+
+
+
+            // Cache la WebView
+            webView.visibility = View.INVISIBLE
 
 
 
@@ -393,6 +393,8 @@ import kotlin.collections.HashMap
 
 
         }, Response.ErrorListener {})
+
+
 
         queue.add(stringRequest)
 

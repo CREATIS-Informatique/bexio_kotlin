@@ -60,14 +60,14 @@ class TacheActivity : AppCompatActivity() {
 
 
 
-        // Très important - Fait une requête
-        RefreshRequest()
-
-
-
-        // Recycler View
+        // Recycler View - Placer avant la requête
         recyclerViewTaches.layoutManager = LinearLayoutManager(this)
         recyclerViewTaches.adapter = TachesAdapter(tachesList, this)
+
+
+
+        // Très important - Fait une requête
+        RefreshRequest()
 
 
 

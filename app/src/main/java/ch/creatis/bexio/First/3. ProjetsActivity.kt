@@ -62,14 +62,14 @@ class ProjetsActivity : AppCompatActivity() {
 
 
 
-        // Très important - Fait une requête
-        RefreshRequest()
-
-
-
-        // Adapter
+        // Recycler View - Placer avant la requête
         recyclerViewProjets.layoutManager = LinearLayoutManager(this)
         recyclerViewProjets.adapter = ProjetsAdapter(projectList, this)
+
+
+
+        // Très important - Fait une requête
+        RefreshRequest()
 
 
 

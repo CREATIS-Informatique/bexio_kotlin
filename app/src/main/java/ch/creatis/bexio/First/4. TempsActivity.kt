@@ -65,15 +65,14 @@ class TempsActivity : AppCompatActivity() {
             semaineList = semaineDAO.getItems() as ArrayList<Semaines>
 
 
+            // Recycler View - Placer avant la requête
+            recyclerViewTemps.layoutManager = LinearLayoutManager(this)
+            recyclerViewTemps.adapter = TempsAdapter(semaineList, this)
+
+
 
             // Très important - Fait une requête
             RefreshRequest()
-
-
-
-            // Recycler View
-            recyclerViewTemps.layoutManager = LinearLayoutManager(this)
-            recyclerViewTemps.adapter = TempsAdapter(semaineList, this)
 
 
 
@@ -121,6 +120,7 @@ class TempsActivity : AppCompatActivity() {
 
             val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
             val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
+            val companyUserIdDecode = sharedPreferences.getString("companyUserIdDecode", "")!!.toInt()
 
             // -----------------------------------------------------------------------------------------
 
@@ -189,9 +189,11 @@ class TempsActivity : AppCompatActivity() {
 
 
                         // Tri selon l'utilisateur
-                        if(response.getJSONObject(i)["user_id"] == 3){
+                        if(response.getJSONObject(i)["user_id"] == companyUserIdDecode){
                             tempsDAO.insert(temps)
                         }
+
+
 
                     }
 

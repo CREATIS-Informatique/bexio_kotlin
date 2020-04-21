@@ -67,12 +67,15 @@ class ContactsActivity : AppCompatActivity() {
 
 
 
-        // Très important - Fait une requête
-        RefreshRequest()
-        // Recycler View
-        recyclerViewContacts.layoutManager = LinearLayoutManager(this)
+            // Recycler View - Placer avant la requête
+            recyclerViewContacts.layoutManager = LinearLayoutManager(this)
             mAdapter = ContactsAdapter(contactList, this)
             recyclerViewContacts.adapter = mAdapter
+
+
+
+        // Très important - Fait une requête
+        RefreshRequest()
 
 
 
