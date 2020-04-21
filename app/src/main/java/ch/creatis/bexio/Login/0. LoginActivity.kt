@@ -365,7 +365,14 @@ class LoginActivity : AppCompatActivity() {
 
         val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
+
         val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
+        println("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
+        println(accessToken)
+
+        val idtoken = sharedPreferences.getString("IDTOKEN", "")
+        println("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
+        println(idtoken)
 
         // -----------------------------------------------------------------------------------------
 
