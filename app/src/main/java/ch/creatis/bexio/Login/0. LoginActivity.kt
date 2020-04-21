@@ -162,8 +162,6 @@ import kotlin.collections.HashMap
 
                 if (url!!.contains("code")) {
 
-
-
                     val chars = url
                     val codeun = chars!!.dropLast(18)
 
@@ -171,7 +169,18 @@ import kotlin.collections.HashMap
 
                         editor.putString("CODETOKEN", codeun.drop(15))
                         editor.commit()
-                        getAccessTokenFirstTime()
+
+
+
+                        var codeToken = sharedPreferences.getString("CODETOKEN", "")
+                        if (codeToken!!.length == 22){
+
+                            // Cache la WebView
+                            webView.visibility = View.INVISIBLE
+
+                            // Première installation
+                            getAccessTokenFirstTime()
+                        }
 
                     // -------------------------------------------------------------------------------------
 
@@ -305,9 +314,6 @@ import kotlin.collections.HashMap
             makeAllDataRequest()
 
 
-
-            // Cache la WebView
-            webView.visibility = View.INVISIBLE
 
             // -------------------------------------------------------------------------------------
 
