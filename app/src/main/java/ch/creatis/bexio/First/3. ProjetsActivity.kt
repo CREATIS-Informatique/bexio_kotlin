@@ -140,8 +140,8 @@ class ProjetsActivity : AppCompatActivity() {
 
 
 
-//               val pr_state_id= response.getJSONObject(i)["pr_state_id"].toString().toInt()
-//
+               val pr_state_id= response.getJSONObject(i)["pr_state_id"].toString().toInt()
+
 //                var pr_project_type_id = response.getJSONObject(i)["pr_project_type_id"].toString().toInt()
 //
 //                val contact_id= response.getJSONObject(i)["contact_id"].toString().toInt()
@@ -158,7 +158,7 @@ class ProjetsActivity : AppCompatActivity() {
 
 
 
-                    val projet = Projet(null, idBexio,nr, name,changedDateStart,changedDateEndFinal,comment,1,1, 1, 1,1,"200",1,"200")
+                    val projet = Projet(null, idBexio,nr, name,changedDateStart,changedDateEndFinal,comment,pr_state_id,1, 1, 1,1,"200",1,"200")
                     projetDAO.insert(projet)
 
 
@@ -290,29 +290,41 @@ class ProjetsAdapter(val items : ArrayList<Projet>, val context: Context) : Recy
 
 
 
-        if (items[position].pr_state_id == 1){
-            holder.endDate?.text = "Actif"
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                holder.endDate.background = ContextCompat.getDrawable(context,
-                    R.drawable.projets_items_background_actif
-                )
-            } else {
-                holder.endDate.setBackgroundDrawable(ContextCompat.getDrawable(context,
-                    R.drawable.projets_items_background_actif
-                ))
-            }
-        } else if(items[position].pr_state_id == 2){
-            holder.endDate?.text = "Ouvert"
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                holder.endDate.background = ContextCompat.getDrawable(context,
-                    R.drawable.projets_items_background_ouvert
-                )
-            } else {
-                holder.endDate.setBackgroundDrawable(ContextCompat.getDrawable(context,
-                    R.drawable.projets_items_background_ouvert
-                ))
-            }
+        // Statut
+        if(items[position].pr_state_id == 1){
+            holder.projetStatusLabel.text = "En suspens"
+            holder.projetStatusLabel.setBackgroundResource(R.drawable.projets_activity_items_status_en_suspens)
+        } else if (items[position].pr_state_id == 2){
+            holder.projetStatusLabel.text = "Actif"
+            holder.projetStatusLabel.setBackgroundResource(R.drawable.projets_activity_items_status_actif)
+        } else if (items[position].pr_state_id == 3){
+            holder.projetStatusLabel.text = "Archivé"
+            holder.projetStatusLabel.setBackgroundResource(R.drawable.projets_activity_items_status_archive)
         }
+
+//        if (items[position].pr_state_id == 1){
+//            holder.endDate?.text = "Actif"
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+//                holder.endDate.background = ContextCompat.getDrawable(context,
+//                    R.drawable.projets_items_background_actif
+//                )
+//            } else {
+//                holder.endDate.setBackgroundDrawable(ContextCompat.getDrawable(context,
+//                    R.drawable.projets_items_background_actif
+//                ))
+//            }
+//        } else if(items[position].pr_state_id == 2){
+//            holder.endDate?.text = "Ouvert"
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+//                holder.endDate.background = ContextCompat.getDrawable(context,
+//                    R.drawable.projets_items_background_ouvert
+//                )
+//            } else {
+//                holder.endDate.setBackgroundDrawable(ContextCompat.getDrawable(context,
+//                    R.drawable.projets_items_background_ouvert
+//                ))
+//            }
+//        }
 
 
 
@@ -337,8 +349,10 @@ class ProjetsAdapter(val items : ArrayList<Projet>, val context: Context) : Recy
 class ProjetsHolder (view: View) : RecyclerView.ViewHolder(view) {
 
     val projetsView = view.projetsView
-    val projectLabel = view.projetLabel
+
     val startDate = view.startDateLabel
-    val endDate = view.endDateLabel
+    val projetStatusLabel = view.projetStatusLabel
+    val projectLabel = view.projetLabel
+
 
 }

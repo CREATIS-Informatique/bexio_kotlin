@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-            android:id="@+id/endDateLabel"
+            android:id="@+id/projetStatusLabel"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

@@ -306,7 +306,7 @@ class TachesHolder (view: View) : RecyclerView.ViewHolder(view) {
 
     val tacheView = view.tacheView
     val viewObjet = view.objetLabel
-    val viewStatus = view.statutLabel
+    val viewStatus = view.tachesStatutLabel
 
 
 }
