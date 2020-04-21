@@ -28,7 +28,7 @@ import kotlin.collections.HashMap
 
 
 
-class LoginActivity : AppCompatActivity() {
+    class LoginActivity : AppCompatActivity() {
 
 
 
