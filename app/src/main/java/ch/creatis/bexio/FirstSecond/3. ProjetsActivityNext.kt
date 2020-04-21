@@ -28,7 +28,7 @@ class ProjetsActivityNext : AppCompatActivity() {
         var start_date = intent.getStringExtra("start_date")
         var end_date = intent.getStringExtra("end_date")
         var comment = intent.getStringExtra("comment")
-        var pr_state_id = intent.getStringExtra("pr_state_id")
+        var pr_state_id = intent.getStringExtra("pr_state_id").toInt()
         var nr = intent.getStringExtra("nr")
 
 
@@ -43,20 +43,16 @@ class ProjetsActivityNext : AppCompatActivity() {
 
 
 
-        if (pr_state_id == "1"){
+         // Statut
+        if(pr_state_id == 1){
+            statutView.text = "En suspens"
+            statutView.setBackgroundResource(R.drawable.projets_activity_items_status_en_suspens)
+        } else if (pr_state_id == 2){
             statutView.text = "Actif"
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                statutView.background = ContextCompat.getDrawable(this, R.drawable.projets_items_background_actif)
-            } else {
-                statutView.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.projets_items_background_actif))
-            }
-        } else if(pr_state_id == "2"){
-            statutView.text = "Ouvert"
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                statutView.background = ContextCompat.getDrawable(this, R.drawable.projets_items_background_ouvert)
-            } else {
-                statutView.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.projets_items_background_ouvert))
-            }
+            statutView.setBackgroundResource(R.drawable.projets_activity_items_status_actif)
+        } else if (pr_state_id == 3){
+            statutView.text = "Archivé"
+           statutView.setBackgroundResource(R.drawable.projets_activity_items_status_archive)
         }
 
 
