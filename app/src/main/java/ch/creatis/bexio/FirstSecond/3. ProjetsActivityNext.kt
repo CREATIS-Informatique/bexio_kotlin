@@ -3,12 +3,10 @@ package ch.creatis.bexio.FirstSecond
 
 
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import ch.creatis.bexio.TachesTemps.Taches.ProjetsActivityNextSaisieTaches
-import ch.creatis.bexio.TachesTemps.Temps.ProjetsActivityNextSaisieTemps
+import ch.creatis.bexio.TachesTemps.Temps.First.ProjetsActivityNextSaisieTemps
 import ch.creatis.bexio.R
 import kotlinx.android.synthetic.main.activity_projets_next.*
 

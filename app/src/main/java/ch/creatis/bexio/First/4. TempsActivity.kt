@@ -3,7 +3,6 @@ package ch.creatis.bexio.First
 
 
 import android.app.AlertDialog
-import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -18,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import ch.creatis.bexio.R
-import ch.creatis.bexio.TachesTemps.Temps.ProjetsActivityNextSaisieTemps
+import ch.creatis.bexio.TachesTemps.Temps.First.ProjetsActivityNextSaisieTemps
 import ch.creatis.bexio.FirstSecond.Temps.TempsActivityItemsNextSemaineDescription
 import ch.creatis.bexio.Room.AppDatabase
 import ch.creatis.bexio.Room.Semaines

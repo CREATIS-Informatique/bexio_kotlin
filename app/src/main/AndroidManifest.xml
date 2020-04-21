@@ -16,7 +16,7 @@
         <activity android:name=".FirstSecond.Temps.TempsActivityItemsNextSemaineDescription" />
         <activity android:name=".FirstSecond.Temps.TempsActivityItemsNextJourDescription"></activity>
         <activity android:name="ch.creatis.bexio.TachesTemps.Taches.ProjetsActivityNextSaisieTaches" />
-        <activity android:name="ch.creatis.bexio.TachesTemps.Temps.ProjetsActivityNextSaisieTemps" />
+        <activity android:name="ch.creatis.bexio.TachesTemps.Temps.First.ProjetsActivityNextSaisieTemps" />
         <activity android:name=".FirstSecond.ProjetsActivityNext" />
         <activity android:name=".FirstSecond.ContactsActivityNext" />
         <activity android:name=".Login.LoginActivity">

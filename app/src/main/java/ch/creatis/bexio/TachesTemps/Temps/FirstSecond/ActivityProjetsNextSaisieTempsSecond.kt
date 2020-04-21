@@ -1,4 +1,4 @@
-package ch.creatis.bexio.TachesTemps.Temps.Pager
+package ch.creatis.bexio.TachesTemps.Temps.FirstSecond
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -170,6 +170,7 @@ class ActivityProjetsNextSaisieTempsSecond : Fragment() {
 
             val sharedPreferences = context!!.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
             val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
+            val companyUserIdDecode = sharedPreferences.getString("companyUserIdDecode", "")!!.toInt()
 
             // -----------------------------------------------------------------------------------------
 
@@ -197,7 +198,7 @@ class ActivityProjetsNextSaisieTempsSecond : Fragment() {
 
             try
             {
-                jsonObject.put("user_id", 2)
+                jsonObject.put("user_id", companyUserIdDecode)
                 jsonObject.put("client_service_id", 2)
                 jsonObject.put("allowable_bill", false)
                 jsonObject.put("tracking", jsonObjectTracking)

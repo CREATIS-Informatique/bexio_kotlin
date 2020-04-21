@@ -101,6 +101,7 @@ class ProjetsActivityNextSaisieTaches : AppCompatActivity() {
 
             val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
             val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
+            val companyUserIdDecode = sharedPreferences.getString("companyUserIdDecode", "")!!.toInt()
 
             // -----------------------------------------------------------------------------------------
 
@@ -114,7 +115,7 @@ class ProjetsActivityNextSaisieTaches : AppCompatActivity() {
             val jsonObject = JSONObject()
             try
             {
-                jsonObject.put("user_id", 2)
+                jsonObject.put("user_id", companyUserIdDecode)
                 jsonObject.put("subject", "TESTESTESTEST")
                 jsonArray.put(jsonObject)
             }
