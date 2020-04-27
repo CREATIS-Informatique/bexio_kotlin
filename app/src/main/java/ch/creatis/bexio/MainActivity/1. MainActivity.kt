@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         // Prénom et nom
         val sharedPreferences = getSharedPreferences("Bexio", Context.MODE_PRIVATE)
-        var sub = sharedPreferences.getString("sub", "")
+        var sub = sharedPreferences.getString("subDecode", "")
         subTextView.text = sub
 
 
