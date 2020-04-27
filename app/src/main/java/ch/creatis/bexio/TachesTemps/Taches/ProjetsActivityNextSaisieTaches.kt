@@ -1,11 +1,14 @@
 package ch.creatis.bexio.TachesTemps.Taches
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import ch.creatis.bexio.First.TempsActivity
 import ch.creatis.bexio.R
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
@@ -92,76 +95,127 @@ class ProjetsActivityNextSaisieTaches : AppCompatActivity() {
 
         envoyerButton.setOnClickListener {
 
-            println(objetInput.text)
-            println(remarquesInput.text)
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Voulez-vous envoyer votre tâche ?")
+            builder.setMessage("L'application mettra à jour vos données")
+            builder.setPositiveButton("Oui"){ _, _ ->
 
+                // Envoi les datas
+                sendData()
 
-
-            // -----------------------------------------------------------------------------------------
-
-            val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
-            val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
-            val companyUserIdDecode = sharedPreferences.getString("companyUserIdDecode", "")!!.toInt()
-
-            // -----------------------------------------------------------------------------------------
-
-
-
-            var url = "https://api.bexio.com/2.0/task"
-
-
-
-            val jsonArray = JSONArray()
-            val jsonObject = JSONObject()
-            try
-            {
-                jsonObject.put("user_id", companyUserIdDecode)
-                jsonObject.put("subject", "TESTESTESTEST")
-                jsonArray.put(jsonObject)
-            }
-            catch (e:Exception) {
             }
 
-
-
-            val stringRequest = object: JsonObjectRequest(Method.POST, url, jsonObject, object: Response.Listener<JSONObject> {
-
-                    override fun onResponse(response: JSONObject?) {
-
-
-
-                    } },
-
-
-
-                object: Response.ErrorListener {
-                    override fun onErrorResponse(error:VolleyError) {
-                        Log.e("Error.Response", error.toString())
-
-                    }
-                })
-
-
-
-            {
-                @Throws(AuthFailureError::class)
-                override fun getHeaders():Map<String, String> {
-                    val headers = HashMap<String, String>()
-                    headers.put("Accept", "application/json")
-                    headers.put("Content-Type", "application/json")
-                    headers.put("Authorization", "Bearer $accessToken")
-                    return headers
-                }
+            builder.setNeutralButton("Annuler"){_,_ ->
+                // Ne fait rien
             }
 
-
-
-            val requestQueue = Volley.newRequestQueue(this)
-            requestQueue.add(stringRequest)
-
-
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
 
         }
+
+
+
+    }
+
+
+
+    // --------------------------------------------------------------- onCreate -------------------------------------------------------------
+
+
+
+    fun sendData(){
+
+
+
+        // -----------------------------------------------------------------------------------------
+
+        val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
+        val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
+        val companyUserIdDecode = sharedPreferences.getString("companyUserIdDecode", "")!!.toInt()
+
+        // -----------------------------------------------------------------------------------------
+
+
+
+        var url = "https://api.bexio.com/2.0/task"
+
+
+
+        val jsonArray = JSONArray()
+        val jsonObject = JSONObject()
+        try
+        {
+            jsonObject.put("user_id", companyUserIdDecode)
+            jsonObject.put("subject", "TESTESTESTEST")
+            jsonArray.put(jsonObject)
+        }
+        catch (e:Exception) {
+        }
+
+
+
+        val stringRequest = object: JsonObjectRequest(Method.POST, url, jsonObject, object: Response.Listener<JSONObject> {
+
+            override fun onResponse(response: JSONObject?) {
+
+
+
+                // Message Finale
+                val builder = AlertDialog.Builder(applicationContext)
+                builder.setTitle("Envoi réussi !")
+                builder.setMessage("Vos tâches ont été actualisés")
+                builder.setPositiveButton("Ok"){ _, _ ->
+                    // Lance l'activité
+                    val intentAct = Intent(applicationContext, TempsActivity::class.java)
+                    startActivity(intentAct)
+                }
+                val dialog: AlertDialog = builder.create()
+                dialog.show()
+
+
+
+            } },
+
+
+
+            object: Response.ErrorListener {
+                override fun onErrorResponse(error:VolleyError) {
+
+
+
+                    // Message Finale
+                    val builder = AlertDialog.Builder(applicationContext)
+                    builder.setTitle("L'envoi a échoué !")
+                    builder.setMessage("Essayez à nouveau")
+                    builder.setPositiveButton("Ok"){ _, _ ->
+                        // Ne fait rien !
+                    }
+                    val dialog: AlertDialog = builder.create()
+                    dialog.show()
+
+
+
+                }
+            })
+
+
+
+        {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders():Map<String, String> {
+                val headers = HashMap<String, String>()
+                headers.put("Accept", "application/json")
+                headers.put("Content-Type", "application/json")
+                headers.put("Authorization", "Bearer $accessToken")
+                return headers
+            }
+        }
+
+
+
+        val requestQueue = Volley.newRequestQueue(this)
+        requestQueue.add(stringRequest)
 
 
 
