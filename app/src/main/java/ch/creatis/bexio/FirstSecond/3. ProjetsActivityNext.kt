@@ -43,7 +43,7 @@ class ProjetsActivityNext : AppCompatActivity() {
 
          // Statut
         if(pr_state_id == 1){
-            statutView.text = "En suspens"
+            statutView.text = "Ouvert"
             statutView.setBackgroundResource(R.drawable.projets_activity_items_status_en_suspens)
         } else if (pr_state_id == 2){
             statutView.text = "Actif"

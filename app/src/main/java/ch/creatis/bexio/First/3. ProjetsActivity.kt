@@ -298,8 +298,9 @@ class ProjetsAdapter(val items : ArrayList<Projet>, val context: Context) : Recy
 
 
         // Statut
+        println(items[position].pr_state_id)
         if(items[position].pr_state_id == 1){
-            holder.projetStatusLabel.text = "En suspens"
+            holder.projetStatusLabel.text = "Ouvert"
             holder.projetStatusLabel.setBackgroundResource(R.drawable.projets_activity_items_status_en_suspens)
         } else if (items[position].pr_state_id == 2){
             holder.projetStatusLabel.text = "Actif"
