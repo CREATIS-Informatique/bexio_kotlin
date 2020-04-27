@@ -42,8 +42,7 @@ class TempsActivityItemsNextSemaineDescription : AppCompatActivity() {
 
 
         recyclerViewTempsJour.layoutManager = LinearLayoutManager(this)
-        recyclerViewTempsJour.adapter =
-            TempsAdapterNext(tempsList, this)
+        recyclerViewTempsJour.adapter = TempsAdapterNext(tempsList, this)
 
 
 
@@ -76,11 +75,16 @@ class TempsAdapterNext(val items : ArrayList<Temps>, val context: Context) : Rec
 
 
 
+        val temps= items[position]
         holder.jourTempsView.setOnClickListener {
-
             val intent = Intent(context, TempsActivityItemsNextJourDescription::class.java)
+            intent.putExtra("idBexio", temps.idBexio)
+            intent.putExtra("date", temps.date)
+            intent.putExtra("duration", temps.duration)
+            intent.putExtra("semaine", temps.semaine)
+            intent.putExtra("annee", temps.annee)
+            intent.putExtra("text", temps.text)
             context.startActivity(intent)
-
         }
 
 
