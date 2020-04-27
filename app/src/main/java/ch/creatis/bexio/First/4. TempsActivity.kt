@@ -59,7 +59,7 @@ class TempsActivity : AppCompatActivity() {
 
 
             // Database
-            val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
+            val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").fallbackToDestructiveMigration().allowMainThreadQueries().build()
             val semaineDAO = database.semaineDAO
             semaineList = semaineDAO.getItems() as ArrayList<Semaines>
 
@@ -140,6 +140,7 @@ class TempsActivity : AppCompatActivity() {
 
 
                         val idBexio= response.getJSONObject(i)["id"].toString()
+                        var userId = response.getJSONObject(i)["user_id"].toString().toInt()
                         var duration = response.getJSONObject(i)["duration"].toString()
                         if (duration.length == 4){ duration = "0$duration"}
 
@@ -183,7 +184,7 @@ class TempsActivity : AppCompatActivity() {
 
 
                         // Création de la classe
-                        val temps = Temps(null, idBexio, date, duration, semaine, annee, text)
+                        val temps = Temps(null, idBexio, userId, date, duration, semaine, annee, text)
 
 
 

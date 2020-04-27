@@ -79,6 +79,7 @@ class TempsAdapterNext(val items : ArrayList<Temps>, val context: Context) : Rec
         holder.jourTempsView.setOnClickListener {
             val intent = Intent(context, TempsActivityItemsNextJourDescription::class.java)
             intent.putExtra("idBexio", temps.idBexio)
+            intent.putExtra("userId", temps.userId)
             intent.putExtra("date", temps.date)
             intent.putExtra("duration", temps.duration)
             intent.putExtra("semaine", temps.semaine)

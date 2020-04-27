@@ -867,6 +867,7 @@ import kotlin.collections.HashMap
 
 
                 val idBexio= response.getJSONObject(i)["id"].toString()
+                var userId = response.getJSONObject(i)["user_id"].toString().toInt()
                 val date= response.getJSONObject(i)["date"].toString()
                 var duration = response.getJSONObject(i)["duration"].toString()
                 if (duration.length == 4){ duration = "0$duration"}
@@ -880,7 +881,7 @@ import kotlin.collections.HashMap
 
 
                 // Création de la classe
-                val temps = Temps(null, idBexio,date, duration, semaine, "2020",text)
+                val temps = Temps(null, idBexio, userId ,date, duration, semaine, "2020",text)
 
                 // Tri selon l'utilisateur
                 if(response.getJSONObject(i)["user_id"] == 1){ tempsListDatabase.add(temps)}

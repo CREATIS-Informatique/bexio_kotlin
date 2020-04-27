@@ -18,6 +18,7 @@ class TempsActivityItemsNextJourDescription : AppCompatActivity() {
 
 
         var idBexio = intent.getStringExtra("idBexio").toInt()
+        var userID = intent.getIntExtra("userId",0)
         var date = intent.getStringExtra("date")
         var duration = intent.getStringExtra("duration")
         var semaine = intent.getStringExtra("semaine")
@@ -27,8 +28,8 @@ class TempsActivityItemsNextJourDescription : AppCompatActivity() {
 
 
         val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
-        val contactDAO = database.contactDAO
-        val contactDAOFinal = contactDAO.getItemsByIdbexio(idBexio)
+        val userDAO = database.userDAO
+        val userDAOFinal = userDAO.getItemsByIdbexio(userID)
 
 
 
@@ -39,7 +40,6 @@ class TempsActivityItemsNextJourDescription : AppCompatActivity() {
         dateLabel.text = date
         projetLabel.text = "Test"
         dureeLabel.text = duration
-        interlocuteurLabel.text = contactDAOFinal.name_un + contactDAOFinal.name_deux
 
 
 
