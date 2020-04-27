@@ -4,6 +4,7 @@ package ch.creatis.bexio.Login
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -156,22 +157,30 @@ import kotlin.collections.HashMap
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
 
-                if (url!!.contains("code")) {
+                if (url!!.contains("code=")) {
 
-                    val chars = url
-                    val codeun = chars!!.dropLast(18)
+
 
                     // -------------------------------------------------------------------------------------
+                            // Convertit l'URL
+                            var uri = Uri.parse(url)
+                            var codeToken = uri.getQueryParameter("code").toString()
 
-                        editor.putString("CODETOKEN", codeun.drop(15))
-                        editor.commit()
+
+
+                            // Ajoute dans le Shared
+                            editor.putString("CODETOKEN", codeToken)
+                            editor.commit()
+
+
+
+                            // Cache la WebView
+                            webView.visibility = View.INVISIBLE
 
 
 
                             // Première installation
                             getAccessTokenFirstTime()
-
-
 
                     // -------------------------------------------------------------------------------------
 
@@ -264,11 +273,6 @@ import kotlin.collections.HashMap
 
         val queue = Volley.newRequestQueue(this)
         val stringRequest = StringRequest(Request.Method.POST, url, Response.Listener<String> { response ->
-
-
-
-            // Cache la WebView
-            webView.visibility = View.INVISIBLE
 
 
 
