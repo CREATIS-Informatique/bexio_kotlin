@@ -7,7 +7,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.room.Room
-import ch.creatis.bexio.TachesTemps.Temps.Pager.MyPagerAdapter
+import ch.creatis.bexio.TachesTemps.Temps.FirstSecond.Pager.MyPagerAdapter
 import ch.creatis.bexio.R
 import ch.creatis.bexio.Room.Activite
 import ch.creatis.bexio.Room.AppDatabase

@@ -1,4 +1,4 @@
-package ch.creatis.bexio.TachesTemps.Temps.Pager
+package ch.creatis.bexio.TachesTemps.Temps.FirstSecond.Pager
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
