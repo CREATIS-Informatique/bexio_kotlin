@@ -85,7 +85,13 @@ import kotlin.collections.HashMap
 
         // Régulier
         else {
+
+            // Connexion régulière
             getAccessTokenAllTime()
+
+            // Connexion régulière
+            val intentAct = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intentAct)
 
         }
 
@@ -383,12 +389,6 @@ import kotlin.collections.HashMap
             editor.putString("subDecode", subDecode)
             editor.putString("companyUserIdDecode", companyUserIdDecode)
             editor.commit()
-
-
-
-            // Connexion régulière
-            val intentAct = Intent(this@LoginActivity, MainActivity::class.java)
-            startActivity(intentAct)
 
 
 
