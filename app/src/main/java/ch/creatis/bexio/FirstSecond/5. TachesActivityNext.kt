@@ -250,8 +250,7 @@ class TachesActivityNext : AppCompatActivity() {
                     builder.setMessage("Vos tâches ont été actualisés")
                     builder.setPositiveButton("Ok"){ _, _ ->
                         // Lance l'activité
-                        val intentAct = Intent(this@TachesActivityNext, TacheActivity::class.java)
-                        startActivity(intentAct)
+                        finish()
                     }
                     val dialog: AlertDialog = builder.create()
                     dialog.show()
@@ -343,8 +342,7 @@ class TachesActivityNext : AppCompatActivity() {
                 builder.setMessage("Vos tâches ont été actualisés")
                 builder.setPositiveButton("Ok"){ _, _ ->
                     // Lance l'activité
-                    val intentAct = Intent(this@TachesActivityNext, TacheActivity::class.java)
-                    startActivity(intentAct)
+                    finish()
                 }
                 val dialog: AlertDialog = builder.create()
                 dialog.show()

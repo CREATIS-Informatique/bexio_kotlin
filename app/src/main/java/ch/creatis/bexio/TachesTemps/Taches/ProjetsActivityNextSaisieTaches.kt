@@ -162,13 +162,12 @@ class ProjetsActivityNextSaisieTaches : AppCompatActivity() {
 
 
                 // Message Finale
-                val builder = AlertDialog.Builder(applicationContext)
+                val builder = AlertDialog.Builder(this@ProjetsActivityNextSaisieTaches)
                 builder.setTitle("Envoi réussi !")
                 builder.setMessage("Vos tâches ont été actualisés")
                 builder.setPositiveButton("Ok"){ _, _ ->
                     // Lance l'activité
-                    val intentAct = Intent(applicationContext, TempsActivity::class.java)
-                    startActivity(intentAct)
+                    finish()
                 }
                 val dialog: AlertDialog = builder.create()
                 dialog.show()
@@ -185,7 +184,7 @@ class ProjetsActivityNextSaisieTaches : AppCompatActivity() {
 
 
                     // Message Finale
-                    val builder = AlertDialog.Builder(applicationContext)
+                    val builder = AlertDialog.Builder(this@ProjetsActivityNextSaisieTaches)
                     builder.setTitle("L'envoi a échoué !")
                     builder.setMessage("Essayez à nouveau")
                     builder.setPositiveButton("Ok"){ _, _ ->

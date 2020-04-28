@@ -205,8 +205,8 @@ class ActivityProjetsNextSaisieTempsFirst : Fragment() {
             builder.setMessage("Vos timbrages ont été actualisés")
             builder.setPositiveButton("Ok"){ _, _ ->
                 // Lance l'activité
-                val intentAct = Intent(context, TempsActivity::class.java)
-                startActivity(intentAct)
+                getActivity()!!.onBackPressed()
+                
             }
             val dialog: AlertDialog = builder.create()
             dialog.show()
