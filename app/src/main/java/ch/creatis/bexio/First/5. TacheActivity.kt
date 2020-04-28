@@ -27,7 +27,10 @@ import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_taches.*
 import kotlinx.android.synthetic.main.activity_taches_items.view.*
 import org.json.JSONArray
-
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 class TacheActivity : AppCompatActivity() {
@@ -159,7 +162,6 @@ class TacheActivity : AppCompatActivity() {
 
 
                     val taches = Tache(null,idBexio,user_id,finish_date,subject,0,"string",contact_id,0,project_id,0,0,todo_status_id,0,false,0,0,0)
-                    println(taches.todo_status_id)
                     tachesDAO.insert(taches)
 
 
@@ -267,11 +269,39 @@ class TachesAdapter(val items : ArrayList<Tache>, val context: Context) : Recycl
         // Sujet
         holder.viewObjet.text = items[position].subject
 
+
+
+        // 2020-04-29 13:15:00
+        val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
+        val currentDate = sdf.format(Date())
+
+//        int compare = date1.compareTo(date2);
+//
+//        compare > 0, if date2 is greater than date1
+//
+//        compare < 0, if date2 is smaller than date1
+//
+//        compare = 0, if date1 is equal to date2
+
+
+
         // Statut
-        if(items[position].todo_status_id == 1){
+        if(items[position].todo_status_id == 1 && items[position].finish_date!!.isNullOrEmpty()){
             holder.viewStatus.text = "En suspens"
             holder.viewStatus.setBackgroundResource(R.drawable.taches_activity_items_status_en_suspens)
-        } else if (items[position].todo_status_id == 5){
+        }
+
+        else if (items[position].todo_status_id == 1 && items[position].finish_date!!.compareTo(currentDate) < 0){
+            holder.viewStatus.text = "En retard"
+            holder.viewStatus.setBackgroundResource(R.drawable.taches_activity_items_status_en_retard)
+        }
+
+        else if (items[position].todo_status_id == 1 && items[position].finish_date!!.compareTo(currentDate) > 0){
+            holder.viewStatus.text = "En suspens"
+            holder.viewStatus.setBackgroundResource(R.drawable.taches_activity_items_status_en_suspens)
+        }
+
+        else if (items[position].todo_status_id == 5){
             holder.viewStatus.text = "Terminé"
             holder.viewStatus.setBackgroundResource(R.drawable.taches_activity_items_status_termine)
         }
