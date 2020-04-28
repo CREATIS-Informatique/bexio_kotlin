@@ -26,7 +26,7 @@ class ProjetsActivityNext : AppCompatActivity() {
         var start_date = intent.getStringExtra("start_date")
         var end_date = intent.getStringExtra("end_date")
         var comment = intent.getStringExtra("comment")
-        var pr_state_id = intent.getStringExtra("pr_state_id").toInt()
+        var pr_state_id = intent.getIntExtra("pr_state_id",0)
         var nr = intent.getStringExtra("nr")
 
 
