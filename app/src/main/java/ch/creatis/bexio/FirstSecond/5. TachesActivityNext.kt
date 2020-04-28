@@ -7,10 +7,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.room.Room
-import ch.creatis.bexio.First.TacheActivity
-import ch.creatis.bexio.First.TempsActivity
 import ch.creatis.bexio.TachesTemps.Temps.First.ProjetsActivityNextSaisieTemps
 import ch.creatis.bexio.R
 import ch.creatis.bexio.Room.AppDatabase
@@ -56,6 +53,7 @@ class TachesActivityNext : AppCompatActivity() {
 
 
         // --------------------------------------------------- Database
+
         val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
         val projetsDAO = database.projetDAO
         val usersDAO = database.userDAO
@@ -67,13 +65,9 @@ class TachesActivityNext : AppCompatActivity() {
 
         // Projet ID
         var projetId = ""
-        if (project_id == 0){ projetId = "" } else{
-            projetId = projetsDAO.getItemsByIdbexio(project_id).name.toString()
-        }
-
+        if (project_id == 0){ projetId = "" } else{ projetId = projetsDAO.getItemsByIdbexio(project_id).name.toString() }
         // Users
         var userId = usersDAO.getItemsByIdbexio(user_id)
-
         // Contacts
         var contactId = contactsDAO.getItemsByIdbexio(contact_id)
 
@@ -81,15 +75,17 @@ class TachesActivityNext : AppCompatActivity() {
 
         // --------------------------------------------------- Les labels
 
-        projectName.text = projetId
         tacheName.text = subject
-//        interlocuteurName.text = userId.firstname + " " + userId.lastname
+        projectName.text = "Aucune indication"
+        interlocuteurName.text = "Aucune indication"
         dureeName.text = finish_date
-//        contactName.text = contactId.name_un + " " + contactId.name_deux
+        priorityName.text = "Aucune indication"
+        contactName.text = "Aucune indication"
 
 
 
-        // 2020-04-29 13:15:00
+        // Statut - 2020-04-29 13:15:00
+
         val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
         val currentDate = sdf.format(Date())
 
@@ -101,9 +97,6 @@ class TachesActivityNext : AppCompatActivity() {
 //
 //        compare = 0, if date1 is equal to date2
 
-
-
-        // Statut
         if(todo_status_id == 1 && finish_date.isNullOrEmpty()){
             statutName.text = "En suspens"
             statutName.setBackgroundResource(R.drawable.taches_activity_items_status_en_suspens)

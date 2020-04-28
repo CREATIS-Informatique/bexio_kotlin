@@ -128,34 +128,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-                android:id="@+id/priorityNameLabel"
-                android:layout_width="120dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:text="Priorité :"
-                android:textColor="#131D2C"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/statutName" />
-
-        <TextView
-                android:id="@+id/priorityName"
-                android:layout_width="190dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:text="Normale"
-                android:textColor="#131D2C"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/priorityNameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/statutName" />
-
-        <TextView
                 android:id="@+id/dureeNameLabel"
                 android:layout_width="120dp"
                 android:layout_height="20dp"
@@ -166,7 +138,7 @@
                 android:textColor="#131D2C"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/priorityNameLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/statutName" />
 
         <TextView
                 android:id="@+id/dureeName"
@@ -177,11 +149,37 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
-                android:text="8 heures"
                 android:textColor="#131D2C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/dureeNameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/priorityName" />
+                app:layout_constraintTop_toBottomOf="@+id/statutName" />
+
+        <TextView
+                android:id="@+id/priorityNameLabel"
+                android:layout_width="120dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Priorité :"
+                android:textColor="#131D2C"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dureeNameLabel" />
+
+        <TextView
+                android:id="@+id/priorityName"
+                android:layout_width="190dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="#131D2C"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/priorityNameLabel"
+                app:layout_constraintTop_toBottomOf="@+id/dureeName" />
 
         <TextView
                 android:id="@+id/contactNameLabel"
@@ -194,7 +192,7 @@
                 android:textColor="#131D2C"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dureeNameLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/priorityNameLabel" />
 
         <TextView
                 android:id="@+id/contactName"
@@ -205,11 +203,11 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
-                android:text="Alain Pery"
+                android:text="Aucun contact"
                 android:textColor="#131D2C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/contactNameLabel"
-                app:layout_constraintTop_toBottomOf="@+id/dureeName" />
+                app:layout_constraintTop_toBottomOf="@+id/priorityName" />
 
         <Button
                 android:id="@+id/saisirTempsTache"
