@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import ch.creatis.bexio.R
@@ -16,9 +17,17 @@ import kotlinx.android.synthetic.main.z_activity_projets_next_saisie_taches.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class ProjetsActivityNextSaisieTaches : AppCompatActivity() {
+
+
+
+    var dateFinal = ""
+    var tempsFinal = ""
 
 
 
@@ -27,24 +36,24 @@ class ProjetsActivityNextSaisieTaches : AppCompatActivity() {
         setContentView(R.layout.z_activity_projets_next_saisie_taches)
 
 
-        var date = ""
-        var temps = ""
 
 
-        // ------------------------------- Calendar -------------------------------
+
+        // ------------------------------- Date -------------------------------
 
         var cal = Calendar.getInstance()
-
         val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
             cal.set(Calendar.YEAR, year)
             cal.set(Calendar.MONTH, monthOfYear)
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-
             val myFormat = "dd.MM.yyyy" // mention the format you need
             val sdf = SimpleDateFormat(myFormat, Locale.US)
+            dateFinal = sdf.format(cal.time)
 
-            date = sdf.format(cal.time)
-            dateLimite.text = date
+
+
+            dateLimite.text = dateFinal
+
 
 
         }
@@ -52,10 +61,7 @@ class ProjetsActivityNextSaisieTaches : AppCompatActivity() {
 
         calendarButton.setOnClickListener {
 
-            DatePickerDialog(this, dateSetListener,
-                cal.get(Calendar.YEAR),
-                cal.get(Calendar.MONTH),
-                cal.get(Calendar.DAY_OF_MONTH)).show()
+            DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
 
         }
 
@@ -65,30 +71,30 @@ class ProjetsActivityNextSaisieTaches : AppCompatActivity() {
 
 
         val cal2 = Calendar.getInstance()
-
         val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
             cal2.set(Calendar.HOUR_OF_DAY, hour)
             cal2.set(Calendar.MINUTE, minute)
+            tempsFinal = SimpleDateFormat("HH:mm:ss").format(cal2.time)
 
-            temps = SimpleDateFormat("HH:mm").format(cal2.time)
-            dateLimite.text = date + " - " + temps
+
+
+            dateLimite.text = dateFinal + " - " + tempsFinal
 
 
 
         }
+
 
 
             timeButton.setOnClickListener {
 
-            TimePickerDialog(this, timeSetListener, cal2.get(Calendar.HOUR_OF_DAY), cal2.get(
-                Calendar.MINUTE), true).show()
-
+            TimePickerDialog(this, timeSetListener, cal2.get(Calendar.HOUR_OF_DAY), cal2.get(Calendar.MINUTE), true).show()
 
         }
 
 
 
-        // ------------------------------- Time -------------------------------
+        // --------------------------------------------------------------
 
         envoyerButton.setOnClickListener {
 
@@ -139,12 +145,18 @@ class ProjetsActivityNextSaisieTaches : AppCompatActivity() {
 
 
 
+        var dateFinalFinal = "2019-08-07 "
+        var tempsFinalFinal = tempsFinal
+        var timeStampFinalFinal = dateFinalFinal + tempsFinalFinal
+
+
+
         val jsonArray = JSONArray()
         val jsonObject = JSONObject()
         try
         {
             jsonObject.put("user_id", companyUserIdDecode)
-            jsonObject.put("finish_date", dateLimite.text)
+            jsonObject.put("finish_date", timeStampFinalFinal)
             jsonObject.put("subject", objetInputText.text)
             jsonObject.put("info", remarquesInputText.text)
             jsonArray.put(jsonObject)
