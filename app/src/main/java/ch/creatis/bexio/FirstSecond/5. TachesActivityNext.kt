@@ -19,6 +19,7 @@ import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_taches_next.*
 import org.json.JSONArray
 import org.json.JSONObject
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -78,7 +79,18 @@ class TachesActivityNext : AppCompatActivity() {
         tacheName.text = subject
         projectName.text = "Aucune indication"
         interlocuteurName.text = "Aucune indication"
-        dureeName.text = finish_date
+
+
+
+        var inputText = finish_date
+        var inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US)
+        var dateInput = inputFormat.parse(inputText)
+        var outputFormat: DateFormat = SimpleDateFormat("dd.MM.yy HH:mm", Locale.US)
+        var dateOutput = outputFormat.format(dateInput)
+        dureeName.text = dateOutput
+
+
+
         priorityName.text = "Aucune indication"
         contactName.text = "Aucune indication"
 

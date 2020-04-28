@@ -16,6 +16,7 @@ import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.z_activity_projets_next_saisie_taches.*
 import org.json.JSONArray
 import org.json.JSONObject
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -145,7 +146,15 @@ class ProjetsActivityNextSaisieTaches : AppCompatActivity() {
 
 
 
-        var dateFinalFinal = "2019-08-07 "
+        var inputText = dateFinal
+        var inputFormat:DateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.US)
+        var dateInput = inputFormat.parse(inputText)
+        var outputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+        var dateOutput = outputFormat.format(dateInput)
+
+
+
+        var dateFinalFinal = dateOutput
         var heureFinalFinal = heureFinal + ":00"
         var timeStampFinalFinal = dateFinalFinal + heureFinalFinal
 
