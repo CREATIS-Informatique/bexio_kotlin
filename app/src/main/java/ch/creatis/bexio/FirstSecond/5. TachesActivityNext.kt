@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.room.Room
+import ch.creatis.bexio.First.TacheActivity
 import ch.creatis.bexio.First.TempsActivity
 import ch.creatis.bexio.TachesTemps.Temps.First.ProjetsActivityNextSaisieTemps
 import ch.creatis.bexio.R
@@ -78,13 +79,6 @@ class TachesActivityNext : AppCompatActivity() {
 
 
 
-
-
-
-
-
-
-
         // --------------------------------------------------- Les labels
 
         projectName.text = projetId
@@ -92,9 +86,6 @@ class TachesActivityNext : AppCompatActivity() {
 //        interlocuteurName.text = userId.firstname + " " + userId.lastname
         dureeName.text = finish_date
 //        contactName.text = contactId.name_un + " " + contactId.name_deux
-
-
-
 
 
 
@@ -135,21 +126,7 @@ class TachesActivityNext : AppCompatActivity() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // --------------------------------------------------- Les boutons
+        // ---------------------------------------------------------- Les boutons ----------------------------------------------------------
 
         // Saisir un temps
         saisirTempsTache.setOnClickListener {
@@ -226,38 +203,11 @@ class TachesActivityNext : AppCompatActivity() {
 
 
 
-
-
-
-
-
     }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // --------------------------------------------------- Les Fonctions de la classe
-
-
-
-
-
+    // ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -295,12 +245,12 @@ class TachesActivityNext : AppCompatActivity() {
 
 
                     // Message Finale
-                    val builder = AlertDialog.Builder(applicationContext)
+                    val builder = AlertDialog.Builder(this@TachesActivityNext)
                     builder.setTitle("Envoi réussi !")
                     builder.setMessage("Vos tâches ont été actualisés")
                     builder.setPositiveButton("Ok"){ _, _ ->
                         // Lance l'activité
-                        val intentAct = Intent(applicationContext, TempsActivity::class.java)
+                        val intentAct = Intent(this@TachesActivityNext, TacheActivity::class.java)
                         startActivity(intentAct)
                     }
                     val dialog: AlertDialog = builder.create()
@@ -318,7 +268,7 @@ class TachesActivityNext : AppCompatActivity() {
 
 
                     // Message Finale
-                    val builder = AlertDialog.Builder(applicationContext)
+                    val builder = AlertDialog.Builder(this@TachesActivityNext)
                     builder.setTitle("L'envoi a échoué !")
                     builder.setMessage("Essayez à nouveau")
                     builder.setPositiveButton("Ok"){ _, _ ->
@@ -351,13 +301,6 @@ class TachesActivityNext : AppCompatActivity() {
         requestQueue.add(stringRequest)
 
     }
-
-
-
-
-
-
-
 
 
 
@@ -395,12 +338,12 @@ class TachesActivityNext : AppCompatActivity() {
 
 
                 // Message Finale
-                val builder = AlertDialog.Builder(applicationContext)
+                val builder = AlertDialog.Builder(this@TachesActivityNext)
                 builder.setTitle("Envoi réussi !")
                 builder.setMessage("Vos tâches ont été actualisés")
                 builder.setPositiveButton("Ok"){ _, _ ->
                     // Lance l'activité
-                    val intentAct = Intent(applicationContext, TempsActivity::class.java)
+                    val intentAct = Intent(this@TachesActivityNext, TacheActivity::class.java)
                     startActivity(intentAct)
                 }
                 val dialog: AlertDialog = builder.create()
@@ -418,7 +361,7 @@ class TachesActivityNext : AppCompatActivity() {
 
 
                     // Message Finale
-                    val builder = AlertDialog.Builder(applicationContext)
+                    val builder = AlertDialog.Builder(this@TachesActivityNext)
                     builder.setTitle("L'envoi a échoué !")
                     builder.setMessage("Essayez à nouveau")
                     builder.setPositiveButton("Ok"){ _, _ ->
