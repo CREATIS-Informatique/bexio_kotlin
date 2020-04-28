@@ -42,12 +42,9 @@ class TempsActivityItemsNextSemaineDescription : AppCompatActivity() {
 
 
 
+        // Recycler View
         recyclerViewTempsJour.layoutManager = LinearLayoutManager(this)
-        recyclerViewTempsJour.adapter =
-            TempsAdapterNext(
-                tempsList,
-                this
-            )
+        recyclerViewTempsJour.adapter = TempsAdapterNext(tempsList, this)
 
 
 
