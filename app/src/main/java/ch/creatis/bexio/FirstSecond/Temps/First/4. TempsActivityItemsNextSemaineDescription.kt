@@ -61,11 +61,7 @@ class TempsAdapterNext(val items : ArrayList<Temps>, val context: Context) : Rec
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TempsHolderNext {
-        return TempsHolderNext(
-            LayoutInflater.from(
-                context
-            ).inflate(R.layout.activity_temps_items_next_jour, parent, false)
-        )
+        return TempsHolderNext(LayoutInflater.from(context).inflate(R.layout.activity_temps_items_next_jour, parent, false))
     }
 
 
@@ -82,11 +78,13 @@ class TempsAdapterNext(val items : ArrayList<Temps>, val context: Context) : Rec
             val intent = Intent(context, TempsActivityItemsNextJourDescription::class.java)
             intent.putExtra("idBexio", temps.idBexio)
             intent.putExtra("userId", temps.userId)
+            intent.putExtra("client_service_id", temps.client_service_id)
+            intent.putExtra("text", temps.text)
+            intent.putExtra("pr_project_id", temps.pr_project_id)
             intent.putExtra("date", temps.date)
             intent.putExtra("duration", temps.duration)
             intent.putExtra("semaine", temps.semaine)
             intent.putExtra("annee", temps.annee)
-            intent.putExtra("text", temps.text)
             context.startActivity(intent)
         }
 
@@ -114,4 +112,3 @@ class TempsHolderNext (view: View) : RecyclerView.ViewHolder(view) {
         val jourTempsView = view.jourTempsView
 
 }
-
