@@ -1,4 +1,6 @@
-package ch.creatis.bexio.FirstSecond.Temps
+package ch.creatis.bexio.FirstSecond.Temps.FirstSecond
+
+
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +8,8 @@ import androidx.room.Room
 import ch.creatis.bexio.R
 import ch.creatis.bexio.Room.AppDatabase
 import kotlinx.android.synthetic.main.activity_temps_items_next_jour_description.*
+
+
 
 class TempsActivityItemsNextJourDescription : AppCompatActivity() {
 
@@ -40,6 +44,7 @@ class TempsActivityItemsNextJourDescription : AppCompatActivity() {
         dateLabel.text = date
         projetLabel.text = "Test"
         dureeLabel.text = duration
+        interlocuteurLabel.text = userDAOFinal.firstname + " " + userDAOFinal.lastname
 
 
 

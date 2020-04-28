@@ -1,4 +1,4 @@
-package ch.creatis.bexio.FirstSecond.Temps
+package ch.creatis.bexio.FirstSecond.Temps.First
 
 
 
@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import ch.creatis.bexio.FirstSecond.Temps.FirstSecond.TempsActivityItemsNextJourDescription
 import ch.creatis.bexio.R
 import ch.creatis.bexio.Room.AppDatabase
 import ch.creatis.bexio.Room.Temps
@@ -42,7 +43,11 @@ class TempsActivityItemsNextSemaineDescription : AppCompatActivity() {
 
 
         recyclerViewTempsJour.layoutManager = LinearLayoutManager(this)
-        recyclerViewTempsJour.adapter = TempsAdapterNext(tempsList, this)
+        recyclerViewTempsJour.adapter =
+            TempsAdapterNext(
+                tempsList,
+                this
+            )
 
 
 

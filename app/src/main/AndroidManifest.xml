@@ -13,8 +13,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity android:name=".FirstSecond.TachesActivityNext" />
-        <activity android:name=".FirstSecond.Temps.TempsActivityItemsNextSemaineDescription" />
-        <activity android:name=".FirstSecond.Temps.TempsActivityItemsNextJourDescription"></activity>
+        <activity android:name=".FirstSecond.Temps.First.TempsActivityItemsNextSemaineDescription" />
+        <activity android:name=".FirstSecond.Temps.FirstSecond.TempsActivityItemsNextJourDescription"></activity>
         <activity android:name="ch.creatis.bexio.TachesTemps.Taches.ProjetsActivityNextSaisieTaches" />
         <activity android:name="ch.creatis.bexio.TachesTemps.Temps.First.ProjetsActivityNextSaisieTemps" />
         <activity android:name=".FirstSecond.ProjetsActivityNext" />

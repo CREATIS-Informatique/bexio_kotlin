@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import ch.creatis.bexio.R
 import ch.creatis.bexio.TachesTemps.Temps.First.ProjetsActivityNextSaisieTemps
-import ch.creatis.bexio.FirstSecond.Temps.TempsActivityItemsNextSemaineDescription
+import ch.creatis.bexio.FirstSecond.Temps.First.TempsActivityItemsNextSemaineDescription
 import ch.creatis.bexio.Room.AppDatabase
 import ch.creatis.bexio.Room.Semaines
 import ch.creatis.bexio.Room.Temps
