@@ -70,16 +70,17 @@ import kotlin.collections.HashMap
 
 
         val sharedPreferences = getSharedPreferences("Bexio", Context.MODE_PRIVATE)
-
-
-
         var refreshToken = sharedPreferences.getString("REFRESHTOKEN", "")
 
 
 
         // Première installation
         if(refreshToken == ""){
-            webViewIsVisible() }
+
+            // Connexion première
+            webViewIsVisible()
+
+        }
 
 
 
@@ -88,10 +89,6 @@ import kotlin.collections.HashMap
 
             // Connexion régulière
             getAccessTokenAllTime()
-
-            // Connexion régulière
-            val intentAct = Intent(this@LoginActivity, MainActivity::class.java)
-            startActivity(intentAct)
 
         }
 
@@ -390,7 +387,15 @@ import kotlin.collections.HashMap
             editor.putString("companyUserIdDecode", companyUserIdDecode)
             editor.commit()
 
+            // -------------------------------------------------------------------------------------
 
+
+
+            makeAllDataRequest()
+
+
+
+            // -------------------------------------------------------------------------------------
 
         }, Response.ErrorListener {})
 
