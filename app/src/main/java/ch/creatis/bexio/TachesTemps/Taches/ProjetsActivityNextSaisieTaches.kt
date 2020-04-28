@@ -27,7 +27,7 @@ class ProjetsActivityNextSaisieTaches : AppCompatActivity() {
 
 
     var dateFinal = ""
-    var tempsFinal = ""
+    var heureFinal = ""
 
 
 
@@ -74,11 +74,11 @@ class ProjetsActivityNextSaisieTaches : AppCompatActivity() {
         val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
             cal2.set(Calendar.HOUR_OF_DAY, hour)
             cal2.set(Calendar.MINUTE, minute)
-            tempsFinal = SimpleDateFormat("HH:mm:ss").format(cal2.time)
+            heureFinal = SimpleDateFormat("HH:mm").format(cal2.time)
 
 
 
-            dateLimite.text = dateFinal + " - " + tempsFinal
+            heureLimite.text = heureFinal
 
 
 
@@ -146,8 +146,8 @@ class ProjetsActivityNextSaisieTaches : AppCompatActivity() {
 
 
         var dateFinalFinal = "2019-08-07 "
-        var tempsFinalFinal = tempsFinal
-        var timeStampFinalFinal = dateFinalFinal + tempsFinalFinal
+        var heureFinalFinal = heureFinal + ":00"
+        var timeStampFinalFinal = dateFinalFinal + heureFinalFinal
 
 
 
