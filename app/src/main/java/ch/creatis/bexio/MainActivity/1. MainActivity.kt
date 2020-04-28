@@ -11,7 +11,7 @@ import android.os.Build
 import ch.creatis.bexio.First.*
 import ch.creatis.bexio.R
 import ch.creatis.bexio.Reglages.ReglagesActivity
-import kotlinx.android.synthetic.main.activity_a_main.*
+import kotlinx.android.synthetic.main.x_activity_a_main.*
 
 
 
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_a_main)
+        setContentView(R.layout.x_activity_a_main)
 
 
 

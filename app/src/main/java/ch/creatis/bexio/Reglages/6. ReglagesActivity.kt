@@ -9,7 +9,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import ch.creatis.bexio.R
-import kotlinx.android.synthetic.main.activity_reglages.*
+import kotlinx.android.synthetic.main.x_activity_reglages.*
 
 
 class ReglagesActivity : AppCompatActivity() {
@@ -18,7 +18,7 @@ class ReglagesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_reglages)
+        setContentView(R.layout.x_activity_reglages)
 
 
 

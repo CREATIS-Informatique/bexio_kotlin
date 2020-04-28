@@ -4,20 +4,18 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ch.creatis.bexio.First.TempsActivity
 import ch.creatis.bexio.R
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.fragment_activity_projets_next_saisie_temps_second.*
+import kotlinx.android.synthetic.main.z_fragment_activity_projets_next_saisie_temps_second.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -36,7 +34,7 @@ class ActivityProjetsNextSaisieTempsSecond : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.fragment_activity_projets_next_saisie_temps_second, container, false)
+        return inflater!!.inflate(R.layout.z_fragment_activity_projets_next_saisie_temps_second, container, false)
     }
 
 

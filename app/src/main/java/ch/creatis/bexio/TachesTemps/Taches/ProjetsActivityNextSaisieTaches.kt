@@ -4,18 +4,15 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import ch.creatis.bexio.First.TempsActivity
 import ch.creatis.bexio.R
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.activity_projets_next_saisie_taches.*
+import kotlinx.android.synthetic.main.z_activity_projets_next_saisie_taches.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -27,7 +24,7 @@ class ProjetsActivityNextSaisieTaches : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_projets_next_saisie_taches)
+        setContentView(R.layout.z_activity_projets_next_saisie_taches)
 
 
         var date = ""
@@ -147,7 +144,9 @@ class ProjetsActivityNextSaisieTaches : AppCompatActivity() {
         try
         {
             jsonObject.put("user_id", companyUserIdDecode)
-            jsonObject.put("subject", "TESTESTESTEST")
+            jsonObject.put("finish_date", dateLimite.text)
+            jsonObject.put("subject", objetInputText.text)
+            jsonObject.put("info", remarquesInputText.text)
             jsonArray.put(jsonObject)
         }
         catch (e:Exception) {

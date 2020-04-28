@@ -11,7 +11,7 @@ import ch.creatis.bexio.TachesTemps.Temps.FirstSecond.Pager.MyPagerAdapter
 import ch.creatis.bexio.R
 import ch.creatis.bexio.Room.Activite
 import ch.creatis.bexio.Room.AppDatabase
-import kotlinx.android.synthetic.main.activity_projets_next_saisie_temps.*
+import kotlinx.android.synthetic.main.z_activity_projets_next_saisie_temps.*
 
 class ProjetsActivityNextSaisieTemps : AppCompatActivity() {
 
@@ -20,7 +20,7 @@ class ProjetsActivityNextSaisieTemps : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_projets_next_saisie_temps)
+        setContentView(R.layout.z_activity_projets_next_saisie_temps)
 
 
 
@@ -50,7 +50,7 @@ class ProjetsActivityNextSaisieTemps : AppCompatActivity() {
         if (spinner != null) {
             
 
-            val adapter = ArrayAdapter(this, R.layout.spinner_color, activiteListFiltered)
+            val adapter = ArrayAdapter(this, R.layout.y_spinner_color, activiteListFiltered)
 
 
             spinner.adapter = adapter

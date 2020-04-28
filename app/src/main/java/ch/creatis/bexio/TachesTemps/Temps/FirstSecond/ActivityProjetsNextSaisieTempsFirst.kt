@@ -2,27 +2,22 @@ package ch.creatis.bexio.TachesTemps.Temps.FirstSecond
 
 
 
-import android.app.ActivityManager
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import ch.creatis.bexio.First.TempsActivity
-import ch.creatis.bexio.MainActivity.MainActivity
 import ch.creatis.bexio.R
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.fragment_activity_projets_next_saisie_temps_first.*
+import kotlinx.android.synthetic.main.z_fragment_activity_projets_next_saisie_temps_first.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -40,7 +35,7 @@ class ActivityProjetsNextSaisieTempsFirst : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.fragment_activity_projets_next_saisie_temps_first, container, false)
+        return inflater!!.inflate(R.layout.z_fragment_activity_projets_next_saisie_temps_first, container, false)
     }
 
 

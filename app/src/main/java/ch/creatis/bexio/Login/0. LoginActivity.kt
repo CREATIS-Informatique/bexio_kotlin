@@ -17,7 +17,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.x_activity_login.*
 import org.json.JSONArray
 import org.json.JSONObject
 import ch.creatis.bexio.R
@@ -66,7 +66,7 @@ import kotlin.collections.HashMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.x_activity_login)
 
 
 
