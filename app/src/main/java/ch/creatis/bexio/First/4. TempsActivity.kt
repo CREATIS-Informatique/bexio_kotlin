@@ -137,7 +137,7 @@ class TempsActivity : AppCompatActivity() {
 
 
 
-                        val idBexio= response.getJSONObject(i)["id"].toString()
+                        val idBexio= response.getJSONObject(i)["id"].toString().toInt()
 
                         var userId = response.getJSONObject(i)["user_id"].toString().toInt()
 

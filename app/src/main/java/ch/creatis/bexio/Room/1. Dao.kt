@@ -29,6 +29,12 @@ interface ActiviteDAO {
 
 
 
+    @Query("SELECT * FROM activites WHERE idBexio == :idBexio")
+    // Retourne une classe et non une liste de classe comme d'habitude
+    fun getItemsByIdbexio(idBexio: Int): Activite
+
+
+
 }
 
 
@@ -103,35 +109,6 @@ interface ProjetDAO {
 
 
 @Dao
-interface TempsDAO {
-
-
-
-    @Query("DELETE FROM temps")
-    fun delete()
-
-
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(items: Temps)
-
-
-
-    @Query("SELECT * FROM temps WHERE annee == :annee ORDER BY idBexio DESC ")
-    fun getItems(annee: String): List<Temps>
-
-
-
-    @Query("SELECT * FROM temps WHERE semaine == :numero")
-    fun getTempsByNumeroSemaine(numero: String): List<Temps>
-
-
-
-}
-
-
-
-@Dao
 interface SemaineDAO{
 
 
@@ -177,6 +154,35 @@ interface TachesDAO {
 
     // @Query("SELECT * FROM taches WHERE type == :type ORDER BY nom")
     // fun getItemsByType(type: String): List<Tache>
+
+
+
+}
+
+
+
+@Dao
+interface TempsDAO {
+
+
+
+    @Query("DELETE FROM temps")
+    fun delete()
+
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(items: Temps)
+
+
+
+    @Query("SELECT * FROM temps WHERE annee == :annee ORDER BY idBexio DESC ")
+    fun getItems(annee: String): List<Temps>
+
+
+
+    @Query("SELECT * FROM temps WHERE semaine == :numero")
+    fun getTempsByNumeroSemaine(numero: String): List<Temps>
 
 
 
