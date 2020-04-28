@@ -7,7 +7,7 @@ import android.os.Bundle
 import androidx.room.Room
 import ch.creatis.bexio.R
 import ch.creatis.bexio.Room.AppDatabase
-import kotlinx.android.synthetic.main.activity_temps_items_next_jour_description.*
+import kotlinx.android.synthetic.main.activity_temps_second_items_next_jour_description.*
 
 
 
@@ -17,7 +17,7 @@ class TempsActivityItemsNextJourDescription : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_temps_items_next_jour_description)
+        setContentView(R.layout.activity_temps_second_items_next_jour_description)
 
 
 
@@ -60,6 +60,9 @@ class TempsActivityItemsNextJourDescription : AppCompatActivity() {
         dureeLabel.text = duration
         interlocuteurLabel.text = userDAOFinal.firstname + " " + userDAOFinal.lastname
         descriptionLabel.text = text
+
+
+
 
 
 

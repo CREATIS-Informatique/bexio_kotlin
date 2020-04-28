@@ -25,8 +25,8 @@ import ch.creatis.bexio.Room.Temps
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.activity_temps_items_semaine_a.*
-import kotlinx.android.synthetic.main.activity_temps_items_semaine.view.*
+import kotlinx.android.synthetic.main.activity_temps_first_items_semaine_a.*
+import kotlinx.android.synthetic.main.activity_temps_first_items_semaine_b.view.*
 import org.json.JSONArray
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -54,7 +54,7 @@ class TempsActivity : AppCompatActivity() {
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_temps_items_semaine_a)
+            setContentView(R.layout.activity_temps_first_items_semaine_a)
 
 
 
@@ -416,7 +416,7 @@ class TempsAdapter(val items : ArrayList<Semaines>, val context: Context) : Recy
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TempsHolder {
         return TempsHolder(
             LayoutInflater.from(context).inflate(
-                R.layout.activity_temps_items_semaine,
+                R.layout.activity_temps_first_items_semaine_b,
                 parent,
                 false
             )

@@ -206,7 +206,7 @@ class ActivityProjetsNextSaisieTempsFirst : Fragment() {
             builder.setPositiveButton("Ok"){ _, _ ->
                 // Lance l'activité
                 getActivity()!!.onBackPressed()
-                
+
             }
             val dialog: AlertDialog = builder.create()
             dialog.show()
