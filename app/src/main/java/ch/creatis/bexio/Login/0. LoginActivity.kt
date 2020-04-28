@@ -23,6 +23,7 @@ import org.json.JSONObject
 import ch.creatis.bexio.R
 import ch.creatis.bexio.Room.*
 import com.auth0.android.jwt.JWT
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
@@ -871,29 +872,82 @@ import kotlin.collections.HashMap
             for (i in 0 until response.length()) {
 
 
+
                 val idBexio= response.getJSONObject(i)["id"].toString()
+
                 var userId = response.getJSONObject(i)["user_id"].toString().toInt()
-                val date= response.getJSONObject(i)["date"].toString()
+
+                var client_service_id = response.getJSONObject(i)["client_service_id"].toString().toInt()
+
+                var text = response.getJSONObject(i)["text"].toString()
+
+                var pr_project_id = response.getJSONObject(i)["pr_project_id"].toString()
+                if(pr_project_id != "null"){
+                    pr_project_id.toInt()
+                } else{
+                    pr_project_id = "0"
+                }
+
                 var duration = response.getJSONObject(i)["duration"].toString()
                 if (duration.length == 4){ duration = "0$duration"}
-                // Ajout du numéro de la semaine
-                val dateConverter = SimpleDateFormat("yyyy-MM-dd").parse(date)
+
+
+
+                // ------------------------------ Date -------------------------------------
+
+                // Format d'entrée
+                var inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
+                // Format de sortie
+                var outputFormat: DateFormat = SimpleDateFormat("dd.MM.yyyy")
+                // Converter
+                var convert = inputFormat.parse(response.getJSONObject(i)["date"].toString())
+
+
+
+                // Ajout de la date
+                var date = outputFormat.format(convert)
+
+
+
+                // Init de l'objet
+                val dateConverter = SimpleDateFormat("dd.MM.yyyy").parse(date)
                 val calendar = Calendar.getInstance()
                 calendar.time = dateConverter
+
+
+
+                // Ajout de la semaine
                 val semaine = calendar.get(Calendar.WEEK_OF_YEAR).toString()
-                var text = response.getJSONObject(i)["text"].toString()
+
+                // Ajout de l'année
+                val annee = calendar.get(Calendar.YEAR).toString()
+
+                // ------------------------------ Date -------------------------------------
 
 
 
                 // Création de la classe
-                val temps = Temps(null, idBexio, userId ,date, duration, semaine, "2020",text)
+                val temps = Temps(null, idBexio, userId, client_service_id, text, pr_project_id.toInt(), date, duration, semaine, annee)
+
+
 
                 // Tri selon l'utilisateur
                 if(response.getJSONObject(i)["user_id"] == 1){ tempsListDatabase.add(temps)}
 
+
+
             }
 
             // ------------------------------------------ Class Temps -----------------------------------------------
+
+
+
+
+
+
+
+
+
 
 
 
@@ -963,6 +1017,14 @@ import kotlin.collections.HashMap
 
 
             // ------------------------------------------ Class Semaines -----------------------------------------------
+
+
+
+
+
+
+
+
 
 
 

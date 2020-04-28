@@ -131,8 +131,6 @@ class TempsActivity : AppCompatActivity() {
 
 
 
-
-
                     // ------------------------------------------ Class Temps -----------------------------------------------
 
                     for (i in 0 until response.length()) {
@@ -140,15 +138,29 @@ class TempsActivity : AppCompatActivity() {
 
 
                         val idBexio= response.getJSONObject(i)["id"].toString()
+
                         var userId = response.getJSONObject(i)["user_id"].toString().toInt()
+
+                        var client_service_id = response.getJSONObject(i)["client_service_id"].toString().toInt()
+
+                        var text = response.getJSONObject(i)["text"].toString()
+
+                        var pr_project_id = response.getJSONObject(i)["pr_project_id"].toString()
+                        if(pr_project_id != "null"){
+                            pr_project_id.toInt()
+                        } else{
+                            pr_project_id = "0"
+                        }
+
                         var duration = response.getJSONObject(i)["duration"].toString()
                         if (duration.length == 4){ duration = "0$duration"}
 
 
 
                         // ------------------------------ Date -------------------------------------
+
                         // Format d'entrée
-                        var inputFormat:DateFormat = SimpleDateFormat("yyyy-MM-dd")
+                        var inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
                         // Format de sortie
                         var outputFormat: DateFormat = SimpleDateFormat("dd.MM.yyyy")
                         // Converter
@@ -161,7 +173,7 @@ class TempsActivity : AppCompatActivity() {
 
 
 
-                        // --------------------------- Init de l'objet ----------------------------
+                        // Init de l'objet
                         val dateConverter = SimpleDateFormat("dd.MM.yyyy").parse(date)
                         val calendar = Calendar.getInstance()
                         calendar.time = dateConverter
@@ -171,20 +183,15 @@ class TempsActivity : AppCompatActivity() {
                         // Ajout de la semaine
                         val semaine = calendar.get(Calendar.WEEK_OF_YEAR).toString()
 
-
-
                         // Ajout de l'année
                         val annee = calendar.get(Calendar.YEAR).toString()
 
-
-
-                        // Ajoute du texte
-                        var text = response.getJSONObject(i)["text"].toString()
+                        // ------------------------------ Date -------------------------------------
 
 
 
                         // Création de la classe
-                        val temps = Temps(null, idBexio, userId, date, duration, semaine, annee, text)
+                        val temps = Temps(null, idBexio, userId, client_service_id, text, pr_project_id.toInt(), date, duration, semaine, annee)
 
 
 

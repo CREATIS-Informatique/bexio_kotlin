@@ -161,7 +161,7 @@ data class Tache(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var idBexio:
 
 
 @Entity(tableName = "temps")
-data class Temps(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var idBexio: String?, var userId: Int?, var date: String?, var duration: String?, var semaine: String?, var annee: String? , var text: String? ) {
+data class Temps(@PrimaryKey(autoGenerate = true) var idRoom: Int?, var idBexio: String?, var userId: Int?, var client_service_id: Int?, var text: String?, var pr_project_id: Int?, var date: String?, var duration: String?, var semaine: String?, var annee: String?) {
 
 
 
