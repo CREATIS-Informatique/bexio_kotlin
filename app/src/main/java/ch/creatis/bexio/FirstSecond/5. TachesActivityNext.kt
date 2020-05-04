@@ -46,7 +46,9 @@ class TachesActivityNext : AppCompatActivity() {
         var project_id = intent.getIntExtra("project_id",0)
         var subject = intent.getStringExtra("subject")
         var user_id = intent.getIntExtra("user_id",0)
+        println("Here Here Here Here Here Here Here Here Here Here Here Here Here Here Here Here ")
         var finish_date = intent.getStringExtra("finish_date")
+        println(finish_date)
         var contact_id = intent.getIntExtra("contact_id",0)
         // Reprend directement sa valeur
         var todo_status_id = intent.getIntExtra("todo_status_id",0)
@@ -81,13 +83,17 @@ class TachesActivityNext : AppCompatActivity() {
         interlocuteurName.text = "Aucune indication"
 
 
-
-        var inputText = finish_date
-        var inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US)
-        var dateInput = inputFormat.parse(inputText)
-        var outputFormat: DateFormat = SimpleDateFormat("dd.MM.yy HH:mm", Locale.US)
-        var dateOutput = outputFormat.format(dateInput)
-        dureeName.text = dateOutput
+        // Date - Utilise aussi la date
+        if(finish_date == "null"){
+            dureeName.text = "Aucune indication"
+        } else {
+            var inputText = finish_date
+            var inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US)
+            var dateInput = inputFormat.parse(inputText)
+            var outputFormat: DateFormat = SimpleDateFormat("dd.MM.yy HH:mm", Locale.US)
+            var dateOutput = outputFormat.format(dateInput)
+            dureeName.text = dateOutput
+        }
 
 
 
@@ -96,19 +102,21 @@ class TachesActivityNext : AppCompatActivity() {
 
 
 
-        // Statut - 2020-04-29 13:15:00
+//        Statut - Utilise aussi la date - 2020-04-29 13:15:00
+//        int compare = date1.compareTo(date2);
+//        compare > 0, if date2 is greater than date1
+//        compare < 0, if date2 is smaller than date1
+//        compare = 0, if date1 is equal to date2
 
+
+
+        // Statut - Le formatage de la date
         val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
         val currentDate = sdf.format(Date())
 
-//        int compare = date1.compareTo(date2);
-//
-//        compare > 0, if date2 is greater than date1
-//
-//        compare < 0, if date2 is smaller than date1
-//
-//        compare = 0, if date1 is equal to date2
 
+
+        // Statut - Les images des statuts avec la comparaison de la date
         if(todo_status_id == 1 && finish_date.isNullOrEmpty()){
             statutName.text = "En suspens"
             statutName.setBackgroundResource(R.drawable.taches_activity_items_status_en_suspens)

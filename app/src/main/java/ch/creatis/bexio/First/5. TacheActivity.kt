@@ -266,26 +266,30 @@ class TachesAdapter(val items : ArrayList<Tache>, val context: Context) : Recycl
 
 
 
+        println(items[position].finish_date)
+
+
+
         // Sujet
         holder.viewObjet.text = items[position].subject
 
 
 
-        // 2020-04-29 13:15:00
-        val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
-        val currentDate = sdf.format(Date())
-
+//        Statut - 2020-04-29 13:15:00
 //        int compare = date1.compareTo(date2);
-//
 //        compare > 0, if date2 is greater than date1
-//
 //        compare < 0, if date2 is smaller than date1
-//
 //        compare = 0, if date1 is equal to date2
 
 
 
-        // Statut
+        // Statut - Le formatage de la date
+        val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
+        val currentDate = sdf.format(Date())
+
+
+
+        // Statut - Les images des statuts avec la comparaison de la date
         if(items[position].todo_status_id == 1 && items[position].finish_date!!.isNullOrEmpty()){
             holder.viewStatus.text = "En suspens"
             holder.viewStatus.setBackgroundResource(R.drawable.taches_activity_items_status_en_suspens)
@@ -308,6 +312,7 @@ class TachesAdapter(val items : ArrayList<Tache>, val context: Context) : Recycl
 
 
 
+        // Intent
         var tache= items[position]
         holder.tacheView.setOnClickListener {
             val intent = Intent(context, TachesActivityNext::class.java)
