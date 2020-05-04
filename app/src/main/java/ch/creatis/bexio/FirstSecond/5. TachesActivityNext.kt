@@ -46,9 +46,7 @@ class TachesActivityNext : AppCompatActivity() {
         var project_id = intent.getIntExtra("project_id",0)
         var subject = intent.getStringExtra("subject")
         var user_id = intent.getIntExtra("user_id",0)
-        println("Here Here Here Here Here Here Here Here Here Here Here Here Here Here Here Here ")
         var finish_date = intent.getStringExtra("finish_date")
-        println(finish_date)
         var contact_id = intent.getIntExtra("contact_id",0)
         // Reprend directement sa valeur
         var todo_status_id = intent.getIntExtra("todo_status_id",0)
@@ -64,41 +62,46 @@ class TachesActivityNext : AppCompatActivity() {
 
 
 
-        // --------------------------------------------------- Les variables Projet
+        // --------------------------------------------------- Les variables Projet qui dépendent de la base de donnée
 
         // Projet ID
-        var projetId = ""
-        if (project_id == 0){ projetId = "" } else{ projetId = projetsDAO.getItemsByIdbexio(project_id).name.toString() }
+        var projetId = "Aucune indication"
+        if (project_id == 0){ projetId = "Aucune indication" } else{ projetId = projetsDAO.getItemsByIdbexio(project_id).name.toString()}
+
         // Users
-        var userId = usersDAO.getItemsByIdbexio(user_id)
+        var userId = "Aucune indication"
+        if (user_id == 0){ userId = "Aucune indication" } else{ userId = usersDAO.getItemsByIdbexio(user_id).firstname.toString() + " " + usersDAO.getItemsByIdbexio(user_id).lastname.toString() }
+
         // Contacts
-        var contactId = contactsDAO.getItemsByIdbexio(contact_id)
+        var contactId = "Aucune indication"
+        if (contact_id == 0){ contactId = "Aucune indication" } else{ contactId = contactsDAO.getItemsByIdbexio(contact_id).name_un.toString()}
 
 
 
         // --------------------------------------------------- Les labels
 
         tacheName.text = subject
-        projectName.text = "Aucune indication"
-        interlocuteurName.text = "Aucune indication"
+        projectName.text = projetId
+        interlocuteurName.text = userId
+
 
 
         // Date - Utilise aussi la date
         if(finish_date == "null"){
-            dureeName.text = "Aucune indication"
+            dateName.text = "Aucune indication"
         } else {
             var inputText = finish_date
             var inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US)
             var dateInput = inputFormat.parse(inputText)
             var outputFormat: DateFormat = SimpleDateFormat("dd.MM.yy HH:mm", Locale.US)
             var dateOutput = outputFormat.format(dateInput)
-            dureeName.text = dateOutput
+            dateName.text = dateOutput
         }
 
 
 
         priorityName.text = "Aucune indication"
-        contactName.text = "Aucune indication"
+        contactName.text = contactId
 
 
 
