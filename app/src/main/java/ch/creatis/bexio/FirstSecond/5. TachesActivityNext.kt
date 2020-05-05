@@ -65,7 +65,7 @@ class TachesActivityNext : AppCompatActivity() {
 
         // --------------------------------------------------- Les variables Projet qui dépendent de la base de donnée
 
-        
+
 
         // Projet ID
         var projetId = "Aucune indication"
