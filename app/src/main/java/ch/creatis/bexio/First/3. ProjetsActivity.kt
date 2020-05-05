@@ -281,6 +281,7 @@ class ProjetsAdapter(val items : ArrayList<Projet>, val context: Context) : Recy
         val projet= items[position]
         holder.projetsView.setOnClickListener {
             val intent = Intent(context, ProjetsActivityNext::class.java)
+            intent.putExtra("idBexio", projet.idBexio)
             intent.putExtra("name", projet.name)
             intent.putExtra("start_date", projet.start_date)
             intent.putExtra("end_date", projet.end_date)

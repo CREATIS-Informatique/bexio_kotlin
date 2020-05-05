@@ -22,6 +22,7 @@ class ProjetsActivityNext : AppCompatActivity() {
 
 
 
+        var idBexioProject = intent.getStringExtra("idBexio")
         var name = intent.getStringExtra("name")
         var start_date = intent.getStringExtra("start_date")
         var end_date = intent.getStringExtra("end_date")
@@ -58,6 +59,7 @@ class ProjetsActivityNext : AppCompatActivity() {
         saisirTempsProjet.setOnClickListener {
 
             val intent = Intent(this, ProjetsActivityNextSaisieTemps::class.java)
+            intent.putExtra("project_id", idBexioProject)
             startActivity(intent)
 
         }
