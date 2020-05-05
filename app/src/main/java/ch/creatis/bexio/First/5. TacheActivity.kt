@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import ch.creatis.bexio.R
-import ch.creatis.bexio.TachesTemps.Taches.ProjetsActivityNextSaisieTaches
+import ch.creatis.bexio.FirstTachesTemps.Taches.ProjetsActivityNextSaisieTaches
 import ch.creatis.bexio.FirstSecond.TachesActivityNext
 import ch.creatis.bexio.Room.AppDatabase
 import ch.creatis.bexio.Room.Tache

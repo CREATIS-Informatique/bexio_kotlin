@@ -5,8 +5,8 @@ package ch.creatis.bexio.FirstSecond
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import ch.creatis.bexio.TachesTemps.Taches.ProjetsActivityNextSaisieTaches
-import ch.creatis.bexio.TachesTemps.Temps.First.ProjetsActivityNextSaisieTemps
+import ch.creatis.bexio.FirstTachesTemps.Taches.ProjetsActivityNextSaisieTaches
+import ch.creatis.bexio.FirstTachesTemps.Temps.First.ProjetsActivityNextSaisieTemps
 import ch.creatis.bexio.R
 import kotlinx.android.synthetic.main.activity_projets_next.*
 
@@ -59,7 +59,7 @@ class ProjetsActivityNext : AppCompatActivity() {
         saisirTempsProjet.setOnClickListener {
 
             val intent = Intent(this, ProjetsActivityNextSaisieTemps::class.java)
-            intent.putExtra("project_id", idBexioProject)
+            intent.putExtra("project_id_from_project_activity", idBexioProject)
             startActivity(intent)
 
         }

@@ -1,10 +1,10 @@
-package ch.creatis.bexio.TachesTemps.Temps.FirstSecond.Pager
+package ch.creatis.bexio.FirstTachesTemps.Temps.FirstSecond.Pager
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import ch.creatis.bexio.TachesTemps.Temps.FirstSecond.ActivityProjetsNextSaisieTempsFirst
-import ch.creatis.bexio.TachesTemps.Temps.FirstSecond.ActivityProjetsNextSaisieTempsSecond
+import ch.creatis.bexio.FirstTachesTemps.Temps.FirstSecond.ActivityProjetsNextSaisieTempsFirst
+import ch.creatis.bexio.FirstTachesTemps.Temps.FirstSecond.ActivityProjetsNextSaisieTempsSecond
 
 class MyPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 

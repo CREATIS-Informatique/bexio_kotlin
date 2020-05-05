@@ -1,10 +1,9 @@
-package ch.creatis.bexio.TachesTemps.Taches
+package ch.creatis.bexio.FirstTachesTemps.Taches
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import ch.creatis.bexio.R
@@ -18,9 +17,6 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class ProjetsActivityNextSaisieTaches : AppCompatActivity() {

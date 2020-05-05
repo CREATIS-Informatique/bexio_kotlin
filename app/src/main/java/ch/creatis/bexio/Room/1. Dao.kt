@@ -28,10 +28,17 @@ interface ActiviteDAO {
     fun getItems(): List<Activite>
 
 
-
+    // Pour retrouber le nom avec l'ID
     @Query("SELECT * FROM activites WHERE idBexio == :idBexio")
     // Retourne une classe et non une liste de classe comme d'habitude
     fun getItemsByIdbexio(idBexio: Int): Activite
+
+
+
+    // Pour retrouver l'ID avec le nom
+    @Query("SELECT * FROM activites WHERE name == :name")
+    // Retourne une classe et non une liste de classe comme d'habitude
+    fun getItemsIDByName(name: String): Activite
 
 
 

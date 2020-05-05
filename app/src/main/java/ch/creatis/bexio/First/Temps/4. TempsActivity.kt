@@ -1,4 +1,4 @@
-package ch.creatis.bexio.First
+package ch.creatis.bexio.First.Temps
 
 
 
@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import ch.creatis.bexio.R
-import ch.creatis.bexio.TachesTemps.Temps.First.ProjetsActivityNextSaisieTemps
+import ch.creatis.bexio.FirstTachesTemps.Temps.First.ProjetsActivityNextSaisieTemps
 import ch.creatis.bexio.FirstSecond.Temps.First.TempsActivityItemsNextSemaineDescription
 import ch.creatis.bexio.Room.AppDatabase
 import ch.creatis.bexio.Room.Semaines
@@ -66,7 +66,8 @@ class TempsActivity : AppCompatActivity() {
 
             // Recycler View - Placer avant la requête
             recyclerViewTemps.layoutManager = LinearLayoutManager(this)
-            recyclerViewTemps.adapter = TempsAdapter(semaineList, this)
+            recyclerViewTemps.adapter =
+                TempsAdapter(semaineList, this)
 
 
 
@@ -384,7 +385,8 @@ class TempsActivity : AppCompatActivity() {
 
             // Très important - Rafraîchit la tableView après la requête
             recyclerViewTemps.layoutManager = LinearLayoutManager(this)
-            recyclerViewTemps.adapter = TempsAdapter(semaineList, this)
+            recyclerViewTemps.adapter =
+                TempsAdapter(semaineList, this)
         }
 
     }

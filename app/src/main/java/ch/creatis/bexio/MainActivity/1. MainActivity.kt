@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import android.os.Build
 import ch.creatis.bexio.First.*
+import ch.creatis.bexio.First.Temps.TempsActivity
 import ch.creatis.bexio.R
 import ch.creatis.bexio.Reglages.ReglagesActivity
 import kotlinx.android.synthetic.main.x_activity_a_main.*

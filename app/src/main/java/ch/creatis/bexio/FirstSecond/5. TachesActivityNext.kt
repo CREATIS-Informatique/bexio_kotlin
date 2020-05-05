@@ -8,7 +8,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.room.Room
-import ch.creatis.bexio.TachesTemps.Temps.First.ProjetsActivityNextSaisieTemps
+import ch.creatis.bexio.FirstTachesTemps.Temps.First.ProjetsActivityNextSaisieTemps
 import ch.creatis.bexio.R
 import ch.creatis.bexio.Room.AppDatabase
 import com.android.volley.AuthFailureError

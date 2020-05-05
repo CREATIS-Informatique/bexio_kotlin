@@ -1,4 +1,4 @@
-package ch.creatis.bexio.TachesTemps.Temps.FirstSecond
+package ch.creatis.bexio.FirstTachesTemps.Temps.FirstSecond
 
 
 
@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import ch.creatis.bexio.FirstTachesTemps.Temps.First.ProjetsActivityNextSaisieTemps.Companion.IDBEXIOPROJECTCOMPANION
 import ch.creatis.bexio.R
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
@@ -163,6 +164,7 @@ class ActivityProjetsNextSaisieTempsFirst : Fragment() {
 
         try
         {
+            // Format utilisé pour le tracking
             jsonObjectTracking.put("type", "duration")
             jsonObjectTracking.put("date", dateInfo)
             jsonObjectTracking.put("duration", dureeInfo)
@@ -177,7 +179,9 @@ class ActivityProjetsNextSaisieTempsFirst : Fragment() {
         {
             jsonObject.put("user_id", companyUserIdDecode)
             jsonObject.put("client_service_id", 2)
+            jsonObject.put("pr_project_id", IDBEXIOPROJECTCOMPANION.toInt())
             jsonObject.put("allowable_bill", false)
+            // Le tracking
             jsonObject.put("tracking", jsonObjectTracking)
             jsonArray.put(jsonObject)
         }

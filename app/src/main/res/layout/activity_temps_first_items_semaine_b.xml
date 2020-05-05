@@ -8,7 +8,7 @@
         android:layout_margin="10dp"
         android:background="@drawable/temps_items_background"
         android:elevation="3dp"
-        tools:context=".First.TempsActivity"
+        tools:context=".First.Temps.TempsActivity"
         android:orientation="vertical">
 
     <FrameLayout

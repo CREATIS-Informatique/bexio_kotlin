@@ -1,4 +1,4 @@
-package ch.creatis.bexio.TachesTemps.Temps.First
+package ch.creatis.bexio.FirstTachesTemps.Temps.First
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.room.Room
-import ch.creatis.bexio.TachesTemps.Temps.FirstSecond.Pager.MyPagerAdapter
+import ch.creatis.bexio.FirstTachesTemps.Temps.FirstSecond.Pager.MyPagerAdapter
 import ch.creatis.bexio.R
 import ch.creatis.bexio.Room.Activite
 import ch.creatis.bexio.Room.AppDatabase
@@ -21,6 +21,10 @@ class ProjetsActivityNextSaisieTemps : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.z_activity_projets_next_saisie_temps)
+
+
+        // La variable qui est utilisée pour connaitre l'ID du project lors d'une saise de temps
+        IDBEXIOPROJECTCOMPANION = intent.getStringExtra("project_id_from_project_activity")
 
 
 
@@ -44,12 +48,7 @@ class ProjetsActivityNextSaisieTemps : AppCompatActivity() {
 
 
         val spinner = findViewById<Spinner>(R.id.spinnerActivities)
-
-
-
         if (spinner != null) {
-            
-
             val adapter = ArrayAdapter(this, R.layout.y_spinner_color, activiteListFiltered)
 
 
@@ -58,7 +57,10 @@ class ProjetsActivityNextSaisieTemps : AppCompatActivity() {
 
                 override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
 
-//                    activitiesSelect.text = list_of_items[position]
+                    // Permet de trouver l'ID de l'activité grâce à son nom
+                    var You = activiteDAO.getItemsIDByName(activiteListFiltered[position])
+                    IDBEXIOACTIVITATECOMPANION = You.idBexio!!.toInt()
+
 
                 }
 
@@ -81,6 +83,16 @@ class ProjetsActivityNextSaisieTemps : AppCompatActivity() {
 
 
 
+
+    }
+
+
+
+    companion object {
+
+        // La variable qui est utilisée pour connaitre l'ID du project lors d'une saise de temps
+        var IDBEXIOPROJECTCOMPANION = "null"
+        var IDBEXIOACTIVITATECOMPANION = 0
 
     }
 
