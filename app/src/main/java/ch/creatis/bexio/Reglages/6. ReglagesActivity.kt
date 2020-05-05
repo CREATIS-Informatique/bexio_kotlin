@@ -22,14 +22,6 @@ class ReglagesActivity : AppCompatActivity() {
 
 
 
-        enregistrerButton.setOnClickListener {
-
-            println(clientIdText.text.toString())
-            println(clientSecretText.text.toString())
-
-        }
-
-
         // Se déconnecter
         seDeconnecterButton.setOnClickListener {
 
