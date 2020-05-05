@@ -51,14 +51,14 @@
                 android:background="@drawable/reglages_background_second_field"
                 android:hint="Client ID"
                 android:textColorHint="#131D2C"
+                android:visibility="invisible"
                 app:helperText="Client ID"
                 app:helperTextEnabled="true"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="invisible">
+                app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/clientIdText"
@@ -83,14 +83,14 @@
                 android:background="@drawable/reglages_background_second_field"
                 android:hint="Client Secret"
                 android:textColorHint="#131D2C"
+                android:visibility="invisible"
                 app:helperText="Client ID"
                 app:helperTextEnabled="true"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/clientId"
-                tools:visibility="invisible">
+                app:layout_constraintTop_toBottomOf="@+id/clientId">
 
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/clientSecretText"
@@ -131,10 +131,10 @@
                     android:textColor="#131D2C"
                     android:textSize="12sp"
                     android:textStyle="bold"
+                    android:visibility="invisible"
                     app:layout_constraintEnd_toStartOf="@+id/heureButton"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="invisible" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                     android:id="@+id/heureButton"
@@ -147,10 +147,10 @@
                     android:text="09:00"
                     android:textColor="#F0A23B"
                     android:textSize="12sp"
+                    android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/labelHeureTache"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="invisible" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                     android:id="@+id/tokenButton"
@@ -164,11 +164,11 @@
                     android:background="@drawable/reglages_background_button_token"
                     android:text="Demander un token"
                     android:textColor="@android:color/white"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toTopOf="@+id/enregistrerButton"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:visibility="invisible" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                     android:id="@+id/enregistrerButton"
@@ -181,11 +181,11 @@
                     android:layout_marginBottom="15dp"
                     android:background="@drawable/reglages_background_button_enregistrer"
                     android:text="Enregistrer"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toTopOf="@+id/seDeconnecterButton"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:visibility="invisible" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                     android:id="@+id/seDeconnecterButton"
