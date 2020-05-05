@@ -41,7 +41,11 @@ class TempsActivityItemsNextSemaineDescription : AppCompatActivity() {
         var tempsList = tempsDAO.getTempsByNumeroSemaine(numeroSemaine) as ArrayList<Temps>
 
 
-        // RefreshView
+
+        // Swiper
+        refreshViewTempsJour.setRefreshing(false)
+        refreshViewTempsJour.setEnabled(false)
+
 
 
         // Recycler View

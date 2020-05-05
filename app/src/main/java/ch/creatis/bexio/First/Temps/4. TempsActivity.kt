@@ -75,7 +75,7 @@ class TempsActivity : AppCompatActivity() {
 
 
 
-            // RefreshView
+            // Swiper
             refreshViewTempsSemaine.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this, R.color.colorPrimary))
             refreshViewTempsSemaine.setColorSchemeColors(Color.WHITE)
             refreshViewTempsSemaine.setOnRefreshListener { if(numberOfRequestsToMake == 0){ if (isConnected()) {RefreshRequest()} else { Alerte() } } }
