@@ -147,9 +147,9 @@ class TacheActivity : AppCompatActivity() {
 
 
 //                val sub_contact_id= response.getJSONObject(i)["sub_contact_id"].toString().toInt()
-                    val project_idT = response.getJSONObject(i)["project_id"].toString()
-                    var project_id = 0
-                    if (project_idT != "null"){ project_id = response.getJSONObject(i)["project_id"].toString().toInt() }
+                val project_idT = response.getJSONObject(i)["project_id"].toString()
+                var project_id = 0
+                if (project_idT != "null"){ project_id = response.getJSONObject(i)["project_id"].toString().toInt() }
 //                val entry_id= response.getJSONObject(i)["entry_id"].toString().toInt()
 //                val module_id= response.getJSONObject(i)["module_id"].toString().toInt()
                 val todo_status_id= response.getJSONObject(i)["todo_status_id"].toString().toInt()
@@ -263,10 +263,6 @@ class TachesAdapter(val items : ArrayList<Tache>, val context: Context) : Recycl
 
 
     override fun onBindViewHolder(holder: TachesHolder, position: Int) {
-
-
-
-        println(items[position].finish_date)
 
 
 

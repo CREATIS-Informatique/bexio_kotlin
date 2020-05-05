@@ -65,13 +65,25 @@ class TachesActivityNext : AppCompatActivity() {
 
         // --------------------------------------------------- Les variables Projet qui dépendent de la base de donnée
 
+        
+
         // Projet ID
         var projetId = "Aucune indication"
         if (project_id == 0){ projetId = "Aucune indication" } else{ projetId = projetsDAO.getItemsByIdbexio(project_id).name.toString()}
 
+
+
         // Users
         var userId = "Aucune indication"
-        if (user_id == 0){ userId = "Aucune indication" } else{ userId = usersDAO.getItemsByIdbexio(user_id).firstname.toString() + " " + usersDAO.getItemsByIdbexio(user_id).lastname.toString() }
+        if (user_id == 0){
+            userId = "Aucune indication"
+
+                // Certaines tâches peuvent contenir des ids utilisateur non existant
+            } else if (usersDAO.getItemsByIdbexio(user_id) != null){
+                userId = usersDAO.getItemsByIdbexio(user_id).firstname.toString() + " " + usersDAO.getItemsByIdbexio(user_id).lastname.toString()
+            }
+
+
 
         // Contacts
         var contactId = "Aucune indication"
