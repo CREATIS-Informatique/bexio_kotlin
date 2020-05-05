@@ -16,8 +16,8 @@ import ch.creatis.bexio.FirstSecond.Temps.FirstSecond.TempsActivityItemsNextJour
 import ch.creatis.bexio.R
 import ch.creatis.bexio.Room.AppDatabase
 import ch.creatis.bexio.Room.Temps
-import kotlinx.android.synthetic.main.activity_temps_second_items_next_jour_b.view.*
-import kotlinx.android.synthetic.main.activity_temps_second_items_next_jour_a.*
+import kotlinx.android.synthetic.main.activity_temps_second_items_next_jour_a.view.*
+import kotlinx.android.synthetic.main.activity_temps_second_items_next_jour_b.*
 
 
 
@@ -27,7 +27,7 @@ class TempsActivityItemsNextSemaineDescription : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_temps_second_items_next_jour_a)
+        setContentView(R.layout.activity_temps_second_items_next_jour_b)
 
 
 
@@ -40,6 +40,8 @@ class TempsActivityItemsNextSemaineDescription : AppCompatActivity() {
         val tempsDAO = database.tempsDAO
         var tempsList = tempsDAO.getTempsByNumeroSemaine(numeroSemaine) as ArrayList<Temps>
 
+
+        // RefreshView
 
 
         // Recycler View
@@ -61,7 +63,7 @@ class TempsAdapterNext(val items : ArrayList<Temps>, val context: Context) : Rec
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TempsHolderNext {
-        return TempsHolderNext(LayoutInflater.from(context).inflate(R.layout.activity_temps_second_items_next_jour_b, parent, false))
+        return TempsHolderNext(LayoutInflater.from(context).inflate(R.layout.activity_temps_second_items_next_jour_a, parent, false))
     }
 
 

@@ -25,8 +25,8 @@ import ch.creatis.bexio.Room.Temps
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.activity_temps_first_items_semaine_a.*
-import kotlinx.android.synthetic.main.activity_temps_first_items_semaine_b.view.*
+import kotlinx.android.synthetic.main.activity_temps_first_items_semaine_b.*
+import kotlinx.android.synthetic.main.activity_temps_first_items_semaine_a.view.*
 import org.json.JSONArray
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -54,7 +54,7 @@ class TempsActivity : AppCompatActivity() {
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_temps_first_items_semaine_a)
+            setContentView(R.layout.activity_temps_first_items_semaine_b)
 
 
 
@@ -65,9 +65,8 @@ class TempsActivity : AppCompatActivity() {
 
 
             // Recycler View - Placer avant la requête
-            recyclerViewTemps.layoutManager = LinearLayoutManager(this)
-            recyclerViewTemps.adapter =
-                TempsAdapter(semaineList, this)
+            recyclerViewTempsSemaine.layoutManager = LinearLayoutManager(this)
+            recyclerViewTempsSemaine.adapter = TempsAdapter(semaineList, this)
 
 
 
@@ -77,9 +76,9 @@ class TempsActivity : AppCompatActivity() {
 
 
             // RefreshView
-            refreshViewTemps.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this, R.color.colorPrimary))
-            refreshViewTemps.setColorSchemeColors(Color.WHITE)
-            refreshViewTemps.setOnRefreshListener { if(numberOfRequestsToMake == 0){ if (isConnected()) {RefreshRequest()} else { Alerte() } } }
+            refreshViewTempsSemaine.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this, R.color.colorPrimary))
+            refreshViewTempsSemaine.setColorSchemeColors(Color.WHITE)
+            refreshViewTempsSemaine.setOnRefreshListener { if(numberOfRequestsToMake == 0){ if (isConnected()) {RefreshRequest()} else { Alerte() } } }
 
 
 
@@ -379,13 +378,13 @@ class TempsActivity : AppCompatActivity() {
             val database = Room.databaseBuilder(this, AppDatabase::class.java, "mydb").allowMainThreadQueries().build()
             val semaineDAO = database.semaineDAO
             semaineList = semaineDAO.getItems() as ArrayList<Semaines>
-            refreshViewTemps.isRefreshing = false
+            refreshViewTempsSemaine.isRefreshing = false
 
 
 
             // Très important - Rafraîchit la tableView après la requête
-            recyclerViewTemps.layoutManager = LinearLayoutManager(this)
-            recyclerViewTemps.adapter =
+            recyclerViewTempsSemaine.layoutManager = LinearLayoutManager(this)
+            recyclerViewTempsSemaine.adapter =
                 TempsAdapter(semaineList, this)
         }
 
@@ -394,7 +393,7 @@ class TempsActivity : AppCompatActivity() {
 
 
     fun Alerte(){
-        refreshViewTemps.isRefreshing = false
+        refreshViewTempsSemaine.isRefreshing = false
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Aucune connexion à internet")
         builder.setMessage("Vérifiez vos réglages avant de pouvoir utiliser l'application.")
@@ -418,7 +417,7 @@ class TempsAdapter(val items : ArrayList<Semaines>, val context: Context) : Recy
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TempsHolder {
         return TempsHolder(
             LayoutInflater.from(context).inflate(
-                R.layout.activity_temps_first_items_semaine_b,
+                R.layout.activity_temps_first_items_semaine_a,
                 parent,
                 false
             )
