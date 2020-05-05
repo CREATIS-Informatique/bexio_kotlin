@@ -1,4 +1,4 @@
-package ch.creatis.bexio.FirstTachesTemps.Temps.FirstSecond
+package ch.creatis.bexio.FirstTachesTemps.Temps.FirstSecond.Fragment
 
 
 

@@ -1,4 +1,4 @@
-package ch.creatis.bexio.FirstTachesTemps.Temps.FirstSecond
+package ch.creatis.bexio.FirstTachesTemps.Temps.FirstSecond.Fragment
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ch.creatis.bexio.FirstTachesTemps.Temps.First.ProjetsActivityNextSaisieTemps
 import ch.creatis.bexio.FirstTachesTemps.Temps.First.ProjetsActivityNextSaisieTemps.Companion.IDBEXIOACTIVITATECOMPANION
 import ch.creatis.bexio.FirstTachesTemps.Temps.First.ProjetsActivityNextSaisieTemps.Companion.IDBEXIOPROJECTCOMPANION
 import ch.creatis.bexio.R

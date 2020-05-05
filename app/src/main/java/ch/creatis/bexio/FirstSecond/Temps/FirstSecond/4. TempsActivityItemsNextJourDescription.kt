@@ -71,7 +71,7 @@ class TempsActivityItemsNextJourDescription : AppCompatActivity() {
         projetLabel.text = projetDAOFinal
         activiteLabel.text = activiteDAOFinal.name
         dureeLabel.text = duration
-        interlocuteurLabel.text = userDAOFinal.firstname + " " + userDAOFinal.lastname
+        interlocuteurTacheLabel.text = userDAOFinal.firstname + " " + userDAOFinal.lastname
         descriptionLabel.text = text
 
 

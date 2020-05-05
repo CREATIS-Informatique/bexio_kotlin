@@ -19,6 +19,8 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
+
+
 class ProjetsActivityNextSaisieTaches : AppCompatActivity() {
 
 
@@ -33,6 +35,12 @@ class ProjetsActivityNextSaisieTaches : AppCompatActivity() {
         setContentView(R.layout.z_activity_projets_next_saisie_taches)
 
 
+
+        // Prénom et Nom
+        val sharedPreferences = getSharedPreferences("Bexio", Context.MODE_PRIVATE)
+        var givenName = sharedPreferences.getString("given_name", "")
+        var familyName = sharedPreferences.getString("family_name", "")
+        interlocuteurTacheText.text = givenName + " " + familyName
 
 
 
