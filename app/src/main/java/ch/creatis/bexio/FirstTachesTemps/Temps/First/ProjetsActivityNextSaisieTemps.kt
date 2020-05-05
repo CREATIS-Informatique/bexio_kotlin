@@ -23,11 +23,17 @@ class ProjetsActivityNextSaisieTemps : AppCompatActivity() {
         setContentView(R.layout.z_activity_projets_next_saisie_temps)
 
 
+
         // La variable qui est utilisée pour connaitre l'ID du project lors d'une saise de temps
-        IDBEXIOPROJECTCOMPANION = intent.getStringExtra("project_id_from_project_activity")
+        // Si il ne provient pas d'un intent, l'utilisateur est donc considéré comme provenant directement de temps
+        val bundle=intent.extras
+        if(bundle!=null)
+        {
+            IDBEXIOPROJECTCOMPANION = bundle.getString("project_id_from_project_activity").toString()
+        }
 
 
-
+        
         // ---------------------------------------------------- TAB
 
         val fragmentAdapter = MyPagerAdapter(supportFragmentManager)

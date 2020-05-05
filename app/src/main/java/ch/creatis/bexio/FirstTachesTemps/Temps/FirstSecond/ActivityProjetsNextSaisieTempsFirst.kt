@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import ch.creatis.bexio.FirstTachesTemps.Temps.First.ProjetsActivityNextSaisieTemps.Companion.IDBEXIOACTIVITATECOMPANION
 import ch.creatis.bexio.FirstTachesTemps.Temps.First.ProjetsActivityNextSaisieTemps.Companion.IDBEXIOPROJECTCOMPANION
 import ch.creatis.bexio.R
 import com.android.volley.AuthFailureError
@@ -178,7 +179,7 @@ class ActivityProjetsNextSaisieTempsFirst : Fragment() {
         try
         {
             jsonObject.put("user_id", companyUserIdDecode)
-            jsonObject.put("client_service_id", 2)
+            jsonObject.put("client_service_id", IDBEXIOACTIVITATECOMPANION)
             jsonObject.put("pr_project_id", IDBEXIOPROJECTCOMPANION.toInt())
             jsonObject.put("allowable_bill", false)
             // Le tracking
