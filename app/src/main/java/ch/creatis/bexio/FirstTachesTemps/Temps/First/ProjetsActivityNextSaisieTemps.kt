@@ -1,5 +1,6 @@
 package ch.creatis.bexio.FirstTachesTemps.Temps.First
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -11,6 +12,7 @@ import ch.creatis.bexio.FirstTachesTemps.Temps.FirstSecond.Pager.MyPagerAdapter
 import ch.creatis.bexio.R
 import ch.creatis.bexio.Room.Activite
 import ch.creatis.bexio.Room.AppDatabase
+import ch.creatis.bexio.Room.Contact
 import kotlinx.android.synthetic.main.z_activity_projets_next_saisie_temps.*
 
 class ProjetsActivityNextSaisieTemps : AppCompatActivity() {
@@ -33,7 +35,17 @@ class ProjetsActivityNextSaisieTemps : AppCompatActivity() {
         }
 
 
-        
+
+        // Prénom et Nom
+        val sharedPreferences = getSharedPreferences("Bexio", Context.MODE_PRIVATE)
+        var givenName = sharedPreferences.getString("given_name", "")
+        var familyName = sharedPreferences.getString("family_name", "")
+        println("Here Here Here Here Here Here Here Here Here Here Here Here HereHereHereHereHereHereHereHereHereHereHereHereHereHereHereHereHereHereHereHereHereHereHereHereHereHereHereHere ")
+        println(givenName)
+        println(familyName)
+
+
+
         // ---------------------------------------------------- TAB
 
         val fragmentAdapter = MyPagerAdapter(supportFragmentManager)

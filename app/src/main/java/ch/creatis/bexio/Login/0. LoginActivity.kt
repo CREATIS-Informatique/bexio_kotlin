@@ -314,6 +314,8 @@ import kotlin.collections.HashMap
             // -------------------------------------------------------------------------------------
 
 
+            // Si les données changent
+            userInfos()
 
             makeAllDataRequest()
 
@@ -391,6 +393,8 @@ import kotlin.collections.HashMap
             // -------------------------------------------------------------------------------------
 
 
+            // Si les données changent
+            userInfos()
 
             makeAllDataRequest()
 
@@ -414,60 +418,53 @@ import kotlin.collections.HashMap
 
     // Inutile mais si besoin !
 
-//    fun userInfos(){
+    fun userInfos(){
 
-//        // -----------------------------------------------------------------------------------------
-//
-//        val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
-//        val editor = sharedPreferences.edit()
-//
-//        val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
-//        println("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
-//        println(accessToken)
-//
-//        val idtoken = sharedPreferences.getString("IDTOKEN", "")
-//        println("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
-//        println(idtoken)
-//
-//        // -----------------------------------------------------------------------------------------
-//
-//
-//
-//        val url = "https://idp.bexio.com/userinfo"
-//        val queue = Volley.newRequestQueue(this)
-//
-//        val stringRequest = object: StringRequest(Method.GET, url, Response.Listener<String> { response ->
-//
-//
-//            var responseJsonObj = JSONObject(response)
-//            editor.putString("sub", responseJsonObj.getString("sub"))
-//            editor.putString("given_name", responseJsonObj.getString("given_name"))
-//            editor.putString("family_name", responseJsonObj.getString("family_name"))
-//            editor.commit()
-//
-//            numberOfRequestsToMake--
-//            if (numberOfRequestsToMake == 0) { requestEndInternet() }
-//        },
-//            Response.ErrorListener {
-//                numberOfRequestsToMake--
-//                hasRequestFailed = true
-//                if (numberOfRequestsToMake == 0) { requestEndInternet() }
-//            })
-//        {
-//            override fun getHeaders(): MutableMap<String, String> {
-//                val headers = HashMap<String, String>()
-//                headers["Accept"] = "application/json"
-//                headers["Authorization"] = "Bearer $accessToken"
-//                return headers
-//            }
-//        }
-//
-//        queue.add(stringRequest)
-//        numberOfRequestsToMake++
-//
-//
-//
-//    }
+        // -----------------------------------------------------------------------------------------
+
+        val sharedPreferences = this.getSharedPreferences("Bexio", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        val accessToken = sharedPreferences.getString("ACCESSTOKEN", "")
+
+        // -----------------------------------------------------------------------------------------
+
+
+
+        val url = "https://idp.bexio.com/userinfo"
+        val queue = Volley.newRequestQueue(this)
+
+        val stringRequest = object: StringRequest(Method.GET, url, Response.Listener<String> { response ->
+
+
+            var responseJsonObj = JSONObject(response)
+            editor.putString("given_name", responseJsonObj.getString("given_name"))
+            editor.putString("family_name", responseJsonObj.getString("family_name"))
+            editor.commit()
+
+            numberOfRequestsToMake--
+            if (numberOfRequestsToMake == 0) { requestEndInternet() }
+        },
+            Response.ErrorListener {
+                numberOfRequestsToMake--
+                hasRequestFailed = true
+                if (numberOfRequestsToMake == 0) { requestEndInternet() }
+            })
+        {
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Accept"] = "application/json"
+                headers["Authorization"] = "Bearer $accessToken"
+                return headers
+            }
+        }
+
+        queue.add(stringRequest)
+        numberOfRequestsToMake++
+
+
+
+    }
 
 
 
